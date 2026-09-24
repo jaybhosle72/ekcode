@@ -48,12 +48,12 @@ function Navbar() {
           {/* Brand Logo & Tagline */}
           <div className="flex items-center space-x-3">
             <Link to="/" className="flex items-center space-x-2.5">
-              <div className="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-xs tracking-wider shadow-xs border border-slate-800">
+              <div className="w-8 h-8 rounded-lg bg-[#4b80d6] text-white flex items-center justify-center font-bold text-xs tracking-wider shadow-xs">
                 EK
               </div>
               <div className="flex items-center space-x-2">
                 <span className="text-base font-bold text-slate-900 tracking-tight">EkCode</span>
-                <span className="text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">
+                <span className="text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-[#4b80d6]/10 text-[#4b80d6] border border-[#4b80d6]/25">
                   DPI
                 </span>
                 <span className="hidden md:inline-block text-[11px] text-slate-400 font-normal border-l border-slate-200 pl-2">

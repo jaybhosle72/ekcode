@@ -156,12 +156,12 @@ function FloatingChat() {
         <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex items-center space-x-3">
           <button
             onClick={() => setIsOpen(true)}
-            className="flex items-center space-x-2 px-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-full shadow-lg shadow-slate-900/15 border border-slate-700/60 transition-all duration-200 cursor-pointer text-xs font-semibold hover:scale-[1.02] active:scale-95"
+            className="flex items-center space-x-2 px-4 py-2.5 bg-[#4b80d6] hover:bg-[#3d6ec0] text-white rounded-full shadow-lg shadow-[#4b80d6]/20 transition-all duration-200 cursor-pointer text-xs font-semibold hover:scale-[1.02] active:scale-95"
             aria-label="Open EkCode AI Assistant"
           >
-            <BsRobot className="text-sm text-slate-300" />
+            <BsRobot className="text-sm text-white" />
             <span>Ask EkCode AI</span>
-            <BsStars className="text-amber-400 text-xs" />
+            <BsStars className="text-amber-300 text-xs" />
           </button>
         </div>
       )}
@@ -172,7 +172,7 @@ function FloatingChat() {
           {/* Header */}
           <div className="p-3 bg-white text-slate-900 border-b border-slate-200 flex items-center justify-between">
             <div className="flex items-center space-x-2.5">
-              <div className="w-8 h-8 rounded-lg bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-700 text-sm">
+              <div className="w-8 h-8 rounded-lg bg-[#4b80d6]/10 border border-[#4b80d6]/25 flex items-center justify-center text-[#4b80d6] text-sm">
                 <BsRobot />
               </div>
               <div>
@@ -214,14 +214,14 @@ function FloatingChat() {
                 className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 {msg.sender === 'ai' && (
-                  <div className="w-6 h-6 rounded bg-slate-200 text-slate-700 flex items-center justify-center flex-shrink-0 mr-2 mt-0.5 font-bold text-[10px]">
+                  <div className="w-6 h-6 rounded bg-[#4b80d6]/15 text-[#4b80d6] flex items-center justify-center flex-shrink-0 mr-2 mt-0.5 font-bold text-[10px]">
                     AI
                   </div>
                 )}
                 <div
                   className={`max-w-[85%] rounded-lg px-3.5 py-2.5 text-xs leading-relaxed ${
                     msg.sender === 'user'
-                      ? 'bg-slate-900 text-white font-medium shadow-xs'
+                      ? 'bg-[#4b80d6] text-white font-medium shadow-xs'
                       : 'bg-white text-slate-800 border border-slate-200/90 shadow-2xs'
                   }`}
                 >
@@ -232,13 +232,13 @@ function FloatingChat() {
 
             {loading && (
               <div className="flex justify-start items-center space-x-2 text-slate-400">
-                <div className="w-6 h-6 rounded bg-slate-200 text-slate-700 flex items-center justify-center flex-shrink-0 text-[10px] font-bold">
+                <div className="w-6 h-6 rounded bg-[#4b80d6]/15 text-[#4b80d6] flex items-center justify-center flex-shrink-0 text-[10px] font-bold">
                   AI
                 </div>
                 <div className="bg-white border border-slate-200 px-3 py-1.5 rounded-lg flex items-center space-x-1.5 shadow-2xs">
-                  <span className="w-1.5 h-1.5 bg-slate-500 rounded-full animate-bounce"></span>
-                  <span className="w-1.5 h-1.5 bg-slate-500 rounded-full animate-bounce [animation-delay:0.2s]"></span>
-                  <span className="w-1.5 h-1.5 bg-slate-500 rounded-full animate-bounce [animation-delay:0.4s]"></span>
+                  <span className="w-1.5 h-1.5 bg-[#4b80d6] rounded-full animate-bounce"></span>
+                  <span className="w-1.5 h-1.5 bg-[#4b80d6] rounded-full animate-bounce [animation-delay:0.2s]"></span>
+                  <span className="w-1.5 h-1.5 bg-[#4b80d6] rounded-full animate-bounce [animation-delay:0.4s]"></span>
                 </div>
               </div>
             )}
@@ -273,12 +273,12 @@ function FloatingChat() {
                 onKeyDown={handleKeyDown}
                 placeholder="Ask about materials, duplicates, savings..."
                 disabled={loading}
-                className="flex-1 bg-white text-slate-900 border border-slate-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 placeholder-slate-400"
+                className="flex-1 bg-white text-slate-900 border border-slate-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-[#4b80d6] focus:ring-1 focus:ring-[#4b80d6] placeholder-slate-400"
               />
               <button
                 onClick={() => handleSend()}
                 disabled={!input.trim() || loading}
-                className="p-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg transition-colors disabled:opacity-40 cursor-pointer shadow-xs"
+                className="p-2 bg-[#4b80d6] hover:bg-[#3d6ec0] text-white rounded-lg transition-colors disabled:opacity-40 cursor-pointer shadow-xs"
                 title="Send message"
               >
                 <FiSend className="text-xs" />

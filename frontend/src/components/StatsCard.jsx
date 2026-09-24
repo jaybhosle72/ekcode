@@ -4,6 +4,10 @@ function StatsCard({ icon, title, value, subtitle, color = 'slate' }) {
       bg: 'bg-slate-100 text-slate-700 border-slate-200',
       borderHover: 'hover:border-slate-300'
     },
+    blue: {
+      bg: 'bg-[#4b80d6]/10 text-[#4b80d6] border-[#4b80d6]/25',
+      borderHover: 'hover:border-[#4b80d6]/40'
+    },
     amber: {
       bg: 'bg-amber-50 text-amber-700 border-amber-200',
       borderHover: 'hover:border-amber-300'
