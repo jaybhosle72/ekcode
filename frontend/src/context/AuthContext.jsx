@@ -3,37 +3,6 @@ import { loginUser, registerUser, googleAuth } from '../services/api';
 
 const AuthContext = createContext();
 
-export const DEMO_PERSONAS = {
-  ongc_officer: {
-    id: 'demo-officer-ongc',
-    name: 'Vikram Sharma',
-    email: 'vikram.sharma@ongc.in',
-    role: 'officer',
-    cpse_organization: 'ONGC',
-    designation: 'Sr. Procurement Manager',
-    avatar: 'https://api.dicebear.com/7.x/initials/svg?seed=Vikram%20Sharma&backgroundColor=2563EB'
-  },
-  bpcl_officer: {
-    id: 'demo-officer-bpcl',
-    name: 'Pooja Iyer',
-    email: 'pooja.iyer@bpcl.in',
-    role: 'officer',
-    cpse_organization: 'BPCL',
-    designation: 'Procurement Specialist',
-    avatar: 'https://api.dicebear.com/7.x/initials/svg?seed=Pooja%20Iyer&backgroundColor=0284C7'
-  },
-  admin: {
-    id: 'demo-admin-mopng',
-    name: 'Dr. Rajesh Verma',
-    email: 'rajesh.verma@nic.in',
-    role: 'admin',
-    cpse_organization: 'MoPNG',
-    designation: 'Joint Secretary & Master Admin',
-    avatar: 'https://api.dicebear.com/7.x/initials/svg?seed=Rajesh%20Verma&backgroundColor=D97706'
-  },
-  viewer: null // Unauthenticated public citizen / auditor mode
-};
-
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(() => {
     try {
@@ -101,13 +70,6 @@ export function AuthProvider({ children }) {
     setCurrentUser(null);
   };
 
-  const switchDemoPersona = (key) => {
-    const persona = DEMO_PERSONAS[key] !== undefined ? DEMO_PERSONAS[key] : null;
-    setCurrentUser(persona);
-    setIsLoginModalOpen(false);
-    return persona;
-  };
-
   return (
     <AuthContext.Provider value={{ 
       currentUser, 
@@ -122,7 +84,6 @@ export function AuthProvider({ children }) {
       register, 
       loginWithGoogle, 
       logout, 
-      switchDemoPersona,
       isLoginModalOpen, 
       setIsLoginModalOpen 
     }}>

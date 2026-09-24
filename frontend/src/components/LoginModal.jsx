@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { FiX, FiShield, FiLogIn, FiUserPlus, FiMail, FiLock, FiUser, FiCheckCircle } from 'react-icons/fi';
+import { FiX, FiShield, FiLogIn, FiUserPlus, FiMail, FiLock, FiUser } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 
 function LoginModal() {
-  const { isLoginModalOpen, setIsLoginModalOpen, login, register, switchDemoPersona } = useAuth();
+  const { isLoginModalOpen, setIsLoginModalOpen, login, register } = useAuth();
   const [activeTab, setActiveTab] = useState('signin'); // 'signin' or 'signup'
   const [loading, setLoading] = useState(false);
 
@@ -88,7 +88,7 @@ function LoginModal() {
             </div>
             <div>
               <h3 className="text-sm sm:text-base font-bold leading-tight">EkCode Authentication</h3>
-              <p className="text-[11px] text-slate-300">Role-Based Scope & Identity Portal</p>
+              <p className="text-[11px] text-slate-300">Central Material Master Portal</p>
             </div>
           </div>
           <button
@@ -100,48 +100,6 @@ function LoginModal() {
         </div>
 
         <div className="p-5 sm:p-6 space-y-4 max-h-[82vh] overflow-y-auto">
-          {/* Quick Persona Demo Selector for Presentation & Testing */}
-          <div className="bg-slate-50 border border-slate-200 rounded-xl p-3 space-y-2">
-            <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-slate-600">
-              <span>Quick Demo Personas (1-Click Switch)</span>
-            </div>
-            <div className="grid grid-cols-3 gap-2">
-              <button
-                type="button"
-                onClick={() => {
-                  switchDemoPersona('ongc_officer');
-                  toast.success('Scope: Vikram Sharma (ONGC Officer)');
-                }}
-                className="p-2 bg-white hover:bg-blue-50 border border-slate-200 hover:border-blue-300 rounded-lg text-left transition-colors cursor-pointer"
-              >
-                <div className="text-xs font-bold text-slate-800">🏢 ONGC Officer</div>
-                <div className="text-[9px] text-slate-500">Upload & Matches</div>
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  switchDemoPersona('admin');
-                  toast.success('Scope: Dr. Rajesh Verma (MoPNG Admin)');
-                }}
-                className="p-2 bg-white hover:bg-amber-50 border border-slate-200 hover:border-amber-300 rounded-lg text-left transition-colors cursor-pointer"
-              >
-                <div className="text-xs font-bold text-amber-900">👑 MoPNG Admin</div>
-                <div className="text-[9px] text-slate-500">Full ERP & CVC</div>
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  switchDemoPersona('viewer');
-                  toast.success('Scope: Public Citizen / Auditor');
-                }}
-                className="p-2 bg-white hover:bg-slate-100 border border-slate-200 rounded-lg text-left transition-colors cursor-pointer"
-              >
-                <div className="text-xs font-bold text-slate-700">👤 Viewer</div>
-                <div className="text-[9px] text-slate-500">Public Open Data</div>
-              </button>
-            </div>
-          </div>
-
           {/* Sign In vs Sign Up Tabs */}
           <div className="flex border-b border-slate-200">
             <button
@@ -170,7 +128,7 @@ function LoginModal() {
 
           {/* TAB 1: Sign In Form */}
           {activeTab === 'signin' && (
-            <form onSubmit={handleLoginSubmit} className="space-y-3.5">
+            <form onSubmit={handleLoginSubmit} className="space-y-4">
               <div>
                 <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1">
                   Email Address
@@ -181,9 +139,9 @@ function LoginModal() {
                     type="email"
                     value={loginEmail}
                     onChange={(e) => setLoginEmail(e.target.value)}
-                    placeholder="yourname@domain.com"
+                    placeholder="officer@ongc.in"
                     required
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-blue-600 font-medium"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2.5 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-blue-600 font-medium"
                   />
                 </div>
               </div>
@@ -200,7 +158,7 @@ function LoginModal() {
                     onChange={(e) => setLoginPassword(e.target.value)}
                     placeholder="••••••••"
                     required
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-blue-600"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2.5 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-blue-600"
                   />
                 </div>
               </div>
@@ -213,11 +171,6 @@ function LoginModal() {
                 <FiLogIn />
                 <span>{loading ? 'Verifying Credentials...' : 'Sign In'}</span>
               </button>
-
-              <div className="p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-[11px] text-slate-500 flex items-start space-x-2">
-                <FiCheckCircle className="text-blue-600 text-sm mt-0.5 flex-shrink-0" />
-                <span>You can also click any <strong>1-Click Demo Persona</strong> above to explore immediately.</span>
-              </div>
             </form>
           )}
 
