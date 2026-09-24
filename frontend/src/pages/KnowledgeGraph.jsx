@@ -32,7 +32,7 @@ function KnowledgeGraph() {
   const getCpseBadge = (cpse) => {
     switch (cpse?.toUpperCase()) {
       case 'ONGC': return 'bg-rose-50 text-rose-700 border-rose-200';
-      case 'BPCL': return 'bg-blue-50 text-blue-700 border-blue-200';
+      case 'BPCL': return 'bg-slate-100 text-slate-700 border-slate-200';
       case 'IOC': return 'bg-amber-50 text-amber-700 border-amber-200';
       default: return 'bg-slate-100 text-slate-700 border-slate-200';
     }
@@ -53,7 +53,7 @@ function KnowledgeGraph() {
       <div className="flex justify-between items-end flex-wrap gap-4">
         <div>
           <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
-            <FiLayers className="text-blue-600" /> CPSE Code Harmonization & Migration Hub
+            <FiLayers className="text-slate-700" /> CPSE Code Harmonization & Migration Hub
           </h1>
           <p className="text-slate-500 text-xs sm:text-sm mt-0.5">
             Standardized mapping showing how legacy material codes across ONGC, BPCL, and IOC merge into One Central National Code.
@@ -62,7 +62,7 @@ function KnowledgeGraph() {
         <div className="flex items-center gap-2">
           <Link
             to="/matches"
-            className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-medium shadow-xs transition-colors flex items-center gap-1.5"
+            className="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-medium shadow-xs transition-colors flex items-center gap-1.5"
           >
             <span>Review Unapproved Items</span>
             <FiExternalLink />
@@ -85,7 +85,7 @@ function KnowledgeGraph() {
               onClick={() => setSelectedCategory(cat)}
               className={`text-xs px-2.5 py-1 rounded-md transition-colors cursor-pointer font-medium ${
                 selectedCategory === cat
-                  ? 'bg-blue-600 text-white shadow-xs'
+                  ? 'bg-slate-900 text-white shadow-xs'
                   : 'bg-slate-100 text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -101,28 +101,28 @@ function KnowledgeGraph() {
             value={search}
             onChange={e => setSearch(e.target.value)}
             placeholder="Search national code, legacy code, or specs..."
-            className="w-full bg-white border border-slate-200 rounded-lg py-1.5 pl-9 pr-3 text-xs text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+            className="w-full bg-white border border-slate-200 rounded-lg py-1.5 pl-9 pr-3 text-xs text-slate-900 focus:outline-none focus:border-slate-900"
           />
         </div>
       </div>
 
       {loading ? (
         <div className="text-center py-24 text-slate-400">
-          <div className="w-8 h-8 border-2 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
+          <div className="w-8 h-8 border-2 border-slate-800 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
           <p className="text-xs font-medium uppercase tracking-wider text-slate-500">Loading harmonization mappings...</p>
         </div>
       ) : (
         <div className="space-y-4">
           <div className="flex justify-between items-center">
             <h2 className="text-xs font-semibold uppercase tracking-wider text-slate-500 flex items-center gap-2">
-              <FiCheckCircle className="text-blue-600 text-sm" /> Standardized National Code Clusters ({filteredUnified.length})
+              <FiCheckCircle className="text-slate-700 text-sm" /> Standardized National Code Clusters ({filteredUnified.length})
             </h2>
             <span className="text-xs text-slate-400">Harmonized across ONGC, BPCL & IOC</span>
           </div>
 
           {filteredUnified.length === 0 ? (
             <div className="p-8 text-center bg-white border border-slate-200 rounded-xl text-slate-500 text-xs shadow-2xs">
-              No unified codes found. Go to the <Link to="/matches" className="text-blue-600 font-semibold hover:underline">Matches</Link> tab to approve duplicate items and generate new National Codes.
+              No unified codes found. Go to the <Link to="/matches" className="text-slate-900 font-semibold hover:underline">Matches</Link> tab to approve duplicate items and generate new National Codes.
             </div>
           ) : (
             <div className="grid grid-cols-1 gap-3.5">
@@ -132,7 +132,7 @@ function KnowledgeGraph() {
                   <div className="flex justify-between items-start flex-wrap gap-2 pb-3 border-b border-slate-100">
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="px-2.5 py-0.5 bg-blue-50 border border-blue-200 text-blue-700 font-mono font-semibold text-xs rounded-md">
+                        <span className="px-2.5 py-0.5 bg-slate-100 border border-slate-200 text-slate-900 font-mono font-semibold text-xs rounded-md">
                           {u.national_code}
                         </span>
                         <span className="text-[10px] px-2 py-0.5 rounded bg-slate-100 text-slate-600 font-medium border border-slate-200">

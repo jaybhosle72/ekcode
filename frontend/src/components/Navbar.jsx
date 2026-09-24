@@ -48,12 +48,12 @@ function Navbar() {
           {/* Brand Logo & Tagline */}
           <div className="flex items-center space-x-3">
             <Link to="/" className="flex items-center space-x-2.5">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-indigo-700 text-white flex items-center justify-center font-bold text-xs tracking-wider shadow-sm">
+              <div className="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-xs tracking-wider shadow-xs border border-slate-800">
                 EK
               </div>
               <div className="flex items-center space-x-2">
                 <span className="text-base font-bold text-slate-900 tracking-tight">EkCode</span>
-                <span className="text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200">
+                <span className="text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">
                   DPI
                 </span>
                 <span className="hidden md:inline-block text-[11px] text-slate-400 font-normal border-l border-slate-200 pl-2">
@@ -73,11 +73,11 @@ function Navbar() {
                   to={link.path}
                   className={`flex items-center px-3 py-1.5 rounded-lg text-xs transition-colors cursor-pointer ${
                     isActive
-                      ? 'bg-blue-50 text-blue-700 font-semibold shadow-2xs'
+                      ? 'bg-slate-100 text-slate-900 font-semibold shadow-2xs'
                       : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50 font-medium'
                   }`}
                 >
-                  <span className={`mr-1.5 text-sm ${isActive ? 'text-blue-600' : 'text-slate-400'}`}>{link.icon}</span>
+                  <span className={`mr-1.5 text-sm ${isActive ? 'text-slate-900' : 'text-slate-400'}`}>{link.icon}</span>
                   {link.name}
                 </Link>
               );
@@ -93,7 +93,7 @@ function Navbar() {
                     ? 'bg-amber-100 text-amber-800'
                     : currentUser.role === 'viewer'
                     ? 'bg-emerald-100 text-emerald-800'
-                    : 'bg-blue-100 text-blue-800'
+                    : 'bg-slate-200 text-slate-800'
                 }`}>
                   {currentUser.role === 'admin'
                     ? '👑'
@@ -126,7 +126,7 @@ function Navbar() {
             ) : (
               <button
                 onClick={() => setIsLoginModalOpen(true)}
-                className="flex items-center space-x-1.5 px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold shadow-xs shadow-blue-500/20 transition-all cursor-pointer"
+                className="flex items-center space-x-1.5 px-3.5 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold shadow-xs transition-all cursor-pointer"
               >
                 <FiLogIn className="text-xs" />
                 <span>Sign In</span>

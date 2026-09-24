@@ -156,12 +156,12 @@ function FloatingChat() {
         <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex items-center space-x-3">
           <button
             onClick={() => setIsOpen(true)}
-            className="flex items-center space-x-2 px-4 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-full shadow-lg shadow-blue-500/20 border border-blue-500/40 transition-all duration-200 cursor-pointer text-xs font-semibold hover:scale-[1.02] active:scale-95"
+            className="flex items-center space-x-2 px-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-full shadow-lg shadow-slate-900/15 border border-slate-700/60 transition-all duration-200 cursor-pointer text-xs font-semibold hover:scale-[1.02] active:scale-95"
             aria-label="Open EkCode AI Assistant"
           >
-            <BsRobot className="text-sm text-blue-100" />
+            <BsRobot className="text-sm text-slate-300" />
             <span>Ask EkCode AI</span>
-            <BsStars className="text-amber-300 text-xs animate-pulse" />
+            <BsStars className="text-amber-400 text-xs" />
           </button>
         </div>
       )}
@@ -172,7 +172,7 @@ function FloatingChat() {
           {/* Header */}
           <div className="p-3 bg-white text-slate-900 border-b border-slate-200 flex items-center justify-between">
             <div className="flex items-center space-x-2.5">
-              <div className="w-8 h-8 rounded-lg bg-blue-50 border border-blue-200/80 flex items-center justify-center text-blue-600 text-sm">
+              <div className="w-8 h-8 rounded-lg bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-700 text-sm">
                 <BsRobot />
               </div>
               <div>
@@ -214,14 +214,14 @@ function FloatingChat() {
                 className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 {msg.sender === 'ai' && (
-                  <div className="w-6 h-6 rounded bg-blue-100 text-blue-700 flex items-center justify-center flex-shrink-0 mr-2 mt-0.5 font-bold text-[10px]">
+                  <div className="w-6 h-6 rounded bg-slate-200 text-slate-700 flex items-center justify-center flex-shrink-0 mr-2 mt-0.5 font-bold text-[10px]">
                     AI
                   </div>
                 )}
                 <div
                   className={`max-w-[85%] rounded-lg px-3.5 py-2.5 text-xs leading-relaxed ${
                     msg.sender === 'user'
-                      ? 'bg-blue-600 text-white font-medium shadow-xs'
+                      ? 'bg-slate-900 text-white font-medium shadow-xs'
                       : 'bg-white text-slate-800 border border-slate-200/90 shadow-2xs'
                   }`}
                 >
@@ -232,13 +232,13 @@ function FloatingChat() {
 
             {loading && (
               <div className="flex justify-start items-center space-x-2 text-slate-400">
-                <div className="w-6 h-6 rounded bg-blue-100 text-blue-700 flex items-center justify-center flex-shrink-0 text-[10px] font-bold">
+                <div className="w-6 h-6 rounded bg-slate-200 text-slate-700 flex items-center justify-center flex-shrink-0 text-[10px] font-bold">
                   AI
                 </div>
                 <div className="bg-white border border-slate-200 px-3 py-1.5 rounded-lg flex items-center space-x-1.5 shadow-2xs">
-                  <span className="w-1.5 h-1.5 bg-blue-600 rounded-full animate-bounce"></span>
-                  <span className="w-1.5 h-1.5 bg-blue-600 rounded-full animate-bounce [animation-delay:0.2s]"></span>
-                  <span className="w-1.5 h-1.5 bg-blue-600 rounded-full animate-bounce [animation-delay:0.4s]"></span>
+                  <span className="w-1.5 h-1.5 bg-slate-500 rounded-full animate-bounce"></span>
+                  <span className="w-1.5 h-1.5 bg-slate-500 rounded-full animate-bounce [animation-delay:0.2s]"></span>
+                  <span className="w-1.5 h-1.5 bg-slate-500 rounded-full animate-bounce [animation-delay:0.4s]"></span>
                 </div>
               </div>
             )}
@@ -248,14 +248,14 @@ function FloatingChat() {
           {/* Quick Prompts Carousel */}
           <div className="px-3 py-1.5 bg-white border-t border-slate-200 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
             <span className="text-[10px] uppercase font-bold text-slate-400 flex items-center gap-1 flex-shrink-0">
-              <BsStars className="text-blue-500" /> Prompts:
+              <BsStars className="text-amber-500" /> Prompts:
             </span>
             {PROMPT_SUGGESTIONS.map((prompt, idx) => (
               <button
                 key={idx}
                 onClick={() => handleSend(prompt)}
                 disabled={loading}
-                className="whitespace-nowrap text-[11px] px-2.5 py-1 rounded bg-slate-50 hover:bg-blue-50/60 hover:text-blue-700 hover:border-blue-200 text-slate-600 border border-slate-200 transition-colors flex-shrink-0 cursor-pointer font-medium"
+                className="whitespace-nowrap text-[11px] px-2.5 py-1 rounded bg-slate-50 hover:bg-slate-100 hover:text-slate-900 hover:border-slate-300 text-slate-600 border border-slate-200 transition-colors flex-shrink-0 cursor-pointer font-medium"
               >
                 {prompt}
               </button>
@@ -273,12 +273,12 @@ function FloatingChat() {
                 onKeyDown={handleKeyDown}
                 placeholder="Ask about materials, duplicates, savings..."
                 disabled={loading}
-                className="flex-1 bg-white text-slate-900 border border-slate-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 placeholder-slate-400"
+                className="flex-1 bg-white text-slate-900 border border-slate-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 placeholder-slate-400"
               />
               <button
                 onClick={() => handleSend()}
                 disabled={!input.trim() || loading}
-                className="p-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors disabled:opacity-40 cursor-pointer shadow-xs"
+                className="p-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg transition-colors disabled:opacity-40 cursor-pointer shadow-xs"
                 title="Send message"
               >
                 <FiSend className="text-xs" />

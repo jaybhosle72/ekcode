@@ -222,7 +222,7 @@ function Matches() {
           <button
             onClick={handleTriggerScan}
             disabled={isScanning}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold shadow-xs shadow-blue-500/20 transition-all disabled:opacity-50 cursor-pointer"
+            className="flex items-center gap-1.5 px-3.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-semibold shadow-xs transition-all disabled:opacity-50 cursor-pointer"
           >
             <FiRefreshCw className={isScanning ? 'animate-spin' : ''} />
             <span>{isScanning ? 'Analyzing All Catalogs...' : 'Re-scan All Catalogs'}</span>
@@ -231,7 +231,7 @@ function Matches() {
           <select 
             value={statusFilter}
             onChange={e => setStatusFilter(e.target.value)}
-            className="bg-white border border-slate-200 rounded-lg py-1.5 px-3 text-xs text-slate-800 font-semibold focus:outline-none focus:border-blue-600 shadow-2xs cursor-pointer"
+            className="bg-white border border-slate-200 rounded-lg py-1.5 px-3 text-xs text-slate-800 font-semibold focus:outline-none focus:border-slate-900 shadow-2xs cursor-pointer"
           >
             <option value="all">Status: All States</option>
             <option value="pending">Status: Pending Review</option>
@@ -242,7 +242,7 @@ function Matches() {
           <select 
             value={typeFilter}
             onChange={e => setTypeFilter(e.target.value)}
-            className="bg-white border border-slate-200 rounded-lg py-1.5 px-3 text-xs text-slate-800 font-semibold focus:outline-none focus:border-blue-600 shadow-2xs cursor-pointer"
+            className="bg-white border border-slate-200 rounded-lg py-1.5 px-3 text-xs text-slate-800 font-semibold focus:outline-none focus:border-slate-900 shadow-2xs cursor-pointer"
           >
             <option value="all">Match Type: All</option>
             <option value="identical">Identical (90%-98%)</option>
@@ -262,9 +262,9 @@ function Matches() {
           <div className="text-[11px] font-semibold text-emerald-700 uppercase tracking-wider">Identical (98%)</div>
           <div className="text-xl font-bold text-emerald-700 mt-0.5">{identicalCount}</div>
         </div>
-        <div className="bg-white border border-blue-200/90 rounded-xl p-3.5 shadow-2xs bg-blue-50/20">
-          <div className="text-[11px] font-semibold text-blue-700 uppercase tracking-wider">Near-Duplicate</div>
-          <div className="text-xl font-bold text-blue-700 mt-0.5">{nearDupCount}</div>
+        <div className="bg-white border border-slate-200 rounded-xl p-3.5 shadow-2xs">
+          <div className="text-[11px] font-semibold text-slate-600 uppercase tracking-wider">Near-Duplicate</div>
+          <div className="text-xl font-bold text-slate-800 mt-0.5">{nearDupCount}</div>
         </div>
         <div className="bg-white border border-amber-200/90 rounded-xl p-3.5 shadow-2xs bg-amber-50/20">
           <div className="text-[11px] font-semibold text-amber-700 uppercase tracking-wider">Equivalent</div>
@@ -277,13 +277,13 @@ function Matches() {
         <div className={`border rounded-xl p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-2xs ${
           currentRole === 'admin'
             ? 'bg-amber-50/30 border-amber-200/80'
-            : 'bg-blue-50/30 border-blue-200/80'
+            : 'bg-slate-50 border-slate-200'
         }`}>
           <div className="flex items-center space-x-3 text-xs">
             <div className={`p-2 rounded-lg text-base border ${
               currentRole === 'admin'
                 ? 'bg-amber-100 text-amber-800 border-amber-200'
-                : 'bg-blue-100 text-blue-800 border-blue-200'
+                : 'bg-slate-200 text-slate-800 border-slate-300'
             }`}>
               {currentRole === 'admin' ? <FiAward /> : <FiShield />}
             </div>
