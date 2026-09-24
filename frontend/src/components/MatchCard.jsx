@@ -195,7 +195,7 @@ function MatchCard({ matchData, onEndorse, onApprove, onReject }) {
                   {row.matchStatus === 'exact' ? (
                     <span className="text-xs font-semibold text-emerald-600">✅ Exact</span>
                   ) : row.matchStatus === 'partial' ? (
-                    <span className="text-xs font-semibold text-blue-600">⚠️ Compatible</span>
+                    <span className="text-xs font-semibold text-amber-600">⚠️ Compatible</span>
                   ) : (
                     <span className="text-xs font-semibold text-rose-600">❌ Mismatch</span>
                   )}

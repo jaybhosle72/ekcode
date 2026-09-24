@@ -84,7 +84,7 @@ function Chat() {
             <button 
               key={i}
               onClick={() => handleSend(sug)}
-              className="text-xs px-3 py-1.5 bg-[#1e293b] border border-[#334155] text-[#94a3b8] hover:text-white hover:border-[#3b82f6] rounded-full transition-colors"
+              className="text-xs px-3 py-1.5 bg-[#1e293b] border border-[#334155] text-[#94a3b8] hover:text-white hover:border-slate-400 rounded-full transition-colors"
             >
               {sug}
             </button>
@@ -97,12 +97,12 @@ function Chat() {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSend()}
             placeholder="Type your question..."
-            className="flex-1 bg-[#1e293b] border border-[#334155] rounded-full py-2 px-4 text-[#f1f5f9] focus:outline-none focus:border-[#3b82f6]"
+            className="flex-1 bg-[#1e293b] border border-[#334155] rounded-full py-2 px-4 text-[#f1f5f9] focus:outline-none focus:border-slate-400"
           />
           <button 
             onClick={() => handleSend()}
             disabled={!input.trim()}
-            className="w-10 h-10 rounded-full bg-[#3b82f6] flex items-center justify-center text-white hover:bg-[#2563eb] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="w-10 h-10 rounded-full bg-slate-700 hover:bg-slate-600 flex items-center justify-center text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             <MdSend />
           </button>
