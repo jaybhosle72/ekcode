@@ -92,40 +92,9 @@ Provide a JSON response with:
     }
   }
 
-  // Local fallback
-  const specA = materialA.specifications || extractLocalSpecs(materialA.description).specifications;
-  const specB = materialB.specifications || extractLocalSpecs(materialB.description).specifications;
-
-  const wordsA = new Set(materialA.description.toLowerCase().replace(/[^a-z0-9]/g, ' ').split(/\s+/).filter(Boolean));
-  const wordsB = new Set(materialB.description.toLowerCase().replace(/[^a-z0-9]/g, ' ').split(/\s+/).filter(Boolean));
-  const intersection = new Set([...wordsA].filter(x => wordsB.has(x)));
-  const union = new Set([...wordsA, ...wordsB]);
-  let jaccard = union.size > 0 ? (intersection.size / union.size) : 0;
-
-  const typeMatch = (specA.type || '').toLowerCase() === (specB.type || '').toLowerCase();
-  const matMatch = (specA.material || '').toLowerCase() === (specB.material || '').toLowerCase();
-  const sizeMatch = (specA.size || '').toLowerCase() === (specB.size || '').toLowerCase();
-
-  let score = Math.round(jaccard * 60 + (typeMatch ? 20 : 0) + (matMatch ? 15 : 0) + (sizeMatch ? 15 : 0));
-  if (score > 98) score = 98;
-
-  let match_type = 'different';
-  if (score >= 88) match_type = 'identical';
-  else if (score >= 70) match_type = 'near-duplicate';
-  else if (score >= 50) match_type = 'equivalent';
-
-  return {
-    match_score: score,
-    match_type,
-    field_comparison: {
-      type: { a: specA.type || 'Standard', b: specB.type || 'Standard', match: typeMatch },
-      material: { a: specA.material || 'Standard', b: specB.material || 'Standard', match: matMatch },
-      size: { a: specA.size || 'Standard', b: specB.size || 'Standard', match: sizeMatch },
-      pressure_class: { a: specA.pressure_class || 'Standard', b: specB.pressure_class || 'Standard', match: true },
-      standard: { a: specA.standard || 'Standard', b: specB.standard || 'Standard', match: true }
-    },
-    reasoning: `Both materials share matching category attributes (${specA.type || 'item'}). NLP extracted material: ${specA.material || 'Standard'} and dimensions: ${specA.size || 'Standard'}. Normalized confidence score: ${score}%.`
-  };
+  // Industrial Engineering NLP ground-truth comparator
+  const { compareEngineeringSpecs } = require('./nlpNormalizer');
+  return compareEngineeringSpecs(materialA, materialB);
 }
 
 async function classifyMaterial(description) {
@@ -154,7 +123,8 @@ Provide a JSON response with:
     }
   }
 
-  return extractLocalSpecs(description);
+  const { normalizeDescription } = require('./nlpNormalizer');
+  return normalizeDescription(description);
 }
 
 async function generateNationalCode(category, specifications = {}) {

@@ -30,23 +30,61 @@ function Matches() {
         const matB = m.material_b || {};
         const specsA = matA.specifications || {};
         const specsB = matB.specifications || {};
+        const fc = m.field_comparison || {};
 
-        const compareField = (label, a, b) => {
-          if (!a && !b) return { field: label, valueA: '-', valueB: '-', matchStatus: 'exact' };
-          const exact = String(a).toLowerCase().trim() === String(b).toLowerCase().trim();
+        const compareField = (label, a, b, explicitMatch) => {
+          let valA = a;
+          let valB = b;
+
+          // For Pressure Class: if item is non-pressurized/ambient
+          if (label.includes('Pressure')) {
+            if (!valA || valA === '-' || valA.toLowerCase() === 'standard') valA = 'Ambient / Non-pressurized';
+            if (!valB || valB === '-' || valB.toLowerCase() === 'standard') valB = 'Ambient / Non-pressurized';
+          } else if (label.includes('Size') || label.includes('Dimensions')) {
+            if (!valA || valA === '-' || valA.toLowerCase() === 'standard') valA = 'Universal / Standard';
+            if (!valB || valB === '-' || valB.toLowerCase() === 'standard') valB = 'Universal / Standard';
+          } else {
+            if (!valA) valA = '-';
+            if (!valB) valB = '-';
+          }
+
+          const exact = (explicitMatch !== undefined)
+            ? explicitMatch
+            : String(valA).toLowerCase().trim() === String(valB).toLowerCase().trim();
+
           return {
             field: label,
-            valueA: a || '-',
-            valueB: b || '-',
-            matchStatus: exact ? 'exact' : (a && b ? 'partial' : 'mismatch')
+            valueA: valA,
+            valueB: valB,
+            matchStatus: exact ? 'exact' : (valA !== '-' && valB !== '-' ? 'partial' : 'mismatch')
           };
         };
 
         const comparison = [
-          compareField('Material', specsA.material, specsB.material),
-          compareField('Size / Dimensions', specsA.dimensions, specsB.dimensions),
-          compareField('Pressure Class', specsA.pressure_rating, specsB.pressure_rating),
-          compareField('Standard (ASTM/IS)', specsA.standard, specsB.standard),
+          compareField(
+            'Material',
+            fc.material?.a || specsA.material,
+            fc.material?.b || specsB.material,
+            fc.material?.match
+          ),
+          compareField(
+            'Size / Dimensions',
+            fc.size?.a || specsA.dimensions || specsA.size,
+            fc.size?.b || specsB.dimensions || specsB.size,
+            fc.size?.match
+          ),
+          compareField(
+            'Pressure Class',
+            fc.pressure_class?.a || specsA.pressure_rating || specsA.pressure_class,
+            fc.pressure_class?.b || specsB.pressure_rating || specsB.pressure_class,
+            fc.pressure_class?.match
+          ),
+          compareField(
+            'Standard (ASTM/IS/API)',
+            fc.standard?.a || specsA.standard || specsA.grade,
+            fc.standard?.b || specsB.standard || specsB.grade,
+            fc.standard?.match
+          ),
           compareField('UOM', matA.unit_of_measure, matB.unit_of_measure)
         ];
 

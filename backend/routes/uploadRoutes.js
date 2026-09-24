@@ -7,6 +7,7 @@ const fs = require('fs');
 const Material = require('../models/Material');
 const AuditLog = require('../models/AuditLog');
 const { classifyMaterial } = require('../services/geminiService');
+const { normalizeDescription } = require('../services/nlpNormalizer');
 const { checkQuality } = require('../services/dataQuality');
 const { runMatching } = require('../services/matchingService');
 
@@ -30,15 +31,11 @@ async function processRows(rows, cpse_name) {
     const description = String(getVal(row, 'description', 'material_description', 'item_description', 'Description', 'Material Description')).trim();
     if (!code || !description) continue;
 
-    let category = String(getVal(row, 'category', 'Category', 'cat')).trim() || 'General';
-    let specs = {};
-    try {
-      const aiData = await classifyMaterial(description);
-      category = aiData.category || category;
-      specs = aiData.specifications || {};
-    } catch (e) {
-      console.warn('AI Classification fallback for row:', e.message);
-    }
+    let userCat = String(getVal(row, 'category', 'Category', 'cat')).trim();
+    // Industrial engineering NLP extraction for metallurgy, size, pressure class & standards
+    const norm = normalizeDescription(description, userCat);
+    const category = userCat || norm.category;
+    const specs = norm.specifications;
 
     const unit = String(getVal(row, 'unit', 'uom', 'unit_of_measure', 'Unit', 'UOM', 'Unit of Measure')).trim() || 'Nos';
     const price = Number(getVal(row, 'price', 'unit_price', 'rate', 'Price', 'Rate', 'Unit Price')) || 0;
