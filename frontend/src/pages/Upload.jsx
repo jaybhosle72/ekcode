@@ -104,37 +104,37 @@ function Upload() {
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <a
-            href="/catalogs/ONGC_Material_Catalog_2026.xlsx"
-            download="ONGC_Material_Catalog_2026.xlsx"
+            href="/catalogs/ONGC_Offshore_Field_Catalog_2026.xlsx"
+            download="ONGC_Offshore_Field_Catalog_2026.xlsx"
             className="flex items-center justify-between p-3 bg-white hover:bg-blue-50/60 border border-slate-200 hover:border-blue-300 rounded-xl transition-all shadow-2xs group cursor-pointer"
           >
             <div>
-              <div className="text-xs font-bold text-slate-800 group-hover:text-blue-600">ONGC Material Catalog</div>
-              <div className="text-[10px] text-slate-500">20 Exploration & Drilling Items</div>
+              <div className="text-xs font-bold text-slate-800 group-hover:text-blue-600">ONGC Offshore Catalog</div>
+              <div className="text-[10px] text-slate-500">20 Fresh Exploration & Field Items</div>
             </div>
             <span className="text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">.XLSX</span>
           </a>
 
           <a
-            href="/catalogs/BPCL_Procurement_Master_2026.xlsx"
-            download="BPCL_Procurement_Master_2026.xlsx"
+            href="/catalogs/BPCL_Terminal_Operations_Catalog_2026.xlsx"
+            download="BPCL_Terminal_Operations_Catalog_2026.xlsx"
             className="flex items-center justify-between p-3 bg-white hover:bg-blue-50/60 border border-slate-200 hover:border-blue-300 rounded-xl transition-all shadow-2xs group cursor-pointer"
           >
             <div>
-              <div className="text-xs font-bold text-slate-800 group-hover:text-blue-600">BPCL Procurement Master</div>
-              <div className="text-[10px] text-slate-500">20 Refinery & Marketing Items</div>
+              <div className="text-xs font-bold text-slate-800 group-hover:text-blue-600">BPCL Operations Master</div>
+              <div className="text-[10px] text-slate-500">20 Fresh Terminal & POL Items</div>
             </div>
             <span className="text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">.XLSX</span>
           </a>
 
           <a
-            href="/catalogs/IOCL_Refinery_Inventory_2026.xlsx"
-            download="IOCL_Refinery_Inventory_2026.xlsx"
+            href="/catalogs/IOCL_Petrochem_Refinery_Catalog_2026.xlsx"
+            download="IOCL_Petrochem_Refinery_Catalog_2026.xlsx"
             className="flex items-center justify-between p-3 bg-white hover:bg-blue-50/60 border border-slate-200 hover:border-blue-300 rounded-xl transition-all shadow-2xs group cursor-pointer"
           >
             <div>
-              <div className="text-xs font-bold text-slate-800 group-hover:text-blue-600">IOCL Refinery Inventory</div>
-              <div className="text-[10px] text-slate-500">12 Pipeline & Process Items</div>
+              <div className="text-xs font-bold text-slate-800 group-hover:text-blue-600">IOCL Petrochem Inventory</div>
+              <div className="text-[10px] text-slate-500">20 Fresh Refinery & Process Items</div>
             </div>
             <span className="text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">.XLSX</span>
           </a>

@@ -1,21 +1,21 @@
 Material Code,Material Description,Category,Unit of Measure,Unit Price (INR),Annual Quantity
-ONGC-PIP-CS-1001,"Pipe Seamless Carbon Steel ASTM A106 Gr B 6"" Sch 40 Beveled End",Pipes,Mtr,4850,12000
-ONGC-PIP-CS-1002,"Pipe Seamless Carbon Steel ASTM A106 Gr B 4"" Sch 40 Beveled End",Pipes,Mtr,3200,8500
-ONGC-PIP-SS-2001,"Pipe Stainless Steel Seamless ASTM A312 TP316L 2"" Sch 40S",Pipes,Mtr,8900,4500
-ONGC-PIP-API-3001,"Line Pipe Seamless API 5L Gr X52 PSL2 8"" Sch 40 3LPE Coated",Pipes,Mtr,11500,15000
-ONGC-VLV-BL-3004,"Ball Valve 4"" Class 300 Flanged Full Bore ASTM A216 WCB Lever Operated API 6D",Valves,Nos,24500,450
-ONGC-VLV-GT-1506,"Gate Valve 6"" Class 150 Flanged Bolted Bonnet ASTM A216 WCB Trim 8 API 600",Valves,Nos,38000,320
-ONGC-VLV-CK-3003,"Swing Check Valve 3"" Class 300 Flanged ASTM A216 WCB API 6D Trim 5",Valves,Nos,16500,280
-ONGC-VLV-GL-3002,"Globe Valve 2"" Class 300 Flanged OS&Y Rising Stem ASTM A216 WCB BS 1873",Valves,Nos,14200,350
-ONGC-FAS-ST-B712,Stud Bolt M20 x 120mm ASTM A193 Gr B7 with 2 Heavy Hex Nuts ASTM A194 Gr 2H,Fasteners,Set,340,25000
-ONGC-FAS-ST-B716,Stud Bolt M24 x 160mm ASTM A193 Gr B7 with 2 Heavy Hex Nuts ASTM A194 Gr 2H,Fasteners,Set,520,18000
-ONGC-FAS-ST-B8M,Stud Bolt M16 x 90mm Stainless Steel ASTM A193 Gr B8M with 2 Nuts A194 Gr 8M,Fasteners,Set,780,9500
-ONGC-FLG-WN-3006,"Weld Neck Flange 6"" Class 300 Raised Face ASME B16.5 ASTM A105 Sch 40 Bore",Fittings,Nos,6200,1200
-ONGC-FLG-WN-1504,"Weld Neck Flange 4"" Class 150 Raised Face ASME B16.5 ASTM A105 Sch 40 Bore",Fittings,Nos,3400,1600
-ONGC-FIT-ELB-906,"90 Deg Long Radius Elbow 6"" Sch 40 Carbon Steel ASTM A234 Gr WPB ASME B16.9",Fittings,Nos,2800,2200
-ONGC-GSK-SW-3006,"Spiral Wound Gasket 6"" Class 300 SS316 with Flexible Graphite Filler ASME B16.20",Fittings,Nos,450,14000
-ONGC-MECH-SEAL-01,Cartridge Mechanical Seal 50mm Shaft Single Spring for Crude Oil Service API 682,Mechanical,Nos,42000,110
-ONGC-ELEC-LED-60W,Flameproof Wellhead LED Well Light 60W Ex d IIC T6 IP66 230V AC,Electrical,Nos,18500,850
-ONGC-SAF-HLM-WHT,Safety Helmet Industrial Grade HDPE Ratchet Type White Colour IS 2925,Safety,Nos,480,6000
-ONGC-SAF-GLV-NIT,Heavy Duty Nitrile Chemical Resistant Gloves 13 Inch Gauntlet EN 388,Safety,Pair,320,12000
-ONGC-DRL-BIT-850,PDC Drilling Bit 8-1/2 Inch 5-Blade Matrix Body 16mm Cutters API Spec 7-1,Drilling,Nos,385000,45
+ONGC-INST-DPT-250M,Differential Pressure Transmitter Range 0-250 mbar Output 4-20mA HART Diaphragm Hastelloy C-276 Flanged Process Connection,Instrumentation,Nos,78500,120
+ONGC-VLV-BF-08-150,"Triple Offset Butterfly Valve 8"" Class 150 Lug Type Body ASTM A216 WCB Disc SS316 Metal Seated API 609 Gear Operated",Valves,Nos,64000,85
+ONGC-INST-CMF-02-300,"Coriolis Mass Flow Meter 2"" Class 300 Flanged SS316L Flow Tube 0-50000 kg/hr with Integral Transmitter 4-20mA HART",Instrumentation,Nos,320000,35
+ONGC-PIP-LTCS-8080,"Pipe Seamless LTCS Low Temp Carbon Steel ASTM A333 Grade 6 8"" Sch 80 Beveled Ends",Pipes,Mtr,14200,6500
+ONGC-INST-RTD-400D,"Duplex Pt100 RTD Temperature Sensor 3-Wire Class A with Flanged Thermowell 1-1/2"" 300# Insertion Length 400mm SS316",Instrumentation,Nos,12500,240
+ONGC-VLV-NDL-12-6K,"Needle Valve 1/2"" NPT Female x Female Rating 6000 PSI Stainless Steel SS316 Body & Stem PTFE Packing",Valves,Nos,4200,850
+ONGC-FLG-SPB-08-300,"Spectacle Blind 8"" Class 300 Raised Face ASME B16.48 Carbon Steel ASTM A516 Gr 70 Smooth Finish",Fittings,Nos,8400,320
+ONGC-GSK-RTJ-R45-SI,Metallic Ring Joint Gasket RTJ R-45 Octagonal Cross Section Soft Iron Max Hardness 90 HB ASME B16.20,Fittings,Nos,1850,1200
+ONGC-ELEC-FLD-200W,Explosion Proof High Mast LED Floodlight 200W Ex d IIC T5 Gb IP66 230V AC Flameproof Cast Aluminium Alloy Body,Electrical,Nos,34500,420
+ONGC-SAF-GAS-4DET,"Portable Multi-Gas Detector 4-Gas (LEL, O2, H2S, CO) with Internal Sampling Pump Li-Ion Rechargeable Battery ATEX / IECEx Certified",Safety,Nos,56000,150
+ONGC-SAF-SCBA-68L,Self-Contained Breathing Apparatus SCBA 300 Bar 6.8 Litre Carbon Composite Cylinder Full Face Mask Demand Valve EN 137 Type 2,Safety,Set,82000,95
+ONGC-VLV-CK-06-300D,"Dual Plate Check Valve 6"" Class 300 Wafer Type Body & Plates Duplex Stainless Steel UNS S31803 Inconel X-750 Spring API 594",Valves,Nos,52000,110
+ONGC-TUB-AST-508-45,Seamless Alloy Steel Tube ASTM A213 Grade T22 Outside Diameter 50.8mm Wall Thickness 4.5mm Cold Drawn,Pipes,Mtr,3850,4500
+ONGC-MEC-BRG-6312,Deep Groove Ball Bearing 6312-2Z Shielded Both Sides Bore 60mm OD 130mm Width 31mm C3 Clearance SKF / FAG,Mechanical,Nos,3100,600
+ONGC-DRL-MUD-MTR-700,"Positive Displacement Downhole Mud Motor 7"" OD 5/6 Lobe for Directional Drilling API 7-1",Drilling,Nos,940000,25
+ONGC-OFF-MOOR-CHN-76,Stud Link Anchor Mooring Chain Grade R4 76mm Dia Offshore Quality Certified,Offshore,Mtr,18200,1800
+ONGC-SUB-XMAS-TR-10K,Subsea Dual Bore Wellhead Tree Valve Trim 10000 PSI Inconel 718 Lined,Wellhead,Nos,1450000,12
+ONGC-SEP-CYC-DES-01,Hydrocyclone Desander Liner Polyurethane 2 Inch for Offshore Produced Water,Mechanical,Nos,28500,140
+ONGC-RIG-ELEC-VFD-1K,Rig Drive Drilling VFD Inverter Module 690V 1200A Liquid Cooled,Electrical,Nos,580000,18
+ONGC-DRL-STB-1225,"Near Bit Integral Blade Drilling Stabilizer 12-1/4"" AISI 4145H Hardfaced",Drilling,Nos,215000,40

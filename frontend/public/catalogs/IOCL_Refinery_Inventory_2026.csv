@@ -1,13 +1,21 @@
 Material Code,Material Description,Category,Unit of Measure,Unit Price (INR),Annual Quantity
-IOCL-P-106B-06,Pipe Carbon Steel Seamless 6in Sch 40 to ASTM A106 Gr.B Beveled Ends,Pipes,Mtr,4880,14000
-IOCL-P-106B-04,CS Seamless Pipe 4 Inch NB Schedule 40 Grade B ASTM A106,Pipes,Mtr,3220,9000
-IOCL-P-SS316-02,Seamless Pipe SS316L 2 Inch Sch 40S ASTM A312 TP316L,Pipes,Mtr,8920,5100
-IOCL-V-300-FB04,Ball Valve 4in 300 LB WCB Body CS Flanged Trim SS316 Fire Safe API 6D,Valves,Nos,24700,520
-IOCL-V-150-GT06,Gate Valve 6in 150 LB Flanged WCB Carbon Steel Trim 8 Handwheel Operated API 600,Valves,Nos,38200,410
-IOCL-V-300-CK03,Check Valve 3in Class 300 Swing Type Flanged WCB Carbon Steel API 6D,Valves,Nos,16600,310
-IOCL-F-B7-20X12,Stud Bolt with 2 Heavy Hex Nuts M20x120 Alloy Steel ASTM A193 B7 / A194 2H,Fasteners,Set,345,28000
-IOCL-F-B7-24X16,Stud Bolt with 2 Nuts M24x160mm Long ASTM A193 B7 / A194 2H Black Finish,Fasteners,Set,525,21000
-IOCL-FL-WN-300-6,Flange Weld Neck 6in 300 LB RF CS A105 ASME B16.5 Sch 40 Bore,Fittings,Nos,6220,1350
-IOCL-GK-SP-300-6,Metallic Gasket Spiral Wound 6in 300 LB SS316 Graphite Filler ASME B16.20,Fittings,Nos,455,16000
-IOCL-S-HLM-WHT,Industrial Safety Helmet White HDPE Shell Ratchet Suspension IS 2925,Safety,Nos,485,7500
-IOCL-E-FL-60W,Flameproof LED Fitting 60 Watt 240V AC Ex d IIC T6 IP66 Wellhead / Refinery,Electrical,Nos,18600,920
+IOCL-TX-DP-250-HART,"Smart D/P Transmitter 0 to 250mbar 4-20 mA with HART Protocol Hastelloy C276 Wetted Parts 1/2"" NPT",Instrumentation,Nos,79200,180
+IOCL-V-BF-8IN-150L,Butterfly Valve 8 Inch 150 LB Triple Eccentric Lugged CS Body Disc CF8M / SS316 Fire Safe API 609 with Gearbox,Valves,Nos,65200,90
+IOCL-FM-CORIOLIS-2IN,Mass Flowmeter Coriolis Type 2 Inch 300 LB Flanged Measuring Range 50000 kg/h SS316L Sensor 4-20mA HART Output,Instrumentation,Nos,325000,40
+IOCL-P-A333-8S80,Seamless Pipe Low Temperature CS 8 Inch NB Schedule 80 to ASTM A333 Gr 6 Beveled End,Pipes,Mtr,14350,7200
+IOCL-TEMP-RTD-DUAL,"Dual Element RTD Pt 100 3-Wire Duplex Class A Immersion Length 400mm with Barstock Thermowell 1.5"" 300 LB RF SS316",Instrumentation,Nos,12700,260
+IOCL-V-NDL-12NPT-6K,Instrument Needle Valve 1/2 Inch FNPT 6000 LB WOG Forged SS316 Bar Stock Body Screwed Bonnet,Valves,Nos,4350,920
+IOCL-FL-BLIND-8-300,Spectacle Blind 8 Inch 300 LB RF to ASME B16.48 Material CS ASTM A516 Grade 70,Fittings,Nos,8600,350
+IOCL-GK-RTJ-R45,Ring Type Joint Gasket Size R-45 Octagonal Profile Soft Iron Material for API 6A / ASME B16.5 Flanges,Fittings,Nos,1920,1400
+IOCL-E-FLD-200-EXD,Flameproof LED Flood Light Fitting 200 Watt 240V AC Gas Group IIC Zone 1 & 2 IP66 Corrosion Resistant LM6,Electrical,Nos,35200,480
+IOCL-S-DET-4GAS-PMP,Multi Gas Monitor 4-Gas Oxygen Combustible LEL Hydrogen Sulfide Carbon Monoxide with Built-in Motorized Pump Intrinsically Safe,Safety,Nos,57500,170
+IOCL-S-SCBA-300B-68,SCBA Breathing Apparatus Set with 6.8L 300 Bar Composite Carbon Cylinder Positive Pressure Facepiece to EN 137 Class II,Safety,Set,83500,110
+IOCL-V-DP-CHK-6-300,Dual Plate Wafer Check Valve 6 Inch 300 LB Body and Discs Duplex SS S31803 Retainerless Design API 594,Valves,Nos,53400,130
+IOCL-T-A213-T22-2IN,"Alloy Steel Boiler Tube 2"" OD x 4.5mm WT Seamless to ASTM A213 Gr. T22 Hydrotested",Pipes,Mtr,3920,5200
+IOCL-M-BRG-6312-2Z,Single Row Radial Ball Bearing 6312-2Z / C3 Metal Shields 60x130x31mm Motor & Pump Application,Mechanical,Nos,3180,680
+IOCL-REF-CAT-HYD-50,Hydrocracking Catalyst Nickel Molybdenum on Alumina Extrudates 1.3mm Bulk Density 0.75 g/ml,Catalysts,Kg,1850,45000
+IOCL-REF-FURN-TUB-HP,Ethylene Cracking Furnace Radiating Coil Tube HP-40 Nb Modified Alloy 25Cr-35Ni,Pipes,Mtr,48000,850
+IOCL-PMP-CRU-SUL-BB2,Heavy Crude Column Bottoms Pump API 610 BB2 Between Bearing 8x6x13 Duplex Impeller,Mechanical,Nos,1850000,8
+IOCL-COL-TR-VAL-SS,Heavy Duty High-Capacity Valve Tray Cap SS410 for Distillation Fractionator Column,Vessels,Nos,750,12000
+IOCL-INST-GAS-CHRO,Online Process Gas Chromatograph Explosion Proof C1-C6 Analysis with Sample System,Instrumentation,Nos,1650000,6
+IOCL-REF-EXP-TURB-01,FCC Flue Gas Power Recovery Expander Turbine Rotor Inconel 738LC Blading,Turbomachinery,Nos,3800000,4
