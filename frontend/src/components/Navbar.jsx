@@ -126,7 +126,7 @@ function Navbar() {
             ) : (
               <button
                 onClick={() => setIsLoginModalOpen(true)}
-                className="flex items-center space-x-1.5 px-3.5 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold shadow-xs transition-all cursor-pointer"
+                className="flex items-center space-x-1.5 px-3.5 py-1.5 rounded-lg bg-[#4b80d6] hover:bg-[#3d6ec0] text-white text-xs font-semibold shadow-xs shadow-[#4b80d6]/20 transition-all cursor-pointer"
               >
                 <FiLogIn className="text-xs" />
                 <span>Sign In</span>

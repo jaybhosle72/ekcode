@@ -161,7 +161,7 @@ function Governance() {
           onClick={() => setActiveTab('erp')}
           className={`pb-2.5 text-xs sm:text-sm font-semibold border-b-2 transition-all cursor-pointer ${
             activeTab === 'erp'
-              ? 'border-slate-900 text-slate-900'
+              ? 'border-[#4b80d6] text-[#4b80d6]'
               : 'border-transparent text-slate-500 hover:text-slate-800'
           }`}
         >
@@ -171,7 +171,7 @@ function Governance() {
           onClick={() => setActiveTab('audit')}
           className={`pb-2.5 text-xs sm:text-sm font-semibold border-b-2 transition-all cursor-pointer ${
             activeTab === 'audit'
-              ? 'border-slate-900 text-slate-900'
+              ? 'border-[#4b80d6] text-[#4b80d6]'
               : 'border-transparent text-slate-500 hover:text-slate-800'
           }`}
         >
@@ -250,7 +250,7 @@ function Governance() {
                     className={`w-full mt-4 py-2 rounded-lg text-xs font-medium transition-colors cursor-pointer flex items-center justify-center gap-1.5 shadow-xs ${
                       wasJustSynced
                         ? 'bg-emerald-600 text-white hover:bg-emerald-700'
-                        : 'bg-slate-900 hover:bg-slate-800 text-white'
+                        : 'bg-[#4b80d6] hover:bg-[#3d6ec0] text-white shadow-sm shadow-[#4b80d6]/20'
                     } disabled:opacity-50 disabled:cursor-not-allowed`}
                   >
                     {isSyncing ? (
@@ -295,7 +295,7 @@ function Governance() {
                 </button>
                 <button
                   onClick={downloadSapCSV}
-                  className="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-medium shadow-xs flex items-center gap-1.5 cursor-pointer"
+                  className="px-3 py-1.5 bg-[#4b80d6] hover:bg-[#3d6ec0] text-white rounded-lg text-xs font-medium shadow-xs shadow-[#4b80d6]/20 flex items-center gap-1.5 cursor-pointer"
                 >
                   <FiDownload /> Export SAP CSV
                 </button>
@@ -374,7 +374,7 @@ function Governance() {
                       <td className="px-5 py-3.5">
                         <span className={`px-2 py-0.5 rounded font-mono text-[10px] font-bold uppercase border ${
                           log.action === 'approve' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
-                          log.action === 'upload' ? 'bg-blue-50 text-blue-700 border-blue-200' :
+                          log.action === 'upload' ? 'bg-[#4b80d6]/10 text-[#4b80d6] border-[#4b80d6]/25' :
                           log.action === 'erp_sync' ? 'bg-purple-50 text-purple-700 border-purple-200' :
                           'bg-slate-100 text-slate-700 border-slate-200'
                         }`}>

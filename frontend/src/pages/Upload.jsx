@@ -94,7 +94,7 @@ function Upload() {
       <div className="bg-white border border-slate-200 rounded-xl p-4 sm:p-5 space-y-3 shadow-2xs">
         <div className="flex items-center justify-between flex-wrap gap-2">
           <div className="flex items-center space-x-2">
-            <FiDownload className="text-slate-700 text-base" />
+            <FiDownload className="text-[#4b80d6] text-base" />
             <h3 className="text-xs font-bold uppercase tracking-wider text-slate-800">
               External Real CPSE Material Catalogs
             </h3>
@@ -118,13 +118,13 @@ function Upload() {
           <a
             href="/catalogs/BPCL_Terminal_Operations_Catalog_2026.xlsx"
             download="BPCL_Terminal_Operations_Catalog_2026.xlsx"
-            className="flex items-center justify-between p-3.5 bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-300 rounded-xl transition-all shadow-2xs group cursor-pointer"
+            className="flex items-center justify-between p-3.5 bg-white hover:bg-[#4b80d6]/5 border border-slate-200 hover:border-[#4b80d6] rounded-xl transition-all shadow-2xs group cursor-pointer"
           >
             <div>
-              <div className="text-xs font-bold text-slate-800 group-hover:text-slate-900">BPCL Operations Master</div>
+              <div className="text-xs font-bold text-slate-800 group-hover:text-[#4b80d6]">BPCL Operations Master</div>
               <div className="text-[10px] text-slate-500">20 Terminal & POL Items</div>
             </div>
-            <span className="text-[10px] font-mono font-bold text-slate-700 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">.XLSX</span>
+            <span className="text-[10px] font-mono font-bold text-[#4b80d6] bg-[#4b80d6]/10 px-2 py-0.5 rounded border border-[#4b80d6]/25">.XLSX</span>
           </a>
 
           <a
@@ -146,7 +146,7 @@ function Upload() {
         <div>
           <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Target CPSE Enterprise</label>
           <select 
-            className="w-full bg-white border border-slate-200 rounded-lg py-2 px-3 text-xs sm:text-sm text-slate-800 font-semibold focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 cursor-pointer"
+            className="w-full bg-white border border-slate-200 rounded-lg py-2 px-3 text-xs sm:text-sm text-slate-800 font-semibold focus:outline-none focus:border-[#4b80d6] focus:ring-1 focus:ring-[#4b80d6] cursor-pointer"
             value={cpse}
             onChange={(e) => setCpse(e.target.value)}
           >
@@ -156,16 +156,24 @@ function Upload() {
 
         <div>
           <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Catalog File (.xlsx, .xls, .csv)</label>
-          <div className="border-2 border-dashed border-slate-300 hover:border-slate-400 rounded-xl p-8 sm:p-10 flex flex-col items-center justify-center bg-slate-50/50 hover:bg-slate-50 transition-all cursor-pointer relative group">
+          <div className={`border-2 border-dashed ${file ? 'border-[#4b80d6] bg-[#4b80d6]/5' : 'border-slate-300 hover:border-[#4b80d6] bg-slate-50/50 hover:bg-[#4b80d6]/5'} rounded-xl p-8 sm:p-10 flex flex-col items-center justify-center transition-all cursor-pointer relative group`}>
             <input 
               type="file" 
               className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
               accept=".csv, .xlsx, .xls"
               onChange={handleFileChange}
             />
-            <MdCloudUpload className="text-4xl text-slate-500 mb-2 group-hover:scale-110 transition-transform" />
-            <p className="text-xs sm:text-sm font-bold text-slate-800 text-center">{file ? file.name : "Click or drag catalog file here to upload"}</p>
-            <p className="text-[11px] sm:text-xs text-slate-400 mt-1 text-center">Accepts Excel (.xlsx) and CSV with columns: Code, Description, Category, Unit, Price, Quantity</p>
+            <MdCloudUpload className="text-4xl text-[#4b80d6] mb-2 group-hover:scale-110 transition-transform" />
+            <p className="text-xs sm:text-sm font-bold text-slate-800 text-center">
+              {file ? (
+                <span className="text-[#4b80d6] font-semibold">{file.name}</span>
+              ) : (
+                <>
+                  Drop procurement catalog spreadsheet here, or <span className="text-[#4b80d6] underline underline-offset-2 font-semibold">browse files</span>
+                </>
+              )}
+            </p>
+            <p className="text-[11px] sm:text-xs text-slate-400 mt-1 text-center">Accepts Excel (.xlsx, .xls) and CSV (Code, Description, Category, Unit, Price, Quantity)</p>
           </div>
         </div>
 
@@ -173,7 +181,7 @@ function Upload() {
           <button 
             onClick={handleUpload}
             disabled={uploading || !file || !cpse}
-            className="w-full sm:w-auto px-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-lg font-semibold text-xs sm:text-sm shadow-xs transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center cursor-pointer"
+            className="w-full sm:w-auto px-6 py-2.5 bg-[#4b80d6] hover:bg-[#3d6ec0] text-white rounded-lg font-semibold text-xs sm:text-sm shadow-sm shadow-[#4b80d6]/25 transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center cursor-pointer"
           >
             {uploading ? 'Processing File with AI...' : 'Upload & Parse Catalog'}
           </button>
@@ -181,7 +189,7 @@ function Upload() {
       </div>
 
       {uploadResult && (
-        <div className="bg-white border border-slate-200 p-5 rounded-xl space-y-3 shadow-2xs">
+        <div className="bg-white border border-[#4b80d6]/30 p-5 rounded-xl space-y-3 shadow-2xs">
           <div className="flex items-center text-slate-900 font-semibold">
             <MdCheckCircle className="text-xl mr-2 text-emerald-600" />
             <h3 className="text-sm font-bold">Upload & Ingestion Complete</h3>
@@ -193,12 +201,12 @@ function Upload() {
           <button 
             onClick={handleRunMatching}
             disabled={matching}
-            className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg font-semibold text-xs shadow-xs transition-all disabled:opacity-50 flex items-center cursor-pointer"
+            className="px-4 py-2 bg-[#4b80d6] hover:bg-[#3d6ec0] text-white rounded-lg font-semibold text-xs shadow-sm shadow-[#4b80d6]/25 transition-all disabled:opacity-50 flex items-center cursor-pointer"
           >
             {matching ? (
               'Running AI Matching Pipeline...'
             ) : (
-              <><MdPlayArrow className="mr-1.5 text-base text-slate-300" /> Trigger AI Matching Pipeline</>
+              <><MdPlayArrow className="mr-1.5 text-base text-white/80" /> Trigger AI Matching Pipeline</>
             )}
           </button>
         </div>

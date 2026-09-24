@@ -86,7 +86,7 @@ function MaterialMaster() {
           </button>
           <button 
             onClick={exportCSV}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-semibold shadow-xs transition-all cursor-pointer"
+            className="flex items-center gap-1.5 px-3.5 py-1.5 bg-[#4b80d6] hover:bg-[#3d6ec0] text-white rounded-lg text-xs font-semibold shadow-sm shadow-[#4b80d6]/20 transition-all cursor-pointer"
           >
             <FiDownload /> Export Master CSV
           </button>
@@ -102,7 +102,7 @@ function MaterialMaster() {
               value={search}
               onChange={e => setSearch(e.target.value)}
               placeholder="Search code, description, or CPSE..." 
-              className="w-full bg-white border border-slate-200 rounded-lg py-1.5 pl-9 pr-3 text-xs text-slate-900 focus:outline-none focus:border-slate-900"
+              className="w-full bg-white border border-slate-200 rounded-lg py-1.5 pl-9 pr-3 text-xs text-slate-900 focus:outline-none focus:border-[#4b80d6]"
             />
           </div>
           <span className="text-xs text-slate-500 font-medium">
@@ -112,7 +112,7 @@ function MaterialMaster() {
 
         {loading ? (
           <div className="text-center py-24 text-slate-400">
-            <div className="w-8 h-8 border-2 border-slate-800 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
+            <div className="w-8 h-8 border-2 border-[#4b80d6] border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
             <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Loading National Material Master...</p>
           </div>
         ) : filtered.length === 0 ? (
@@ -135,7 +135,7 @@ function MaterialMaster() {
               <tbody className="divide-y divide-slate-100">
                 {filtered.map(m => (
                   <tr key={m._id} className="hover:bg-slate-50/60 transition-colors">
-                    <td className="px-4 py-3 font-mono font-bold text-slate-900 whitespace-nowrap">
+                    <td className="px-4 py-3 font-mono font-bold text-[#4b80d6] whitespace-nowrap">
                       {m.national_code}
                     </td>
                     <td className="px-4 py-3 text-slate-800 font-medium max-w-md">

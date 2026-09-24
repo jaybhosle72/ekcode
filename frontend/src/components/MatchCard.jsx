@@ -297,9 +297,9 @@ function MatchCard({ matchData, onEndorse, onApprove, onReject }) {
               <button
                 onClick={handleApproveAction}
                 disabled={loading}
-                className="flex items-center px-4 py-2 text-xs font-semibold text-white bg-slate-900 hover:bg-slate-800 rounded-lg shadow-xs transition-all cursor-pointer disabled:opacity-50"
+                className="flex items-center px-4 py-2 text-xs font-semibold text-white bg-[#4b80d6] hover:bg-[#3d6ec0] rounded-lg shadow-sm shadow-[#4b80d6]/20 transition-all cursor-pointer disabled:opacity-50"
               >
-                <FiAward className="mr-1.5 text-sm text-slate-300" />
+                <FiAward className="mr-1.5 text-sm text-white/90" />
                 <span>Sovereign Ratify & Mint National Code</span>
               </button>
             )}

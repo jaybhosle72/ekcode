@@ -184,7 +184,7 @@ function LoginModal() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-lg font-semibold text-xs shadow-xs transition-all flex items-center justify-center space-x-1.5 cursor-pointer disabled:opacity-50 mt-1"
+                className="w-full py-2.5 bg-[#4b80d6] hover:bg-[#3d6ec0] text-white rounded-lg font-semibold text-xs shadow-sm shadow-[#4b80d6]/25 transition-all flex items-center justify-center space-x-1.5 cursor-pointer disabled:opacity-50 mt-1"
               >
                 <FiLogIn />
                 <span>{loading ? 'Verifying...' : 'Sign In to Portal'}</span>
@@ -240,14 +240,14 @@ function LoginModal() {
                     onClick={() => handleRoleChange('officer')}
                     className={`p-2.5 rounded-lg border text-left transition-all cursor-pointer ${
                       registerRole === 'officer'
-                        ? 'border-2 border-slate-900 bg-slate-100 text-slate-900 shadow-xs'
+                        ? 'border-2 border-[#4b80d6] bg-[#4b80d6]/5 text-slate-900 shadow-xs'
                         : 'border-slate-200 bg-white hover:border-slate-300 text-slate-600'
                     }`}
                   >
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-base">🏢</span>
                       <span className={`w-3.5 h-3.5 rounded-full border flex items-center justify-center ${
-                        registerRole === 'officer' ? 'border-slate-900 bg-slate-900' : 'border-slate-300'
+                        registerRole === 'officer' ? 'border-[#4b80d6] bg-[#4b80d6]' : 'border-slate-300'
                       }`}>
                         {registerRole === 'officer' && <span className="w-1.5 h-1.5 rounded-full bg-white"></span>}
                       </span>
@@ -399,7 +399,7 @@ function LoginModal() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-lg font-semibold text-xs shadow-xs transition-all flex items-center justify-center space-x-1.5 cursor-pointer disabled:opacity-50 mt-1"
+                className="w-full py-2.5 bg-[#4b80d6] hover:bg-[#3d6ec0] text-white rounded-lg font-semibold text-xs shadow-sm shadow-[#4b80d6]/25 transition-all flex items-center justify-center space-x-1.5 cursor-pointer disabled:opacity-50 mt-1"
               >
                 <FiUserPlus />
                 <span>{loading ? 'Creating Account...' : 'Complete Registration & Access DPI →'}</span>

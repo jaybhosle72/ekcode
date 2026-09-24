@@ -62,7 +62,7 @@ function KnowledgeGraph() {
         <div className="flex items-center gap-2">
           <Link
             to="/matches"
-            className="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-medium shadow-xs transition-colors flex items-center gap-1.5"
+            className="px-3 py-1.5 bg-[#4b80d6] hover:bg-[#3d6ec0] text-white rounded-lg text-xs font-medium shadow-sm shadow-[#4b80d6]/20 transition-colors flex items-center gap-1.5"
           >
             <span>Review Unapproved Items</span>
             <FiExternalLink />
@@ -85,7 +85,7 @@ function KnowledgeGraph() {
               onClick={() => setSelectedCategory(cat)}
               className={`text-xs px-2.5 py-1 rounded-md transition-colors cursor-pointer font-medium ${
                 selectedCategory === cat
-                  ? 'bg-slate-900 text-white shadow-xs'
+                  ? 'bg-[#4b80d6] text-white shadow-xs'
                   : 'bg-slate-100 text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -101,14 +101,14 @@ function KnowledgeGraph() {
             value={search}
             onChange={e => setSearch(e.target.value)}
             placeholder="Search national code, legacy code, or specs..."
-            className="w-full bg-white border border-slate-200 rounded-lg py-1.5 pl-9 pr-3 text-xs text-slate-900 focus:outline-none focus:border-slate-900"
+            className="w-full bg-white border border-slate-200 rounded-lg py-1.5 pl-9 pr-3 text-xs text-slate-900 focus:outline-none focus:border-[#4b80d6]"
           />
         </div>
       </div>
 
       {loading ? (
         <div className="text-center py-24 text-slate-400">
-          <div className="w-8 h-8 border-2 border-slate-800 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
+          <div className="w-8 h-8 border-2 border-[#4b80d6] border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
           <p className="text-xs font-medium uppercase tracking-wider text-slate-500">Loading harmonization mappings...</p>
         </div>
       ) : (
@@ -122,7 +122,7 @@ function KnowledgeGraph() {
 
           {filteredUnified.length === 0 ? (
             <div className="p-8 text-center bg-white border border-slate-200 rounded-xl text-slate-500 text-xs shadow-2xs">
-              No unified codes found. Go to the <Link to="/matches" className="text-slate-900 font-semibold hover:underline">Matches</Link> tab to approve duplicate items and generate new National Codes.
+              No unified codes found. Go to the <Link to="/matches" className="text-[#4b80d6] font-semibold hover:underline">Matches</Link> tab to approve duplicate items and generate new National Codes.
             </div>
           ) : (
             <div className="grid grid-cols-1 gap-3.5">
@@ -132,7 +132,7 @@ function KnowledgeGraph() {
                   <div className="flex justify-between items-start flex-wrap gap-2 pb-3 border-b border-slate-100">
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="px-2.5 py-0.5 bg-slate-100 border border-slate-200 text-slate-900 font-mono font-semibold text-xs rounded-md">
+                        <span className="px-2.5 py-0.5 bg-[#4b80d6]/10 border border-[#4b80d6]/25 text-[#4b80d6] font-mono font-semibold text-xs rounded-md">
                           {u.national_code}
                         </span>
                         <span className="text-[10px] px-2 py-0.5 rounded bg-slate-100 text-slate-600 font-medium border border-slate-200">
