@@ -42,16 +42,23 @@ function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-40 bg-[#0f172a] border-b border-[#334155] shadow-sm">
+    <nav className="sticky top-0 z-40 bg-white/85 backdrop-blur-md border-b border-slate-200/80 shadow-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Brand Logo & Tagline */}
           <div className="flex items-center space-x-3">
-            <Link to="/" className="flex items-center flex-shrink-0">
-              <span className="text-2xl font-bold text-[#3b82f6]">EkCode</span>
-              <span className="ml-2 text-xs text-[#94a3b8] italic hidden sm:inline-block">
-                Ek Desh, Ek Code
-              </span>
+            <Link to="/" className="flex items-center flex-shrink-0 group">
+              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-blue-500 flex items-center justify-center text-white shadow-xs font-black text-xs tracking-wider mr-2.5">
+                EK
+              </div>
+              <div className="flex flex-col">
+                <span className="text-xl font-black text-slate-900 tracking-tight leading-none">
+                  EkCode
+                </span>
+                <span className="text-[10px] font-semibold text-slate-500 tracking-tight mt-0.5 hidden sm:inline-block">
+                  One Nation, One Material Code
+                </span>
+              </div>
             </Link>
           </div>
 
@@ -63,10 +70,10 @@ function Navbar() {
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`flex items-center px-3 py-2 rounded-lg text-xs font-semibold transition-all ${
+                  className={`flex items-center px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                     isActive
-                      ? 'bg-[#1e293b] text-white border-b-2 border-[#3b82f6] shadow-inner'
-                      : 'text-[#94a3b8] hover:bg-[#1e293b] hover:text-white'
+                      ? 'bg-slate-900 text-white font-bold shadow-xs'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/80'
                   }`}
                 >
                   <span className="mr-1.5 text-base">{link.icon}</span>
@@ -79,13 +86,13 @@ function Navbar() {
           {/* User Profile / Genuine Authentication Controls */}
           <div className="flex items-center space-x-3">
             {currentUser ? (
-              <div className="flex items-center space-x-2.5 bg-[#1e293b] border border-[#334155] px-3 py-1.5 rounded-xl">
-                <div className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold text-white shadow-xs ${
+              <div className="flex items-center space-x-2.5 bg-white border border-slate-200 shadow-2xs px-3 py-1.5 rounded-xl">
+                <div className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold shadow-2xs ${
                   currentUser.role === 'admin'
-                    ? 'bg-amber-600'
+                    ? 'bg-amber-100 text-amber-900 border border-amber-300/80'
                     : currentUser.role === 'viewer'
-                    ? 'bg-emerald-600'
-                    : 'bg-blue-600'
+                    ? 'bg-emerald-100 text-emerald-900 border border-emerald-300/80'
+                    : 'bg-blue-100 text-blue-900 border border-blue-300/80'
                 }`}>
                   {currentUser.role === 'admin'
                     ? '👑'
@@ -96,15 +103,15 @@ function Navbar() {
                     : 'CP'}
                 </div>
                 <div className="hidden sm:flex flex-col text-left">
-                  <span className="text-xs font-bold text-white leading-tight truncate max-w-[140px]">
+                  <span className="text-xs font-bold text-slate-900 leading-tight truncate max-w-[140px]">
                     {currentUser.name}
                   </span>
-                  <span className={`text-[10px] font-semibold leading-tight ${
+                  <span className={`text-[10px] font-bold leading-tight ${
                     currentUser.role === 'admin'
-                      ? 'text-amber-400'
+                      ? 'text-amber-700'
                       : currentUser.role === 'viewer'
-                      ? 'text-emerald-400'
-                      : 'text-blue-400'
+                      ? 'text-emerald-700'
+                      : 'text-blue-700'
                   }`}>
                     {currentUser.role === 'admin'
                       ? (currentUser.designation || 'MoPNG National Admin')
@@ -116,7 +123,7 @@ function Navbar() {
                 <button
                   onClick={handleLogout}
                   title="Sign Out"
-                  className="p-1.5 text-[#94a3b8] hover:text-rose-400 rounded-lg hover:bg-[#253349] transition-colors ml-1 cursor-pointer"
+                  className="p-1.5 text-slate-400 hover:text-rose-600 rounded-lg hover:bg-rose-50 transition-colors ml-1 cursor-pointer"
                 >
                   <FiLogOut className="text-sm" />
                 </button>
@@ -124,7 +131,7 @@ function Navbar() {
             ) : (
               <button
                 onClick={() => setIsLoginModalOpen(true)}
-                className="flex items-center space-x-1.5 px-3.5 py-1.5 rounded-lg bg-[#3b82f6] hover:bg-blue-600 text-white text-xs font-bold transition-all shadow-sm cursor-pointer"
+                className="flex items-center space-x-1.5 px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
               >
                 <FiLogIn className="text-sm" />
                 <span>Sign In / Register</span>
@@ -134,7 +141,7 @@ function Navbar() {
             {/* Mobile Menu Hamburger Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 rounded-lg text-[#94a3b8] hover:text-white hover:bg-[#1e293b] transition-colors cursor-pointer"
+              className="lg:hidden p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors cursor-pointer"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <MdClose className="text-xl" /> : <MdMenu className="text-xl" />}
@@ -145,7 +152,7 @@ function Navbar() {
 
       {/* Mobile Drawer Navigation Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#0f172a] border-t border-[#334155] px-4 pt-2 pb-4 space-y-1">
+        <div className="lg:hidden bg-white/95 backdrop-blur-md border-t border-slate-200/80 px-4 pt-2 pb-4 space-y-1 shadow-lg">
           {visibleLinks.map((link) => {
             const isActive = location.pathname === link.path;
             return (
@@ -153,10 +160,10 @@ function Navbar() {
                 key={link.name}
                 to={link.path}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`flex items-center px-3 py-2 rounded-lg text-xs font-semibold transition-colors ${
+                className={`flex items-center px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all ${
                   isActive
-                    ? 'bg-[#1e293b] text-white border-l-4 border-[#3b82f6]'
-                    : 'text-[#94a3b8] hover:bg-[#1e293b] hover:text-white'
+                    ? 'bg-slate-900 text-white shadow-xs font-bold'
+                    : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
                 }`}
               >
                 <span className="mr-3 text-base">{link.icon}</span>
@@ -165,17 +172,17 @@ function Navbar() {
             );
           })}
 
-          <div className="pt-3 border-t border-[#334155] flex items-center justify-between text-xs text-[#94a3b8] px-2">
+          <div className="pt-3 border-t border-slate-200 flex items-center justify-between text-xs text-slate-600 px-2">
             {currentUser ? (
               <div className="flex items-center justify-between w-full">
                 <div className="flex flex-col">
-                  <span className="text-white font-bold leading-tight">{currentUser.name}</span>
+                  <span className="text-slate-900 font-bold leading-tight">{currentUser.name}</span>
                   <span className={`text-[11px] font-semibold mt-0.5 ${
                     currentUser.role === 'admin'
-                      ? 'text-amber-400'
+                      ? 'text-amber-700'
                       : currentUser.role === 'viewer'
-                      ? 'text-emerald-400'
-                      : 'text-blue-400'
+                      ? 'text-emerald-700'
+                      : 'text-blue-700'
                   }`}>
                     {currentUser.role === 'admin'
                       ? (currentUser.designation || 'MoPNG National Admin')
@@ -189,7 +196,7 @@ function Navbar() {
                     handleLogout();
                     setMobileMenuOpen(false);
                   }}
-                  className="text-rose-400 font-bold hover:underline ml-4"
+                  className="text-rose-600 font-bold hover:underline ml-4"
                 >
                   Sign Out
                 </button>
@@ -200,7 +207,7 @@ function Navbar() {
                   setMobileMenuOpen(false);
                   setIsLoginModalOpen(true);
                 }}
-                className="text-[#3b82f6] font-bold hover:underline"
+                className="text-slate-900 font-bold hover:underline"
               >
                 Sign In / Register
               </button>

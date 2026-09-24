@@ -104,34 +104,42 @@ function LoginModal() {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in duration-200">
       <div className="w-full max-w-md bg-white border border-slate-200 rounded-2xl shadow-2xl overflow-hidden">
         {/* Modal Header */}
-        <div className="p-4 sm:p-5 bg-gradient-to-r from-[#1E293B] to-[#243C4C] text-white flex justify-between items-center">
+        <div className="p-4 sm:p-5 bg-white border-b border-slate-200/80 flex justify-between items-center">
           <div className="flex items-center space-x-3">
-            <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white text-base font-bold shadow-xs">
+            <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200/60 flex items-center justify-center text-blue-600 text-lg font-bold shadow-2xs">
               <FiShield />
             </div>
             <div>
-              <h3 className="text-sm sm:text-base font-bold leading-tight">EkCode Authentication</h3>
-              <p className="text-[11px] text-slate-300">Central Material Master Portal</p>
+              <h3 className="text-sm sm:text-base font-bold text-slate-900 leading-tight">EkCode Authentication</h3>
+              <p className="text-[11px] text-slate-500 font-medium">National Petroleum & Energy Materials DPI</p>
             </div>
           </div>
           <button
             onClick={() => setIsLoginModalOpen(false)}
-            className="p-1.5 text-slate-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors cursor-pointer"
+            className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
           >
             <FiX className="text-lg" />
           </button>
         </div>
 
         <div className="p-5 sm:p-6 space-y-4 max-h-[82vh] overflow-y-auto">
-          {/* Sign In vs Sign Up Tabs */}
-          <div className="flex border-b border-slate-200">
+          {/* Production Real-Database Badge (inspired by KaryaSetu) */}
+          <div className="flex items-center justify-between pb-0.5">
+            <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase bg-emerald-50 text-emerald-700 border border-emerald-200/80">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span>
+              REAL-TIME ENTERPRISE AUTHENTICATION
+            </span>
+          </div>
+
+          {/* Sign In vs Sign Up Tabs (Pill Container) */}
+          <div className="flex bg-slate-100/80 p-1 rounded-xl border border-slate-200/60">
             <button
               type="button"
               onClick={() => setActiveTab('signin')}
-              className={`flex-1 pb-2.5 text-xs sm:text-sm font-bold border-b-2 transition-all cursor-pointer ${
+              className={`flex-1 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer ${
                 activeTab === 'signin'
-                  ? 'border-blue-600 text-slate-900'
-                  : 'border-transparent text-slate-400 hover:text-slate-700'
+                  ? 'bg-white text-slate-900 shadow-xs'
+                  : 'text-slate-500 hover:text-slate-800'
               }`}
             >
               Sign In
@@ -139,10 +147,10 @@ function LoginModal() {
             <button
               type="button"
               onClick={() => setActiveTab('signup')}
-              className={`flex-1 pb-2.5 text-xs sm:text-sm font-bold border-b-2 transition-all cursor-pointer ${
+              className={`flex-1 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer ${
                 activeTab === 'signup'
-                  ? 'border-blue-600 text-slate-900'
-                  : 'border-transparent text-slate-400 hover:text-slate-700'
+                  ? 'bg-white text-slate-900 shadow-xs'
+                  : 'text-slate-500 hover:text-slate-800'
               }`}
             >
               Create Account (Sign Up)
@@ -189,17 +197,17 @@ function LoginModal() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs sm:text-sm shadow-sm transition-colors flex items-center justify-center space-x-1.5 cursor-pointer disabled:opacity-50"
+                className="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-bold text-xs sm:text-sm shadow-xs transition-colors flex items-center justify-center space-x-1.5 cursor-pointer disabled:opacity-50"
               >
                 <FiLogIn />
-                <span>{loading ? 'Verifying Credentials...' : 'Sign In'}</span>
+                <span>{loading ? 'Verifying Credentials...' : 'Sign In to Portal →'}</span>
               </button>
             </form>
           )}
 
           {/* TAB 2: Sign Up Form */}
           {activeTab === 'signup' && (
-            <form onSubmit={handleRegisterSubmit} className="space-y-3">
+            <form onSubmit={handleRegisterSubmit} className="space-y-3.5">
               <div>
                 <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-700 mb-1">
                   Full Name
@@ -234,20 +242,75 @@ function LoginModal() {
                 </div>
               </div>
 
-              {/* Role Scope Selector */}
+              {/* Role Scope Selector (Interactive Persona Cards) */}
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-700 mb-1">
-                  Account Role & Scope
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+                  Select Account Persona & Scope
                 </label>
-                <select
-                  value={registerRole}
-                  onChange={(e) => handleRoleChange(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-2.5 py-2 text-xs text-slate-900 font-semibold focus:outline-none focus:border-blue-600 cursor-pointer"
-                >
-                  <option value="officer">CPSE Procurement Officer (Upload & Review Matches)</option>
-                  <option value="admin">MoPNG National Admin (Full Governance & ERP Sync)</option>
-                  <option value="viewer">Public Citizen / Auditor (Open Data Transparency)</option>
-                </select>
+                <div className="grid grid-cols-3 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => handleRoleChange('officer')}
+                    className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer ${
+                      registerRole === 'officer'
+                        ? 'border-2 border-blue-600 bg-blue-50/60 shadow-2xs'
+                        : 'border-slate-200 bg-white hover:border-slate-300'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-base">🏢</span>
+                      <span className={`w-3.5 h-3.5 rounded-full border flex items-center justify-center ${
+                        registerRole === 'officer' ? 'border-blue-600 bg-blue-600' : 'border-slate-300'
+                      }`}>
+                        {registerRole === 'officer' && <span className="w-1.5 h-1.5 rounded-full bg-white"></span>}
+                      </span>
+                    </div>
+                    <div className="text-xs font-bold text-slate-900 leading-tight">CPSE Officer</div>
+                    <div className="text-[10px] text-slate-500 mt-0.5">Procurement</div>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => handleRoleChange('admin')}
+                    className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer ${
+                      registerRole === 'admin'
+                        ? 'border-2 border-amber-600 bg-amber-50/60 shadow-2xs'
+                        : 'border-slate-200 bg-white hover:border-slate-300'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-base">👑</span>
+                      <span className={`w-3.5 h-3.5 rounded-full border flex items-center justify-center ${
+                        registerRole === 'admin' ? 'border-amber-600 bg-amber-600' : 'border-slate-300'
+                      }`}>
+                        {registerRole === 'admin' && <span className="w-1.5 h-1.5 rounded-full bg-white"></span>}
+                      </span>
+                    </div>
+                    <div className="text-xs font-bold text-slate-900 leading-tight">MoPNG Admin</div>
+                    <div className="text-[10px] text-slate-500 mt-0.5">Governance</div>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => handleRoleChange('viewer')}
+                    className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer ${
+                      registerRole === 'viewer'
+                        ? 'border-2 border-emerald-600 bg-emerald-50/60 shadow-2xs'
+                        : 'border-slate-200 bg-white hover:border-slate-300'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-base">🌐</span>
+                      <span className={`w-3.5 h-3.5 rounded-full border flex items-center justify-center ${
+                        registerRole === 'viewer' ? 'border-emerald-600 bg-emerald-600' : 'border-slate-300'
+                      }`}>
+                        {registerRole === 'viewer' && <span className="w-1.5 h-1.5 rounded-full bg-white"></span>}
+                      </span>
+                    </div>
+                    <div className="text-xs font-bold text-slate-900 leading-tight">Public Citizen</div>
+                    <div className="text-[10px] text-slate-500 mt-0.5">Open Data</div>
+                  </button>
+                </div>
               </div>
 
               {registerRole === 'officer' && (
@@ -349,10 +412,10 @@ function LoginModal() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs sm:text-sm shadow-sm transition-colors flex items-center justify-center space-x-1.5 cursor-pointer disabled:opacity-50 mt-1"
+                className="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-bold text-xs sm:text-sm shadow-xs transition-colors flex items-center justify-center space-x-1.5 cursor-pointer disabled:opacity-50 mt-1"
               >
                 <FiUserPlus />
-                <span>{loading ? 'Creating Account...' : 'Register & Log In'}</span>
+                <span>{loading ? 'Creating Account...' : 'Complete Registration & Access DPI →'}</span>
               </button>
             </form>
           )}

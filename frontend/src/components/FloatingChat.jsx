@@ -156,28 +156,28 @@ function FloatingChat() {
         <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex items-center space-x-3">
           <button
             onClick={() => setIsOpen(true)}
-            className="flex items-center space-x-2 px-4 py-3 bg-[#3b82f6] hover:bg-blue-700 text-white rounded-full shadow-lg transition-all duration-200 cursor-pointer"
+            className="flex items-center space-x-2 px-4 py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-full shadow-xl border border-slate-700/60 transition-all duration-200 cursor-pointer"
             aria-label="Open EkCode AI Assistant"
           >
-            <BsRobot className="text-lg" />
-            <span className="text-xs sm:text-sm font-semibold">Ask EkCode AI</span>
-            <BsStars className="text-yellow-200 text-xs" />
+            <BsRobot className="text-lg text-blue-400" />
+            <span className="text-xs sm:text-sm font-bold">Ask EkCode AI</span>
+            <BsStars className="text-amber-300 text-xs" />
           </button>
         </div>
       )}
 
       {/* Floating Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-3 right-3 sm:bottom-6 sm:right-6 z-50 w-[94vw] sm:w-[400px] h-[550px] max-h-[82vh] bg-white border border-slate-300 rounded-xl shadow-2xl flex flex-col overflow-hidden animate-in fade-in duration-150">
+        <div className="fixed bottom-3 right-3 sm:bottom-6 sm:right-6 z-50 w-[94vw] sm:w-[400px] h-[550px] max-h-[82vh] bg-white border border-slate-200/90 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in fade-in duration-150">
           {/* Header */}
-          <div className="p-3.5 bg-[#0f172a] text-white border-b border-[#334155] flex items-center justify-between">
+          <div className="p-3.5 bg-white text-slate-900 border-b border-slate-200/80 flex items-center justify-between">
             <div className="flex items-center space-x-2.5">
-              <div className="w-8 h-8 rounded-lg bg-[#3b82f6] flex items-center justify-center text-white text-base">
+              <div className="w-8 h-8 rounded-lg bg-blue-50 border border-blue-200/60 flex items-center justify-center text-blue-600 text-base">
                 <BsRobot />
               </div>
               <div>
-                <h3 className="text-xs sm:text-sm font-bold text-white leading-tight">EkCode AI Copilot</h3>
-                <p className="text-[10px] text-[#94a3b8] leading-tight">One Nation, One Material Code</p>
+                <h3 className="text-xs sm:text-sm font-bold text-slate-900 leading-tight">EkCode AI Copilot</h3>
+                <p className="text-[10px] text-slate-500 leading-tight">National Material Standardization DPI</p>
               </div>
             </div>
 
@@ -185,21 +185,21 @@ function FloatingChat() {
               <button
                 onClick={clearChat}
                 title="Clear conversation"
-                className="p-1.5 text-slate-400 hover:text-white rounded transition-colors text-xs"
+                className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors text-xs cursor-pointer"
               >
                 <FiTrash2 />
               </button>
               <button
                 onClick={() => setIsOpen(false)}
                 title="Minimize chat"
-                className="p-1.5 text-slate-400 hover:text-white rounded transition-colors text-xs"
+                className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors text-xs cursor-pointer"
               >
                 <FiMinimize2 />
               </button>
               <button
                 onClick={() => setIsOpen(false)}
                 title="Close chat"
-                className="p-1.5 text-slate-400 hover:text-rose-400 rounded transition-colors text-xs"
+                className="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors text-xs cursor-pointer"
               >
                 <FiX />
               </button>

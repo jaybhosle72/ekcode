@@ -71,7 +71,7 @@ function Dashboard() {
         </div>
         <button 
           onClick={fetchStats}
-          className="text-xs bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 px-4 py-2 rounded-lg transition-colors font-semibold shadow-xs cursor-pointer"
+          className="text-xs bg-white/90 border border-slate-200/90 text-slate-800 hover:bg-white px-4 py-2 rounded-xl transition-all font-bold shadow-2xs cursor-pointer"
         >
           Refresh Live Data
         </button>
@@ -89,8 +89,8 @@ function Dashboard() {
 
       {/* Clean Slate Onboarding Prompt */}
       {(!stats.totalMaterials || stats.totalMaterials === 0) && (
-        <div className="bg-white border border-blue-200 rounded-xl p-6 text-center space-y-2 shadow-xs">
-          <h3 className="text-sm sm:text-base font-bold text-slate-800">
+        <div className="bg-white/95 backdrop-blur-xs border border-blue-200/80 rounded-2xl p-6 text-center space-y-2 shadow-xs">
+          <h3 className="text-sm sm:text-base font-bold text-slate-900">
             🚀 Ready for External CPSE Catalog Ingestion
           </h3>
           <p className="text-xs sm:text-sm text-slate-500 max-w-xl mx-auto">
@@ -102,22 +102,22 @@ function Dashboard() {
       {/* Analytics Charts Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* CPSE Distribution */}
-        <div className="bg-white border border-slate-200 shadow-sm rounded-xl p-5">
+        <div className="bg-white/95 backdrop-blur-xs border border-slate-200/80 shadow-xs rounded-2xl p-5">
           <h2 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-4">Materials Ingested per CPSE</h2>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={cpseChartData}>
                 <XAxis dataKey="name" stroke="#94a3b8" fontSize={11} />
                 <YAxis stroke="#94a3b8" fontSize={11} />
-                <Tooltip contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', borderRadius: '8px', color: '#0f172a', fontSize: '12px' }} />
-                <Bar dataKey="count" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+                <Tooltip contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', borderRadius: '12px', color: '#0f172a', fontSize: '12px', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
+                <Bar dataKey="count" fill="#3b82f6" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </div>
 
         {/* Match Classification */}
-        <div className="bg-white border border-slate-200 shadow-sm rounded-xl p-5">
+        <div className="bg-white/95 backdrop-blur-xs border border-slate-200/80 shadow-xs rounded-2xl p-5">
           <h2 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-4">Duplicate Match Types</h2>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
@@ -136,14 +136,14 @@ function Dashboard() {
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
-                <Tooltip contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', borderRadius: '8px', color: '#0f172a', fontSize: '12px' }} />
+                <Tooltip contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', borderRadius: '12px', color: '#0f172a', fontSize: '12px', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
               </PieChart>
             </ResponsiveContainer>
           </div>
         </div>
 
         {/* Category Breakdown */}
-        <div className="bg-white border border-slate-200 shadow-sm rounded-xl p-5">
+        <div className="bg-white/95 backdrop-blur-xs border border-slate-200/80 shadow-xs rounded-2xl p-5">
           <h2 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-4">Category Breakdown</h2>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
