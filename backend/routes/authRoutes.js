@@ -46,15 +46,34 @@ router.post('/register', async (req, res) => {
 
     const hashedPassword = hashPassword(password);
 
+    const role = req.body.role || 'officer';
+    let assignedOrg = cpse_organization;
+    let assignedDesignation = designation;
+
+    if (role === 'viewer') {
+      assignedOrg = 'Public Citizen';
+      assignedDesignation = designation && designation !== 'Procurement Officer' && designation !== 'Materials & Procurement Officer'
+        ? designation
+        : 'Public Citizen / Auditor';
+    } else if (role === 'admin') {
+      assignedOrg = 'MoPNG';
+      assignedDesignation = designation || 'MoPNG Master Administrator';
+    } else {
+      assignedOrg = cpse_organization || 'ONGC';
+      assignedDesignation = designation || 'Materials & Procurement Officer';
+    }
+
+    const avatarBg = role === 'admin' ? 'D97706' : role === 'viewer' ? '059669' : '2563EB';
+
     if (existingUser) {
       // Update existing record with password and details
       existingUser.name = name.trim();
       existingUser.password = hashedPassword;
-      existingUser.cpse_organization = cpse_organization || 'ONGC';
-      existingUser.designation = designation || 'Procurement Officer';
+      existingUser.role = role;
+      existingUser.cpse_organization = assignedOrg;
+      existingUser.designation = assignedDesignation;
       existingUser.auth_provider = 'local';
-      if (req.body.role) existingUser.role = req.body.role;
-      existingUser.avatar = `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(name)}&backgroundColor=2563EB`;
+      existingUser.avatar = `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(name)}&backgroundColor=${avatarBg}`;
       await existingUser.save();
 
       return res.status(200).json({
@@ -64,7 +83,7 @@ router.post('/register', async (req, res) => {
           id: existingUser._id,
           name: existingUser.name,
           email: existingUser.email,
-          role: existingUser.role || 'officer',
+          role: existingUser.role,
           cpse_organization: existingUser.cpse_organization,
           designation: existingUser.designation,
           avatar: existingUser.avatar
@@ -76,11 +95,11 @@ router.post('/register', async (req, res) => {
       name: name.trim(),
       email: cleanEmail,
       password: hashedPassword,
-      role: req.body.role || 'officer',
-      cpse_organization: cpse_organization || 'ONGC',
-      designation: designation || 'Procurement Officer',
+      role: role,
+      cpse_organization: assignedOrg,
+      designation: assignedDesignation,
       auth_provider: 'local',
-      avatar: `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(name)}&backgroundColor=2563EB`
+      avatar: `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(name)}&backgroundColor=${avatarBg}`
     });
 
     await newUser.save();
@@ -92,7 +111,7 @@ router.post('/register', async (req, res) => {
         id: newUser._id,
         name: newUser.name,
         email: newUser.email,
-        role: newUser.role || 'officer',
+        role: newUser.role,
         cpse_organization: newUser.cpse_organization,
         designation: newUser.designation,
         avatar: newUser.avatar

@@ -21,6 +21,20 @@ function LoginModal() {
   const [registerCpse, setRegisterCpse] = useState('ONGC');
   const [registerDesignation, setRegisterDesignation] = useState('Materials & Procurement Officer');
 
+  const handleRoleChange = (newRole) => {
+    setRegisterRole(newRole);
+    if (newRole === 'viewer') {
+      setRegisterCpse('Public Citizen');
+      setRegisterDesignation('Public Citizen / Auditor');
+    } else if (newRole === 'admin') {
+      setRegisterCpse('MoPNG');
+      setRegisterDesignation('MoPNG Master Administrator');
+    } else {
+      setRegisterCpse('ONGC');
+      setRegisterDesignation('Materials & Procurement Officer');
+    }
+  };
+
   if (!isLoginModalOpen) return null;
 
   const handleLoginSubmit = async (e) => {
@@ -57,17 +71,26 @@ function LoginModal() {
       return;
     }
 
+    const isViewer = registerRole === 'viewer';
+    const isAdmin = registerRole === 'admin';
+    const cpseOrg = isAdmin ? 'MoPNG' : isViewer ? 'Public Citizen' : registerCpse;
+    const desig = isAdmin 
+      ? 'MoPNG Master Administrator' 
+      : isViewer 
+      ? 'Public Citizen / Auditor' 
+      : (registerDesignation.trim() || 'Materials & Procurement Officer');
+
     setLoading(true);
     try {
       const user = await register({
-        name: registerName,
-        email: registerEmail,
+        name: registerName.trim(),
+        email: registerEmail.trim(),
         password: registerPassword,
         role: registerRole,
-        cpse_organization: registerRole === 'admin' ? 'MoPNG' : registerCpse,
-        designation: registerRole === 'admin' ? 'MoPNG Master Administrator' : registerDesignation
+        cpse_organization: cpseOrg,
+        designation: desig
       });
-      toast.success(`Account created successfully for ${user.name}!`);
+      toast.success(`Account created successfully as ${user.name}!`);
       setIsLoginModalOpen(false);
     } catch (err) {
       console.error(err);
@@ -218,7 +241,7 @@ function LoginModal() {
                 </label>
                 <select
                   value={registerRole}
-                  onChange={(e) => setRegisterRole(e.target.value)}
+                  onChange={(e) => handleRoleChange(e.target.value)}
                   className="w-full bg-slate-50 border border-slate-300 rounded-xl px-2.5 py-2 text-xs text-slate-900 font-semibold focus:outline-none focus:border-blue-600 cursor-pointer"
                 >
                   <option value="officer">CPSE Procurement Officer (Upload & Review Matches)</option>
@@ -256,9 +279,39 @@ function LoginModal() {
                       type="text"
                       value={registerDesignation}
                       onChange={(e) => setRegisterDesignation(e.target.value)}
-                      placeholder="Procurement Officer"
+                      placeholder="Materials & Procurement Officer"
                       className="w-full bg-slate-50 border border-slate-300 rounded-xl px-2.5 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-600"
                     />
+                  </div>
+                </div>
+              )}
+
+              {registerRole === 'admin' && (
+                <div className="p-3 bg-amber-50/90 border border-amber-200 rounded-xl flex items-start space-x-2.5 text-left">
+                  <span className="text-base mt-0.5">👑</span>
+                  <div className="text-[11px] leading-relaxed">
+                    <div className="font-bold text-amber-950">MoPNG Master Administrator Persona</div>
+                    <div className="text-amber-800">
+                      Organization: <span className="font-semibold text-amber-950">MoPNG</span> · Designation: <span className="font-semibold text-amber-950">MoPNG Master Administrator</span>
+                    </div>
+                    <div className="text-amber-700 text-[10px] mt-0.5">
+                      Full authority: Catalog governance, Cross-CPSE approval, ERP Sync & Audit logs.
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {registerRole === 'viewer' && (
+                <div className="p-3 bg-emerald-50/90 border border-emerald-200 rounded-xl flex items-start space-x-2.5 text-left">
+                  <span className="text-base mt-0.5">🌐</span>
+                  <div className="text-[11px] leading-relaxed">
+                    <div className="font-bold text-emerald-950">Public Citizen / Auditor Persona</div>
+                    <div className="text-emerald-800">
+                      Organization: <span className="font-semibold text-emerald-950">Public Citizen</span> · Designation: <span className="font-semibold text-emerald-950">Public Citizen / Auditor</span>
+                    </div>
+                    <div className="text-emerald-700 text-[10px] mt-0.5">
+                      Open Data Access: Read-only access to Central Master Catalogue & Semantic Graph.
+                    </div>
                   </div>
                 </div>
               )}

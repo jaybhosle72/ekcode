@@ -81,20 +81,36 @@ function Navbar() {
             {currentUser ? (
               <div className="flex items-center space-x-2.5 bg-[#1e293b] border border-[#334155] px-3 py-1.5 rounded-xl">
                 <div className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold text-white shadow-xs ${
-                  currentUser.role === 'admin' ? 'bg-amber-600' : 'bg-blue-600'
+                  currentUser.role === 'admin'
+                    ? 'bg-amber-600'
+                    : currentUser.role === 'viewer'
+                    ? 'bg-emerald-600'
+                    : 'bg-blue-600'
                 }`}>
-                  {currentUser.role === 'admin' ? '👑' : currentUser.name ? currentUser.name.slice(0, 2).toUpperCase() : 'U'}
+                  {currentUser.role === 'admin'
+                    ? '👑'
+                    : currentUser.role === 'viewer'
+                    ? '🌐'
+                    : currentUser.name
+                    ? currentUser.name.slice(0, 2).toUpperCase()
+                    : 'CP'}
                 </div>
                 <div className="hidden sm:flex flex-col text-left">
-                  <span className="text-xs font-bold text-white leading-tight truncate max-w-[130px]">
+                  <span className="text-xs font-bold text-white leading-tight truncate max-w-[140px]">
                     {currentUser.name}
                   </span>
                   <span className={`text-[10px] font-semibold leading-tight ${
-                    currentUser.role === 'admin' ? 'text-amber-400' : 'text-blue-400'
+                    currentUser.role === 'admin'
+                      ? 'text-amber-400'
+                      : currentUser.role === 'viewer'
+                      ? 'text-emerald-400'
+                      : 'text-blue-400'
                   }`}>
-                    {currentUser.role === 'admin' 
-                      ? 'MoPNG National Admin' 
-                      : `${currentUser.cpse_organization || 'CPSE'} Officer`}
+                    {currentUser.role === 'admin'
+                      ? (currentUser.designation || 'MoPNG National Admin')
+                      : currentUser.role === 'viewer'
+                      ? (currentUser.designation || 'Public Citizen / Auditor')
+                      : `${currentUser.cpse_organization || 'CPSE'} · ${currentUser.designation || 'Officer'}`}
                   </span>
                 </div>
                 <button
@@ -152,13 +168,28 @@ function Navbar() {
           <div className="pt-3 border-t border-[#334155] flex items-center justify-between text-xs text-[#94a3b8] px-2">
             {currentUser ? (
               <div className="flex items-center justify-between w-full">
-                <span>Signed in as: <strong className="text-white">{currentUser.name}</strong></span>
+                <div className="flex flex-col">
+                  <span className="text-white font-bold leading-tight">{currentUser.name}</span>
+                  <span className={`text-[11px] font-semibold mt-0.5 ${
+                    currentUser.role === 'admin'
+                      ? 'text-amber-400'
+                      : currentUser.role === 'viewer'
+                      ? 'text-emerald-400'
+                      : 'text-blue-400'
+                  }`}>
+                    {currentUser.role === 'admin'
+                      ? (currentUser.designation || 'MoPNG National Admin')
+                      : currentUser.role === 'viewer'
+                      ? (currentUser.designation || 'Public Citizen / Auditor')
+                      : `${currentUser.cpse_organization || 'CPSE'} · ${currentUser.designation || 'Officer'}`}
+                  </span>
+                </div>
                 <button
                   onClick={() => {
                     handleLogout();
                     setMobileMenuOpen(false);
                   }}
-                  className="text-rose-400 font-bold hover:underline"
+                  className="text-rose-400 font-bold hover:underline ml-4"
                 >
                   Sign Out
                 </button>
