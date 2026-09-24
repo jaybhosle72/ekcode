@@ -184,10 +184,10 @@ function LoginModal() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg font-medium text-xs shadow-2xs transition-colors flex items-center justify-center space-x-1.5 cursor-pointer disabled:opacity-50 mt-1"
+                className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold text-xs shadow-xs shadow-blue-500/20 transition-all flex items-center justify-center space-x-1.5 cursor-pointer disabled:opacity-50 mt-1"
               >
                 <FiLogIn />
-                <span>{loading ? 'Verifying...' : 'Sign In'}</span>
+                <span>{loading ? 'Verifying...' : 'Sign In to Portal'}</span>
               </button>
             </form>
           )}
@@ -207,7 +207,7 @@ function LoginModal() {
                     onChange={(e) => setRegisterName(e.target.value)}
                     placeholder="e.g. Vikram Sharma"
                     required
-                    className="w-full bg-white border border-slate-200 rounded-lg pl-9 pr-3.5 py-1.5 text-xs text-slate-900 focus:outline-none focus:border-slate-900 font-medium"
+                    className="w-full bg-white border border-slate-200 rounded-lg pl-9 pr-3.5 py-1.5 text-xs text-slate-900 focus:outline-none focus:border-blue-600 font-medium"
                   />
                 </div>
               </div>
@@ -224,7 +224,7 @@ function LoginModal() {
                     onChange={(e) => setRegisterEmail(e.target.value)}
                     placeholder="name@domain.com"
                     required
-                    className="w-full bg-white border border-slate-200 rounded-lg pl-9 pr-3.5 py-1.5 text-xs text-slate-900 focus:outline-none focus:border-slate-900 font-medium"
+                    className="w-full bg-white border border-slate-200 rounded-lg pl-9 pr-3.5 py-1.5 text-xs text-slate-900 focus:outline-none focus:border-blue-600 font-medium"
                   />
                 </div>
               </div>
@@ -240,19 +240,19 @@ function LoginModal() {
                     onClick={() => handleRoleChange('officer')}
                     className={`p-2.5 rounded-lg border text-left transition-all cursor-pointer ${
                       registerRole === 'officer'
-                        ? 'border-slate-900 bg-slate-50 text-slate-900 shadow-2xs'
+                        ? 'border-2 border-blue-600 bg-blue-50/80 text-blue-900 shadow-xs'
                         : 'border-slate-200 bg-white hover:border-slate-300 text-slate-600'
                     }`}
                   >
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-base">🏢</span>
                       <span className={`w-3.5 h-3.5 rounded-full border flex items-center justify-center ${
-                        registerRole === 'officer' ? 'border-slate-900 bg-slate-900' : 'border-slate-300'
+                        registerRole === 'officer' ? 'border-blue-600 bg-blue-600' : 'border-slate-300'
                       }`}>
                         {registerRole === 'officer' && <span className="w-1.5 h-1.5 rounded-full bg-white"></span>}
                       </span>
                     </div>
-                    <div className="text-xs font-semibold text-slate-900 leading-tight">CPSE Officer</div>
+                    <div className="text-xs font-bold text-slate-900 leading-tight">CPSE Officer</div>
                     <div className="text-[10px] text-slate-500 mt-0.5">Procurement</div>
                   </button>
 
@@ -261,19 +261,19 @@ function LoginModal() {
                     onClick={() => handleRoleChange('admin')}
                     className={`p-2.5 rounded-lg border text-left transition-all cursor-pointer ${
                       registerRole === 'admin'
-                        ? 'border-slate-900 bg-slate-50 text-slate-900 shadow-2xs'
+                        ? 'border-2 border-amber-600 bg-amber-50/80 text-amber-900 shadow-xs'
                         : 'border-slate-200 bg-white hover:border-slate-300 text-slate-600'
                     }`}
                   >
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-base">👑</span>
                       <span className={`w-3.5 h-3.5 rounded-full border flex items-center justify-center ${
-                        registerRole === 'admin' ? 'border-slate-900 bg-slate-900' : 'border-slate-300'
+                        registerRole === 'admin' ? 'border-amber-600 bg-amber-600' : 'border-slate-300'
                       }`}>
                         {registerRole === 'admin' && <span className="w-1.5 h-1.5 rounded-full bg-white"></span>}
                       </span>
                     </div>
-                    <div className="text-xs font-semibold text-slate-900 leading-tight">MoPNG Admin</div>
+                    <div className="text-xs font-bold text-slate-900 leading-tight">MoPNG Admin</div>
                     <div className="text-[10px] text-slate-500 mt-0.5">Governance</div>
                   </button>
 
@@ -282,19 +282,19 @@ function LoginModal() {
                     onClick={() => handleRoleChange('viewer')}
                     className={`p-2.5 rounded-lg border text-left transition-all cursor-pointer ${
                       registerRole === 'viewer'
-                        ? 'border-slate-900 bg-slate-50 text-slate-900 shadow-2xs'
+                        ? 'border-2 border-emerald-600 bg-emerald-50/80 text-emerald-900 shadow-xs'
                         : 'border-slate-200 bg-white hover:border-slate-300 text-slate-600'
                     }`}
                   >
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-base">🌐</span>
                       <span className={`w-3.5 h-3.5 rounded-full border flex items-center justify-center ${
-                        registerRole === 'viewer' ? 'border-slate-900 bg-slate-900' : 'border-slate-300'
+                        registerRole === 'viewer' ? 'border-emerald-600 bg-emerald-600' : 'border-slate-300'
                       }`}>
                         {registerRole === 'viewer' && <span className="w-1.5 h-1.5 rounded-full bg-white"></span>}
                       </span>
                     </div>
-                    <div className="text-xs font-semibold text-slate-900 leading-tight">Public Citizen</div>
+                    <div className="text-xs font-bold text-slate-900 leading-tight">Public Citizen</div>
                     <div className="text-[10px] text-slate-500 mt-0.5">Open Data</div>
                   </button>
                 </div>
@@ -399,7 +399,7 @@ function LoginModal() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg font-medium text-xs shadow-2xs transition-colors flex items-center justify-center space-x-1.5 cursor-pointer disabled:opacity-50 mt-1"
+                className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold text-xs shadow-xs shadow-blue-500/20 transition-all flex items-center justify-center space-x-1.5 cursor-pointer disabled:opacity-50 mt-1"
               >
                 <FiUserPlus />
                 <span>{loading ? 'Creating Account...' : 'Complete Registration & Access DPI →'}</span>

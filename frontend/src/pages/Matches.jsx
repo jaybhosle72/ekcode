@@ -222,7 +222,7 @@ function Matches() {
           <button
             onClick={handleTriggerScan}
             disabled={isScanning}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-medium shadow-2xs transition-colors disabled:opacity-50 cursor-pointer"
+            className="flex items-center gap-1.5 px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold shadow-xs shadow-blue-500/20 transition-all disabled:opacity-50 cursor-pointer"
           >
             <FiRefreshCw className={isScanning ? 'animate-spin' : ''} />
             <span>{isScanning ? 'Analyzing All Catalogs...' : 'Re-scan All Catalogs'}</span>
@@ -231,7 +231,7 @@ function Matches() {
           <select 
             value={statusFilter}
             onChange={e => setStatusFilter(e.target.value)}
-            className="bg-white border border-slate-200 rounded-lg py-1.5 px-3 text-xs text-slate-800 font-medium focus:outline-none focus:border-slate-900 shadow-2xs cursor-pointer"
+            className="bg-white border border-slate-200 rounded-lg py-1.5 px-3 text-xs text-slate-800 font-semibold focus:outline-none focus:border-blue-600 shadow-2xs cursor-pointer"
           >
             <option value="all">Status: All States</option>
             <option value="pending">Status: Pending Review</option>
@@ -242,7 +242,7 @@ function Matches() {
           <select 
             value={typeFilter}
             onChange={e => setTypeFilter(e.target.value)}
-            className="bg-white border border-slate-200 rounded-lg py-1.5 px-3 text-xs text-slate-800 font-medium focus:outline-none focus:border-slate-900 shadow-2xs cursor-pointer"
+            className="bg-white border border-slate-200 rounded-lg py-1.5 px-3 text-xs text-slate-800 font-semibold focus:outline-none focus:border-blue-600 shadow-2xs cursor-pointer"
           >
             <option value="all">Match Type: All</option>
             <option value="identical">Identical (90%-98%)</option>
@@ -254,52 +254,60 @@ function Matches() {
 
       {/* Real-time Cross-CPSE Parity Stats Bar */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <div className="bg-white border border-slate-200 rounded-xl p-3 shadow-2xs">
-          <div className="text-[11px] font-medium text-slate-500 uppercase tracking-wider">Total Match Pairs</div>
+        <div className="bg-white border border-slate-200 rounded-xl p-3.5 shadow-2xs">
+          <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Total Match Pairs</div>
           <div className="text-xl font-bold text-slate-900 mt-0.5">{matches.length}</div>
         </div>
-        <div className="bg-white border border-slate-200 rounded-xl p-3 shadow-2xs">
-          <div className="text-[11px] font-medium text-slate-500 uppercase tracking-wider">Identical (98%)</div>
-          <div className="text-xl font-bold text-slate-900 mt-0.5">{identicalCount}</div>
+        <div className="bg-white border border-emerald-200/90 rounded-xl p-3.5 shadow-2xs bg-emerald-50/20">
+          <div className="text-[11px] font-semibold text-emerald-700 uppercase tracking-wider">Identical (98%)</div>
+          <div className="text-xl font-bold text-emerald-700 mt-0.5">{identicalCount}</div>
         </div>
-        <div className="bg-white border border-slate-200 rounded-xl p-3 shadow-2xs">
-          <div className="text-[11px] font-medium text-slate-500 uppercase tracking-wider">Near-Duplicate</div>
-          <div className="text-xl font-bold text-slate-900 mt-0.5">{nearDupCount}</div>
+        <div className="bg-white border border-blue-200/90 rounded-xl p-3.5 shadow-2xs bg-blue-50/20">
+          <div className="text-[11px] font-semibold text-blue-700 uppercase tracking-wider">Near-Duplicate</div>
+          <div className="text-xl font-bold text-blue-700 mt-0.5">{nearDupCount}</div>
         </div>
-        <div className="bg-white border border-slate-200 rounded-xl p-3 shadow-2xs">
-          <div className="text-[11px] font-medium text-slate-500 uppercase tracking-wider">Equivalent</div>
-          <div className="text-xl font-bold text-slate-900 mt-0.5">{equivCount}</div>
+        <div className="bg-white border border-amber-200/90 rounded-xl p-3.5 shadow-2xs bg-amber-50/20">
+          <div className="text-[11px] font-semibold text-amber-700 uppercase tracking-wider">Equivalent</div>
+          <div className="text-xl font-bold text-amber-700 mt-0.5">{equivCount}</div>
         </div>
       </div>
 
       {/* Role-Specific Two-Tier Framework Session Banner */}
       {currentUser && (
-        <div className="bg-white border border-slate-200 rounded-xl p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-2xs">
+        <div className={`border rounded-xl p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-2xs ${
+          currentRole === 'admin'
+            ? 'bg-amber-50/30 border-amber-200/80'
+            : 'bg-blue-50/30 border-blue-200/80'
+        }`}>
           <div className="flex items-center space-x-3 text-xs">
-            <div className="p-2 rounded-lg bg-slate-100 text-slate-700 text-base border border-slate-200">
+            <div className={`p-2 rounded-lg text-base border ${
+              currentRole === 'admin'
+                ? 'bg-amber-100 text-amber-800 border-amber-200'
+                : 'bg-blue-100 text-blue-800 border-blue-200'
+            }`}>
               {currentRole === 'admin' ? <FiAward /> : <FiShield />}
             </div>
             <div>
-              <div className="font-semibold text-slate-900 text-xs sm:text-sm">
+              <div className="font-bold text-slate-900 text-xs sm:text-sm">
                 {currentRole === 'admin' 
                   ? 'MoPNG Central Standardization Committee Session' 
                   : `${currentUser.cpse_organization || 'CPSE'} Domain Technical Session`}
               </div>
-              <div className="text-slate-500 text-[11px] mt-0.5">
-                Active User: <strong className="text-slate-700">{currentUser.name}</strong> · Designation: <strong className="text-slate-700">{currentUser.designation || 'Specialist'}</strong>
+              <div className="text-slate-600 text-[11px] mt-0.5">
+                Active User: <strong className="text-slate-900">{currentUser.name}</strong> · Designation: <strong className="text-slate-700">{currentUser.designation || 'Specialist'}</strong>
               </div>
             </div>
           </div>
 
-          <div className="text-[11px] font-medium bg-slate-50 border border-slate-200 px-2.5 py-1 rounded-md text-slate-600 self-start sm:self-auto">
+          <div className="text-[11px] font-medium bg-white border border-slate-200 px-3 py-1.5 rounded-lg text-slate-700 shadow-2xs self-start sm:self-auto">
             {currentRole === 'admin' ? (
-              <span className="flex items-center gap-1.5 text-slate-700">
-                <FiAward className="text-slate-600" />
+              <span className="flex items-center gap-1.5 text-amber-900 font-semibold">
+                <FiAward className="text-amber-600 text-sm" />
                 <span>Tier 2 Authority: Sovereign Ratification & Minting</span>
               </span>
             ) : (
-              <span className="flex items-center gap-1.5 text-slate-700">
-                <FiCheckCircle className="text-slate-600" />
+              <span className="flex items-center gap-1.5 text-blue-900 font-semibold">
+                <FiCheckCircle className="text-emerald-600 text-sm" />
                 <span>Tier 1 Authority: Specification Equivalence Endorsement</span>
               </span>
             )}

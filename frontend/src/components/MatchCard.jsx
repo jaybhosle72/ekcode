@@ -15,9 +15,9 @@ function MatchCard({ matchData, onEndorse, onApprove, onReject }) {
   const { score, type, materialA, materialB, comparison, reasoning } = matchData;
 
   const getScoreColor = (s) => {
-    if (s > 85) return 'text-blue-700 bg-blue-50 border-blue-200';
-    if (s >= 70) return 'text-slate-700 bg-slate-100 border-slate-200';
-    return 'text-rose-700 bg-rose-50 border-rose-200';
+    if (s > 85) return 'text-emerald-800 bg-emerald-50 border-emerald-300 font-bold';
+    if (s >= 70) return 'text-blue-800 bg-blue-50 border-blue-300 font-bold';
+    return 'text-amber-800 bg-amber-50 border-amber-300 font-bold';
   };
 
   const getCpseBadge = (cpse) => {
@@ -297,9 +297,9 @@ function MatchCard({ matchData, onEndorse, onApprove, onReject }) {
               <button
                 onClick={handleApproveAction}
                 disabled={loading}
-                className="flex items-center px-4 py-1.5 text-xs font-semibold text-white bg-slate-900 hover:bg-slate-800 rounded-lg shadow-2xs transition-colors cursor-pointer disabled:opacity-50"
+                className="flex items-center px-4 py-2 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-xs shadow-blue-500/20 transition-all cursor-pointer disabled:opacity-50"
               >
-                <FiAward className="mr-1.5 text-sm text-slate-300" />
+                <FiAward className="mr-1.5 text-sm text-blue-200" />
                 <span>Sovereign Ratify & Mint National Code</span>
               </button>
             )}

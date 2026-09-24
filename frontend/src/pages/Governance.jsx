@@ -141,7 +141,7 @@ function Governance() {
       <div className="flex justify-between items-end flex-wrap gap-4">
         <div>
           <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
-            <FiShield className="text-slate-700" /> Audit Trail & ERP Governance
+            <FiShield className="text-blue-600" /> Audit Trail & ERP Governance
           </h1>
           <p className="text-slate-500 text-xs sm:text-sm mt-0.5">
             Enterprise compliance, immutable approval ledger, and SAP S/4HANA & Oracle ERP integration support.
@@ -161,7 +161,7 @@ function Governance() {
           onClick={() => setActiveTab('erp')}
           className={`pb-2.5 text-xs sm:text-sm font-semibold border-b-2 transition-all cursor-pointer ${
             activeTab === 'erp'
-              ? 'border-slate-900 text-slate-900'
+              ? 'border-blue-600 text-blue-600'
               : 'border-transparent text-slate-500 hover:text-slate-800'
           }`}
         >
@@ -171,7 +171,7 @@ function Governance() {
           onClick={() => setActiveTab('audit')}
           className={`pb-2.5 text-xs sm:text-sm font-semibold border-b-2 transition-all cursor-pointer ${
             activeTab === 'audit'
-              ? 'border-slate-900 text-slate-900'
+              ? 'border-blue-600 text-blue-600'
               : 'border-transparent text-slate-500 hover:text-slate-800'
           }`}
         >
@@ -247,10 +247,10 @@ function Governance() {
                   <button
                     onClick={() => handleSync(conn.cpse)}
                     disabled={isSyncing}
-                    className={`w-full mt-4 py-2 rounded-lg text-xs font-medium transition-colors cursor-pointer flex items-center justify-center gap-1.5 shadow-2xs ${
+                    className={`w-full mt-4 py-2 rounded-lg text-xs font-medium transition-colors cursor-pointer flex items-center justify-center gap-1.5 shadow-xs ${
                       wasJustSynced
-                        ? 'bg-emerald-700 text-white hover:bg-emerald-800'
-                        : 'bg-slate-900 hover:bg-slate-800 text-white'
+                        ? 'bg-emerald-600 text-white hover:bg-emerald-700'
+                        : 'bg-blue-600 hover:bg-blue-700 text-white'
                     } disabled:opacity-50 disabled:cursor-not-allowed`}
                   >
                     {isSyncing ? (
@@ -280,7 +280,7 @@ function Governance() {
             <div className="flex justify-between items-center flex-wrap gap-3">
               <div>
                 <h3 className="text-sm font-semibold text-slate-900 flex items-center gap-2">
-                  <FiDatabase className="text-slate-700" /> SAP Material Master (MATMAS05) Payload Generator
+                  <FiDatabase className="text-blue-600" /> SAP Material Master (MATMAS05) Payload Generator
                 </h3>
                 <p className="text-xs text-slate-500 mt-0.5">
                   Ready-to-import payload for SAP S/4HANA (BAPI_MATERIAL_SAVEDATA) including <code>BISMT</code> (Old Material Number) for backward traceability.
@@ -295,7 +295,7 @@ function Governance() {
                 </button>
                 <button
                   onClick={downloadSapCSV}
-                  className="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-medium shadow-2xs flex items-center gap-1.5 cursor-pointer"
+                  className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-medium shadow-xs flex items-center gap-1.5 cursor-pointer"
                 >
                   <FiDownload /> Export SAP CSV
                 </button>
@@ -319,7 +319,7 @@ function Governance() {
                   <tbody className="divide-y divide-slate-100">
                     {sapPayload.records.slice(0, 5).map((row, idx) => (
                       <tr key={idx} className="hover:bg-slate-50/60">
-                        <td className="px-4 py-2.5 font-mono font-semibold text-slate-900">{row.MATNR}</td>
+                        <td className="px-4 py-2.5 font-mono font-semibold text-blue-700">{row.MATNR}</td>
                         <td className="px-4 py-2.5 text-slate-800 font-medium">{row.MAKTX}</td>
                         <td className="px-4 py-2.5 text-slate-600">{row.MEINS}</td>
                         <td className="px-4 py-2.5 text-slate-600">{row.MATKL}</td>
