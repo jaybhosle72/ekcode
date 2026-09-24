@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "description": "EkCode - One Nation, One Material Code (Full-Stack Monorepo)",
+  "workspaces": [
+    "frontend"
+  ],
   "scripts": {
-    "build": "npm run build --prefix frontend",
+    "build": "npm --prefix frontend install --legacy-peer-deps && npm --prefix frontend run build",
     "start": "node backend/server.js"
   },
   "dependencies": {
