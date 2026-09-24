@@ -25,6 +25,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: 'Materials & Procurement Officer',
   },
+  role: {
+    type: String,
+    enum: ['officer', 'admin', 'viewer'],
+    default: 'officer',
+  },
   auth_provider: {
     type: String,
     enum: ['local', 'google'],

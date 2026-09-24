@@ -45,8 +45,9 @@ const handleApprove = async (req, res) => {
     const match = await Match.findById(req.params.id);
     if (!match) return res.status(404).json({ error: 'Match not found' });
 
+    const reviewingUser = req.body.user || 'Authorized CPSE Officer';
     match.status = 'approved';
-    match.reviewed_by = req.body.user || 'Admin';
+    match.reviewed_by = reviewingUser;
     match.reviewed_at = new Date();
     await match.save();
 
@@ -56,6 +57,7 @@ const handleApprove = async (req, res) => {
       action: 'approve',
       entity_type: 'match',
       entity_id: match._id,
+      user: reviewingUser,
       details: `Approved match and generated unified code ${unifiedMaterial?.national_code || 'N/A'}`
     });
 
@@ -72,8 +74,9 @@ const handleReject = async (req, res) => {
     const match = await Match.findById(req.params.id);
     if (!match) return res.status(404).json({ error: 'Match not found' });
 
+    const reviewingUser = req.body.user || 'Authorized CPSE Officer';
     match.status = 'rejected';
-    match.reviewed_by = req.body.user || 'Admin';
+    match.reviewed_by = reviewingUser;
     match.reviewed_at = new Date();
     await match.save();
 
@@ -81,7 +84,8 @@ const handleReject = async (req, res) => {
       action: 'reject',
       entity_type: 'match',
       entity_id: match._id,
-      details: 'Rejected match'
+      user: reviewingUser,
+      details: `Rejected match by ${reviewingUser}`
     });
 
     res.json({ success: true, match });

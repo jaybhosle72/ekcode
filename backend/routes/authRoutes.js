@@ -53,6 +53,7 @@ router.post('/register', async (req, res) => {
       existingUser.cpse_organization = cpse_organization || 'ONGC';
       existingUser.designation = designation || 'Procurement Officer';
       existingUser.auth_provider = 'local';
+      if (req.body.role) existingUser.role = req.body.role;
       existingUser.avatar = `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(name)}&backgroundColor=2563EB`;
       await existingUser.save();
 
@@ -63,6 +64,7 @@ router.post('/register', async (req, res) => {
           id: existingUser._id,
           name: existingUser.name,
           email: existingUser.email,
+          role: existingUser.role || 'officer',
           cpse_organization: existingUser.cpse_organization,
           designation: existingUser.designation,
           avatar: existingUser.avatar
@@ -74,6 +76,7 @@ router.post('/register', async (req, res) => {
       name: name.trim(),
       email: cleanEmail,
       password: hashedPassword,
+      role: req.body.role || 'officer',
       cpse_organization: cpse_organization || 'ONGC',
       designation: designation || 'Procurement Officer',
       auth_provider: 'local',
@@ -89,6 +92,7 @@ router.post('/register', async (req, res) => {
         id: newUser._id,
         name: newUser.name,
         email: newUser.email,
+        role: newUser.role || 'officer',
         cpse_organization: newUser.cpse_organization,
         designation: newUser.designation,
         avatar: newUser.avatar
@@ -140,6 +144,7 @@ router.post('/login', async (req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
+        role: user.role || 'officer',
         cpse_organization: user.cpse_organization,
         designation: user.designation,
         avatar: user.avatar

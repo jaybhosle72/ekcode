@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
 import MatchCard from '../components/MatchCard';
 import { getMatches, approveMatch, rejectMatch } from '../services/api';
+import { useAuth } from '../context/AuthContext';
+import { FiCheckCircle, FiShield } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 
 function Matches() {
+  const { currentUser } = useAuth();
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
   const [statusFilter, setStatusFilter] = useState('pending');
@@ -79,7 +82,10 @@ function Matches() {
 
   const handleApprove = async (id) => {
     try {
-      await approveMatch(id);
+      const officerTag = currentUser 
+        ? `${currentUser.name} (${currentUser.cpse_organization || 'CPSE'})` 
+        : 'Authorized CPSE Officer';
+      await approveMatch(id, officerTag);
       toast.success('Match approved! National Code registered.');
     } catch (err) {
       console.error(err);
@@ -89,7 +95,10 @@ function Matches() {
 
   const handleReject = async (id) => {
     try {
-      await rejectMatch(id);
+      const officerTag = currentUser 
+        ? `${currentUser.name} (${currentUser.cpse_organization || 'CPSE'})` 
+        : 'Authorized CPSE Officer';
+      await rejectMatch(id, officerTag);
       toast.error('Match rejected.');
     } catch (err) {
       console.error(err);
@@ -130,6 +139,26 @@ function Matches() {
           </select>
         </div>
       </div>
+
+      {/* Authorized Officer Session Indicator */}
+      {currentUser && (
+        <div className="bg-blue-50/70 border border-blue-200/80 rounded-xl p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 shadow-xs">
+          <div className="flex items-center space-x-2 text-xs">
+            <FiShield className="text-blue-600 text-base flex-shrink-0" />
+            <span className="text-slate-600">Authorized Reviewer:</span>
+            <span className="font-bold text-slate-900">{currentUser.name}</span>
+            <span className="text-slate-400">·</span>
+            <span className="text-slate-600">{currentUser.designation || 'Procurement Executive'}</span>
+            <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase bg-blue-100 text-blue-700 border border-blue-200">
+              {currentUser.cpse_organization || 'CPSE'}
+            </span>
+          </div>
+          <div className="text-[11px] text-slate-500 flex items-center space-x-1">
+            <FiCheckCircle className="text-emerald-600" />
+            <span>Approvals are signed & recorded in Central Audit Trail</span>
+          </div>
+        </div>
+      )}
 
       {loading ? (
         <div className="text-center py-24 text-slate-400">

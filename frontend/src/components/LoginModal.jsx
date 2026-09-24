@@ -4,7 +4,7 @@ import { FiX, FiShield, FiLogIn, FiUserPlus, FiMail, FiLock, FiUser, FiCheckCirc
 import toast from 'react-hot-toast';
 
 function LoginModal() {
-  const { isLoginModalOpen, setIsLoginModalOpen, login, register } = useAuth();
+  const { isLoginModalOpen, setIsLoginModalOpen, login, register, switchDemoPersona } = useAuth();
   const [activeTab, setActiveTab] = useState('signin'); // 'signin' or 'signup'
   const [loading, setLoading] = useState(false);
 
@@ -17,6 +17,7 @@ function LoginModal() {
   const [registerEmail, setRegisterEmail] = useState('');
   const [registerPassword, setRegisterPassword] = useState('');
   const [registerConfirmPassword, setRegisterConfirmPassword] = useState('');
+  const [registerRole, setRegisterRole] = useState('officer');
   const [registerCpse, setRegisterCpse] = useState('ONGC');
   const [registerDesignation, setRegisterDesignation] = useState('Materials & Procurement Officer');
 
@@ -62,8 +63,9 @@ function LoginModal() {
         name: registerName,
         email: registerEmail,
         password: registerPassword,
-        cpse_organization: registerCpse,
-        designation: registerDesignation
+        role: registerRole,
+        cpse_organization: registerRole === 'admin' ? 'MoPNG' : registerCpse,
+        designation: registerRole === 'admin' ? 'MoPNG Master Administrator' : registerDesignation
       });
       toast.success(`Account created successfully for ${user.name}!`);
       setIsLoginModalOpen(false);
@@ -86,7 +88,7 @@ function LoginModal() {
             </div>
             <div>
               <h3 className="text-sm sm:text-base font-bold leading-tight">EkCode Authentication</h3>
-              <p className="text-[11px] text-slate-300">Central Material Master Portal</p>
+              <p className="text-[11px] text-slate-300">Role-Based Scope & Identity Portal</p>
             </div>
           </div>
           <button
@@ -97,13 +99,55 @@ function LoginModal() {
           </button>
         </div>
 
-        <div className="p-5 sm:p-6 space-y-5 max-h-[82vh] overflow-y-auto">
+        <div className="p-5 sm:p-6 space-y-4 max-h-[82vh] overflow-y-auto">
+          {/* Quick Persona Demo Selector for Presentation & Testing */}
+          <div className="bg-slate-50 border border-slate-200 rounded-xl p-3 space-y-2">
+            <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-slate-600">
+              <span>Quick Demo Personas (1-Click Switch)</span>
+            </div>
+            <div className="grid grid-cols-3 gap-2">
+              <button
+                type="button"
+                onClick={() => {
+                  switchDemoPersona('ongc_officer');
+                  toast.success('Scope: Vikram Sharma (ONGC Officer)');
+                }}
+                className="p-2 bg-white hover:bg-blue-50 border border-slate-200 hover:border-blue-300 rounded-lg text-left transition-colors cursor-pointer"
+              >
+                <div className="text-xs font-bold text-slate-800">🏢 ONGC Officer</div>
+                <div className="text-[9px] text-slate-500">Upload & Matches</div>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  switchDemoPersona('admin');
+                  toast.success('Scope: Dr. Rajesh Verma (MoPNG Admin)');
+                }}
+                className="p-2 bg-white hover:bg-amber-50 border border-slate-200 hover:border-amber-300 rounded-lg text-left transition-colors cursor-pointer"
+              >
+                <div className="text-xs font-bold text-amber-900">👑 MoPNG Admin</div>
+                <div className="text-[9px] text-slate-500">Full ERP & CVC</div>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  switchDemoPersona('viewer');
+                  toast.success('Scope: Public Citizen / Auditor');
+                }}
+                className="p-2 bg-white hover:bg-slate-100 border border-slate-200 rounded-lg text-left transition-colors cursor-pointer"
+              >
+                <div className="text-xs font-bold text-slate-700">👤 Viewer</div>
+                <div className="text-[9px] text-slate-500">Public Open Data</div>
+              </button>
+            </div>
+          </div>
+
           {/* Sign In vs Sign Up Tabs */}
           <div className="flex border-b border-slate-200">
             <button
               type="button"
               onClick={() => setActiveTab('signin')}
-              className={`flex-1 pb-3 text-xs sm:text-sm font-bold border-b-2 transition-all cursor-pointer ${
+              className={`flex-1 pb-2.5 text-xs sm:text-sm font-bold border-b-2 transition-all cursor-pointer ${
                 activeTab === 'signin'
                   ? 'border-blue-600 text-slate-900'
                   : 'border-transparent text-slate-400 hover:text-slate-700'
@@ -114,7 +158,7 @@ function LoginModal() {
             <button
               type="button"
               onClick={() => setActiveTab('signup')}
-              className={`flex-1 pb-3 text-xs sm:text-sm font-bold border-b-2 transition-all cursor-pointer ${
+              className={`flex-1 pb-2.5 text-xs sm:text-sm font-bold border-b-2 transition-all cursor-pointer ${
                 activeTab === 'signup'
                   ? 'border-blue-600 text-slate-900'
                   : 'border-transparent text-slate-400 hover:text-slate-700'
@@ -126,7 +170,7 @@ function LoginModal() {
 
           {/* TAB 1: Sign In Form */}
           {activeTab === 'signin' && (
-            <form onSubmit={handleLoginSubmit} className="space-y-4">
+            <form onSubmit={handleLoginSubmit} className="space-y-3.5">
               <div>
                 <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1">
                   Email Address
@@ -137,9 +181,9 @@ function LoginModal() {
                     type="email"
                     value={loginEmail}
                     onChange={(e) => setLoginEmail(e.target.value)}
-                    placeholder="yourname@gmail.com"
+                    placeholder="yourname@domain.com"
                     required
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2.5 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-blue-600 font-medium"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-blue-600 font-medium"
                   />
                 </div>
               </div>
@@ -156,7 +200,7 @@ function LoginModal() {
                     onChange={(e) => setLoginPassword(e.target.value)}
                     placeholder="••••••••"
                     required
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2.5 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-blue-600"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-blue-600"
                   />
                 </div>
               </div>
@@ -170,18 +214,18 @@ function LoginModal() {
                 <span>{loading ? 'Verifying Credentials...' : 'Sign In'}</span>
               </button>
 
-              <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl text-[11px] text-slate-500 flex items-start space-x-2">
+              <div className="p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-[11px] text-slate-500 flex items-start space-x-2">
                 <FiCheckCircle className="text-blue-600 text-sm mt-0.5 flex-shrink-0" />
-                <span>First time here? Click <strong>Create Account</strong> above to register with your email.</span>
+                <span>You can also click any <strong>1-Click Demo Persona</strong> above to explore immediately.</span>
               </div>
             </form>
           )}
 
           {/* TAB 2: Sign Up Form */}
           {activeTab === 'signup' && (
-            <form onSubmit={handleRegisterSubmit} className="space-y-3.5">
+            <form onSubmit={handleRegisterSubmit} className="space-y-3">
               <div>
-                <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1">
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-700 mb-1">
                   Full Name
                 </label>
                 <div className="relative">
@@ -192,13 +236,13 @@ function LoginModal() {
                     onChange={(e) => setRegisterName(e.target.value)}
                     placeholder="e.g. Vikram Sharma"
                     required
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-blue-600 font-medium"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-600 font-medium"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1">
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-700 mb-1">
                   Email Address
                 </label>
                 <div className="relative">
@@ -207,45 +251,64 @@ function LoginModal() {
                     type="email"
                     value={registerEmail}
                     onChange={(e) => setRegisterEmail(e.target.value)}
-                    placeholder="name@gmail.com"
+                    placeholder="name@domain.com"
                     required
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-blue-600 font-medium"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-600 font-medium"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-2.5">
-                <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-700 mb-1">
-                    CPSE Enterprise
-                  </label>
-                  <select
-                    value={registerCpse}
-                    onChange={(e) => setRegisterCpse(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-2.5 py-2 text-xs text-slate-900 font-semibold focus:outline-none focus:border-blue-600 cursor-pointer"
-                  >
-                    <option value="ONGC">ONGC</option>
-                    <option value="BPCL">BPCL</option>
-                    <option value="IOC">IOC</option>
-                    <option value="HPCL">HPCL</option>
-                    <option value="GAIL">GAIL</option>
-                    <option value="MoPNG">MoPNG (Admin)</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-700 mb-1">
-                    Designation
-                  </label>
-                  <input
-                    type="text"
-                    value={registerDesignation}
-                    onChange={(e) => setRegisterDesignation(e.target.value)}
-                    placeholder="Procurement Officer"
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-2.5 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-600"
-                  />
-                </div>
+              {/* Role Scope Selector */}
+              <div>
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-700 mb-1">
+                  Account Role & Scope
+                </label>
+                <select
+                  value={registerRole}
+                  onChange={(e) => setRegisterRole(e.target.value)}
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-2.5 py-2 text-xs text-slate-900 font-semibold focus:outline-none focus:border-blue-600 cursor-pointer"
+                >
+                  <option value="officer">CPSE Procurement Officer (Upload & Review Matches)</option>
+                  <option value="admin">MoPNG National Admin (Full Governance & ERP Sync)</option>
+                  <option value="viewer">Public Citizen / Auditor (Open Data Transparency)</option>
+                </select>
               </div>
+
+              {registerRole === 'officer' && (
+                <div className="grid grid-cols-2 gap-2.5">
+                  <div>
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-700 mb-1">
+                      CPSE Enterprise
+                    </label>
+                    <select
+                      value={registerCpse}
+                      onChange={(e) => setRegisterCpse(e.target.value)}
+                      className="w-full bg-slate-50 border border-slate-300 rounded-xl px-2.5 py-2 text-xs text-slate-900 font-semibold focus:outline-none focus:border-blue-600 cursor-pointer"
+                    >
+                      <option value="ONGC">ONGC</option>
+                      <option value="BPCL">BPCL</option>
+                      <option value="IOC">IOC</option>
+                      <option value="HPCL">HPCL</option>
+                      <option value="GAIL">GAIL</option>
+                      <option value="NTPC">NTPC</option>
+                      <option value="SAIL">SAIL</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-700 mb-1">
+                      Designation
+                    </label>
+                    <input
+                      type="text"
+                      value={registerDesignation}
+                      onChange={(e) => setRegisterDesignation(e.target.value)}
+                      placeholder="Procurement Officer"
+                      className="w-full bg-slate-50 border border-slate-300 rounded-xl px-2.5 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-600"
+                    />
+                  </div>
+                </div>
+              )}
 
               <div className="grid grid-cols-2 gap-2.5">
                 <div>
@@ -280,10 +343,10 @@ function LoginModal() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs sm:text-sm shadow-sm transition-colors flex items-center justify-center space-x-1.5 cursor-pointer disabled:opacity-50 mt-2"
+                className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs sm:text-sm shadow-sm transition-colors flex items-center justify-center space-x-1.5 cursor-pointer disabled:opacity-50 mt-1"
               >
                 <FiUserPlus />
-                <span>{loading ? 'Creating Account in Database...' : 'Register & Log In'}</span>
+                <span>{loading ? 'Creating Account...' : 'Register & Log In'}</span>
               </button>
             </form>
           )}
