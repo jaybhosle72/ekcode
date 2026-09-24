@@ -4,8 +4,8 @@
   "private": true,
   "description": "EkCode - One Nation, One Material Code (Full-Stack Monorepo)",
   "scripts": {
-    "build": "cd frontend && npm install && npm run build",
-    "start": "cd backend && node server.js"
+    "build": "npm run build --prefix frontend",
+    "start": "node backend/server.js"
   },
   "dependencies": {
     "@google/generative-ai": "^0.1.0",
