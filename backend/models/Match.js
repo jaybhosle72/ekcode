@@ -28,8 +28,18 @@ const MatchSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['pending', 'approved', 'rejected'],
+    enum: ['pending', 'endorsed', 'approved', 'rejected'],
     default: 'pending',
+  },
+  technical_endorsement: {
+    endorsed_by: { type: String },
+    cpse: { type: String },
+    designation: { type: String },
+    endorsed_at: { type: Date },
+    notes: { type: String }
+  },
+  suggested_national_code: {
+    type: String,
   },
   reviewed_by: {
     type: String,

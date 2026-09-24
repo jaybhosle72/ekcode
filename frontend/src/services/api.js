@@ -16,6 +16,7 @@ export const uploadFile = (file, cpseName) => {
 export const getMaterials = (cpse) => api.get('/materials', { params: { cpse } });
 export const runMatching = () => api.post('/match/run');
 export const getMatches = (filters) => api.get('/matches', { params: filters });
+export const endorseMatch = (id, payload) => api.post(`/match/${id}/endorse`, payload);
 export const approveMatch = (id, user) => api.post(`/match/${id}/approve`, { user });
 export const rejectMatch = (id, user) => api.post(`/match/${id}/reject`, { user });
 export const getUnifiedMaterials = () => api.get('/master');
