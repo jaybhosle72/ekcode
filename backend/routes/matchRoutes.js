@@ -27,14 +27,14 @@ router.get(['/', '/all'], async (req, res) => {
 // Trigger cross-CPSE matching
 router.post('/run', async (req, res) => {
   try {
-    res.json({ message: 'Matching process started.' });
-    
-    runMatching().then(count => {
-      console.log(`Matching complete. Generated ${count} matches.`);
-    }).catch(err => {
-      console.error('Error during matching:', err);
+    const count = await runMatching();
+    res.json({
+      success: true,
+      message: `AI Matching complete. Generated/updated ${count} matches.`,
+      matchesCount: count
     });
   } catch (err) {
+    console.error('Error during matching run:', err);
     res.status(500).json({ error: err.message });
   }
 });

@@ -26,20 +26,55 @@ function getVal(row, ...keys) {
 
 async function processRows(rows, cpse_name) {
   const materials = [];
-  for (const row of rows) {
-    const code = String(getVal(row, 'code', 'material_code', 'item_code', 'Material Code', 'Item Code', 'Code')).trim();
-    const description = String(getVal(row, 'description', 'material_description', 'item_description', 'Description', 'Material Description')).trim();
-    if (!code || !description) continue;
+  let rowIndex = 0;
 
-    let userCat = String(getVal(row, 'category', 'Category', 'cat')).trim();
+  for (const row of rows) {
+    rowIndex++;
+    let code = String(getVal(row, 
+      'code', 'material_code', 'item_code', 'Material Code', 'Item Code', 'Code',
+      'part_number', 'part_no', 'Part No', 'Part Number', 'Item No', 'item_no',
+      'mat_code', 'Mat Code', 'ID', 'Item ID', 'item_id', 'SAP Code', 'Oracle Code'
+    )).trim();
+
+    const description = String(getVal(row, 
+      'description', 'material_description', 'item_description', 'Description', 
+      'Material Description', 'Item Description', 'item_name', 'Item Name', 'name', 
+      'Name', 'product_description', 'specification', 'specifications', 'Details', 
+      'details', 'item', 'Item', 'Material'
+    )).trim();
+
+    // If description is empty, row is unserviceable
+    if (!description) continue;
+
+    // Auto-generate code if spreadsheet did not supply one
+    if (!code) {
+      code = `${cpse_name}-ITEM-${String(rowIndex).padStart(4, '0')}`;
+    }
+
+    let userCat = String(getVal(row, 
+      'category', 'Category', 'cat', 'Cat', 'Item Category', 'Group', 'group', 
+      'Classification', 'classification', 'Department', 'department'
+    )).trim();
+
     // Industrial engineering NLP extraction for metallurgy, size, pressure class & standards
     const norm = normalizeDescription(description, userCat);
     const category = userCat || norm.category;
     const specs = norm.specifications;
 
-    const unit = String(getVal(row, 'unit', 'uom', 'unit_of_measure', 'Unit', 'UOM', 'Unit of Measure')).trim() || 'Nos';
-    const price = Number(getVal(row, 'price', 'unit_price', 'rate', 'Price', 'Rate', 'Unit Price')) || 0;
-    const quantity = Number(getVal(row, 'quantity', 'annual_quantity', 'qty', 'Quantity', 'Annual Quantity')) || 0;
+    const unit = String(getVal(row, 
+      'unit', 'uom', 'unit_of_measure', 'Unit', 'UOM', 'Unit of Measure', 
+      'Unit of Measurement', 'measure', 'Unit_Of_Measure'
+    )).trim() || 'Nos';
+
+    const price = Number(getVal(row, 
+      'price', 'unit_price', 'rate', 'Price', 'Rate', 'Unit Price', 'Cost', 
+      'Unit Cost', 'Price (INR)', 'Unit Price (INR)'
+    )) || 0;
+
+    const quantity = Number(getVal(row, 
+      'quantity', 'annual_quantity', 'qty', 'Quantity', 'Annual Quantity', 
+      'Qty', 'Stock', 'Inventory', 'Annual_Quantity'
+    )) || 0;
 
     materials.push(new Material({
       cpse_name,
@@ -54,7 +89,7 @@ async function processRows(rows, cpse_name) {
   }
 
   if (materials.length === 0) {
-    throw new Error('No valid material rows found in file. Please ensure columns include Code and Description.');
+    throw new Error('No valid material rows found in file. Please ensure file contains material descriptions.');
   }
 
   const savedMaterials = await Material.insertMany(materials);
@@ -71,12 +106,19 @@ async function processRows(rows, cpse_name) {
     details: `Uploaded ${savedMaterials.length} materials for ${cpse_name}`,
   });
 
-  // Trigger background cross-CPSE matching
-  runMatching().then(cnt => console.log(`Post-upload matching generated ${cnt} matches.`)).catch(err => console.error(err));
+  // Await cross-CPSE matching synchronously so serverless lambdas do not terminate early
+  let matchCount = 0;
+  try {
+    matchCount = await runMatching();
+    console.log(`Post-upload matching generated/updated ${matchCount} matches.`);
+  } catch (mErr) {
+    console.error('Error during post-upload matching:', mErr);
+  }
 
   return {
     uploaded: savedMaterials.length,
-    qualityFlags: qualityIssues
+    qualityFlags: qualityIssues,
+    matchesGenerated: matchCount
   };
 }
 
@@ -90,14 +132,12 @@ router.post('/', upload.single('file'), async (req, res) => {
 
   try {
     if (originalName.endsWith('.xlsx') || originalName.endsWith('.xls')) {
-      // Excel parsing
       const workbook = XLSX.readFile(filePath);
       const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
       const rows = XLSX.utils.sheet_to_json(firstSheet);
       const result = await processRows(rows, cpse_name);
       return res.json({ success: true, ...result });
     } else {
-      // CSV parsing
       const rows = [];
       await new Promise((resolve, reject) => {
         fs.createReadStream(filePath)

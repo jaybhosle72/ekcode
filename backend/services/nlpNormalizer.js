@@ -1,14 +1,24 @@
 /**
- * Industrial Engineering Spec Extraction & Normalization Engine for Indian CPSEs (ONGC, IOCL, BPCL, GAIL, HPCL)
- * Accurately extracts metallurgy, dimensions, pressure ratings, and standards from raw procurement descriptions.
+ * Universal Industrial Engineering Spec Extraction & Normalization Engine
+ * Built for Indian CPSEs (ONGC, IOCL, BPCL, GAIL, HPCL, NTPC, BHEL) and generic industrial procurement.
+ * Features automated metric/imperial standardizations, metallurgy extraction, numerical parameter fingerprinting,
+ * and universal NLP fallback for arbitrary custom equipment.
  */
+
+// Canonical Metric Nominal Bore (mm) to Imperial Pipe/Valve/Flange size
+const METRIC_NB_TO_INCH = {
+  '15': '1/2', '20': '3/4', '25': '1', '32': '1-1/4', '40': '1-1/2',
+  '50': '2', '65': '2-1/2', '80': '3', '100': '4', '125': '5',
+  '150': '6', '200': '8', '250': '10', '300': '12', '350': '14',
+  '400': '16', '450': '18', '500': '20', '600': '24'
+};
 
 function normalizeDescription(desc = '', userCat = '') {
   const d = (desc || '').toLowerCase().trim();
 
   // 1. Identify Category and Item Type
   let category = userCat || 'General';
-  let type = 'Standard Item';
+  let type = 'Industrial Equipment';
 
   // Check Electrical FIRST (to prevent "LED fitting" being caught by pipe fittings)
   if (/\b(light|led|luminaire|lamp|cable|wire|motor|mcb|transformer|switchgear|breaker|conduit)\b/i.test(d)) {
@@ -16,6 +26,8 @@ function normalizeDescription(desc = '', userCat = '') {
     if (d.includes('led') || d.includes('light') || d.includes('luminaire') || d.includes('fitting')) type = 'Flameproof LED Luminaire';
     else if (d.includes('cable') || d.includes('wire')) type = 'Power Cable';
     else if (d.includes('motor')) type = 'Induction Motor';
+    else if (d.includes('transformer')) type = 'Power Transformer';
+    else if (d.includes('mcb') || d.includes('breaker')) type = 'Circuit Breaker';
     else type = 'Electrical Equipment';
   } else if (/\b(pipe|tubing|tube|linepipe|casing)\b/i.test(d)) {
     category = 'Pipes';
@@ -26,16 +38,19 @@ function normalizeDescription(desc = '', userCat = '') {
     category = 'Valves';
     if (d.includes('ball')) type = 'Ball Valve';
     else if (d.includes('gate')) type = 'Gate Valve';
-    else if (d.includes('check')) type = 'Check Valve';
+    else if (d.includes('check') || d.includes('nrv') || d.includes('non-return')) type = 'Check Valve';
     else if (d.includes('globe')) type = 'Globe Valve';
     else if (d.includes('butterfly')) type = 'Butterfly Valve';
     else if (d.includes('plug')) type = 'Plug Valve';
+    else if (d.includes('needle')) type = 'Needle Valve';
+    else if (d.includes('psv') || d.includes('relief') || d.includes('safety valve')) type = 'Safety Relief Valve';
     else type = 'Process Valve';
   } else if (/\b(bolt|nut|stud|fastener|screw|washer)\b/i.test(d)) {
     category = 'Fasteners';
     if (d.includes('stud')) type = 'Stud Bolt';
     else if (d.includes('hex bolt') || (d.includes('bolt') && d.includes('hex'))) type = 'Hex Bolt';
     else if (d.includes('washer')) type = 'Washer';
+    else if (d.includes('screw')) type = 'Cap Screw';
     else type = 'Fastener';
   } else if (/\b(flange|flg|elbow|elbw|tee|reducer|gasket|gsk|fitting|coupling|union)\b/i.test(d)) {
     category = 'Fittings';
@@ -44,19 +59,29 @@ function normalizeDescription(desc = '', userCat = '') {
     else if (d.includes('elbow')) type = '90 Deg Elbow';
     else if (d.includes('tee')) type = 'Equal Tee';
     else if (d.includes('reducer')) type = 'Concentric Reducer';
+    else if (d.includes('coupling')) type = 'Coupling';
     else type = 'Fitting';
-  } else if (/\b(helmet|glove|shoe|goggle|mask|ppe|safety|harness)\b/i.test(d)) {
+  } else if (/\b(helmet|glove|shoe|boot|goggle|mask|ppe|safety|harness|coverall)\b/i.test(d)) {
     category = 'Safety';
     if (d.includes('helmet') || d.includes('hard hat')) type = 'Safety Helmet';
     else if (d.includes('glove')) type = 'Chemical Gloves';
-    else if (d.includes('shoe')) type = 'Safety Shoes';
+    else if (d.includes('shoe') || d.includes('boot')) type = 'Safety Shoes';
     else type = 'Safety Equipment';
-  } else if (/\b(seal|pump|compressor|bearing|trap|coupler)\b/i.test(d)) {
+  } else if (/\b(seal|pump|compressor|bearing|trap|coupler|filter|strainer)\b/i.test(d)) {
     category = 'Mechanical';
     if (d.includes('seal')) type = 'Mechanical Seal';
     else if (d.includes('steam trap') || d.includes('trap')) type = 'Steam Trap';
     else if (d.includes('coupler') || d.includes('loading arm')) type = 'Loading Coupler';
+    else if (d.includes('pump')) type = 'Process Pump';
+    else if (d.includes('compressor')) type = 'Compressor';
+    else if (d.includes('bearing')) type = 'Industrial Bearing';
     else type = 'Mechanical Equipment';
+  } else if (/\b(gauge|meter|transmitter|sensor|transducer|flowmeter|indicator)\b/i.test(d)) {
+    category = 'Instruments';
+    if (d.includes('gauge')) type = 'Pressure Gauge';
+    else if (d.includes('transmitter')) type = 'Transmitter';
+    else if (d.includes('flowmeter')) type = 'Flowmeter';
+    else type = 'Instrument';
   } else if (/\b(bit|drilling|casing hanger|tubing head)\b/i.test(d)) {
     category = 'Drilling';
     type = 'Drilling Bit';
@@ -99,23 +124,27 @@ function normalizeDescription(desc = '', userCat = '') {
   } else if (d.includes('hdpe') || (category === 'Safety' && (d.includes('helmet') || d.includes('hard hat')))) {
     material = 'HDPE Polymer';
     materialKey = 'HDPE';
-  } else if (d.includes('nitrile')) {
+  } else if (d.includes('nitrile') || d.includes('nbr')) {
     material = 'Nitrile Rubber';
     materialKey = 'NITRILE';
   } else if (category === 'Electrical' && (d.includes('led') || d.includes('fitting') || d.includes('luminaire'))) {
     material = 'Cast Aluminum (LM6)';
     materialKey = 'ALUM_LM6';
-  } else if (d.includes('carbon steel') || d.includes(' cs ')) {
+  } else if (d.includes('carbon steel') || d.includes(' cs ') || d.includes('forged carbon')) {
     material = 'Carbon Steel';
     materialKey = 'CS';
+  } else if (d.includes('stainless') || d.includes(' ss ')) {
+    material = 'Stainless Steel';
+    materialKey = 'SS';
   }
 
   // 3. Extract Nominal Size & Dimensions
   let dimensions = 'Standard';
   let sizeKey = 'STD';
 
-  // Check for Metric Bolt Sizes (M20x120, M24 x 160mm, 20mm Dia x 120mm)
-  const metricBolt = d.match(/(?:m|dia\s*)?(\d{2})\s*(?:x|dia\s*x|\*)\s*(\d{2,3})\s*(?:mm)?/i) || d.match(/(\d{2})\s*mm\s*(?:dia)?\s*x\s*(\d{2,3})\s*mm/i);
+  // Check Metric Bolt Sizes: M20x120, M24 x 160mm, 20mm Dia x 120mm Long
+  const metricBolt = d.match(/(?:m|dia\s*)?(\d{2})\s*(?:x|dia\s*x|\*)\s*(\d{2,3})\s*(?:mm)?/i) ||
+                     d.match(/(\d{2})\s*mm\s*(?:dia)?\s*x\s*(\d{2,3})\s*mm/i);
   if (metricBolt && category === 'Fasteners') {
     const dia = metricBolt[1];
     const len = metricBolt[2];
@@ -131,16 +160,29 @@ function normalizeDescription(desc = '', userCat = '') {
     dimensions = 'Universal (52-64cm)';
     sizeKey = 'UNIVERSAL_HELMET';
   } else {
-    // Pipe / Valve / Flange Nominal Diameters: 6", 6in, 6 inch, 6 inch NB, 6in NB, 8-1/2"
+    // Pipe / Valve / Flange Nominal Diameters:
+    // Check metric NB/DN first (e.g. 150mm NB, 150 NB, DN150)
+    const metricNbMatch = d.match(/(?:dn\s*|nb\s*)(\d{2,3})\b|(\d{2,3})\s*(?:mm\s*nb|nb\b)/i);
+    let convertedInch = null;
+    if (metricNbMatch) {
+      const mmVal = metricNbMatch[1] || metricNbMatch[2];
+      if (METRIC_NB_TO_INCH[mmVal]) {
+        convertedInch = METRIC_NB_TO_INCH[mmVal];
+      }
+    }
+
+    // Imperial match: 6", 6in, 6 inch, 6 inch NB, 6in NB, 8-1/2"
     const inchMatch = d.match(/(\d+(?:\s*-\s*\d+\/\d+|\s*\d+\/\d+|\.\d+)?)\s*(?:inch\b|in\b|"|''|nb\b)/i);
-    if (inchMatch) {
-      let nom = inchMatch[1].replace(/\s+/g, '');
+
+    const nomVal = convertedInch || (inchMatch ? inchMatch[1].replace(/\s+/g, '') : null);
+
+    if (nomVal) {
       let sch = '';
       const schMatch = d.match(/sch(?:edule)?\s*([0-9a-z]+)/i);
       if (schMatch) sch = ` Sch ${schMatch[1].toUpperCase()}`;
-      
-      dimensions = `${nom}"${sch}`;
-      sizeKey = `${nom}IN${sch ? '_' + sch.replace(/\s+/g, '') : ''}`;
+
+      dimensions = `${nomVal}"${sch}`;
+      sizeKey = `${nomVal}IN${sch ? '_' + sch.replace(/\s+/g, '') : ''}`;
     }
   }
 
@@ -181,6 +223,14 @@ function normalizeDescription(desc = '', userCat = '') {
 
   const standard = standards.length > 0 ? standards.join(' / ') : 'IS / ASME';
 
+  // 6. Universal Numbers & Parameter Extraction (for generalized fallback)
+  const numbers = [];
+  const numRegex = /\b(\d+(?:\.\d+)?)\s*(kw|mw|hp|rpm|kv|v|a|ma|hz|bar|psi|kg|g|ltr|l|mm|cm|m|mtr|ton|inch|"|#|lb|w)\b/gi;
+  let nm;
+  while ((nm = numRegex.exec(d)) !== null) {
+    numbers.push(`${nm[1]}${nm[2].toLowerCase()}`);
+  }
+
   return {
     category,
     specifications: {
@@ -198,15 +248,17 @@ function normalizeDescription(desc = '', userCat = '') {
         materialKey,
         sizeKey,
         pressKey,
-        standards
+        standards,
+        numbers
       }
     }
   };
 }
 
 /**
- * Intelligent Engineering Specification Comparator
+ * Universal Intelligent Engineering Specification Comparator
  * Calculates true industrial parity between two equipment descriptions
+ * Handles both known CPSE catalog patterns and completely new arbitrary industrial products.
  */
 function compareEngineeringSpecs(matA, matB) {
   const normA = (matA.specifications && matA.specifications._fingerprint) 
@@ -222,7 +274,7 @@ function compareEngineeringSpecs(matA, matB) {
   const fpA = specA._fingerprint || {};
   const fpB = specB._fingerprint || {};
 
-  // Rule 1: Type check (If completely incompatible types, return 0)
+  // Rule 1: Type check (If completely incompatible types and neither is General, return 0)
   const isTypeCompatible = (fpA.type === fpB.type) || 
     (normA.category === normB.category && normA.category !== 'General');
 
@@ -246,7 +298,9 @@ function compareEngineeringSpecs(matA, matB) {
   const isExactSize = (fpA.sizeKey === fpB.sizeKey) && fpA.sizeKey !== 'STD';
   const isExactPress = (fpA.pressKey === fpB.pressKey) && fpA.pressKey !== 'STD';
 
-  const isCompatMat = isExactMat || (specA.material.includes('Carbon') && specB.material.includes('Carbon')) || (specA.material.includes('Stainless') && specB.material.includes('Stainless'));
+  const isCompatMat = isExactMat || 
+    (specA.material.includes('Carbon') && specB.material.includes('Carbon')) || 
+    (specA.material.includes('Stainless') && specB.material.includes('Stainless'));
   const isCompatSize = isExactSize || (specA.dimensions.split(' ')[0] === specB.dimensions.split(' ')[0]);
 
   // Scoring weights: Type (30), Metallurgy (25), Dimensions (25), Pressure (10), Standards (10)
@@ -271,13 +325,20 @@ function compareEngineeringSpecs(matA, matB) {
   if (sharedStd) score += 10;
   else if (specA.standard === specB.standard) score += 8;
 
+  // Universal Fallback Similarity Boost (Token overlap + Numeric overlap)
+  const wordsA = new Set((matA.description || '').toLowerCase().replace(/[^a-z0-9]/g, ' ').split(/\s+/).filter(w => w.length > 2));
+  const wordsB = new Set((matB.description || '').toLowerCase().replace(/[^a-z0-9]/g, ' ').split(/\s+/).filter(w => w.length > 2));
+  const intersection = new Set([...wordsA].filter(x => wordsB.has(x)));
+  const jaccard = wordsA.size > 0 ? (intersection.size / Math.max(wordsA.size, wordsB.size)) : 0;
+  score += Math.round(jaccard * 5);
+
   if (score > 98) score = 98;
 
   // Genuine identical determination
   let match_type = 'different';
   if (isExactType && isExactMat && isExactSize && (!isPressApplicable || isExactPress) && score >= 85) {
     match_type = 'identical';
-    if (score < 94) score = 98; // Boost verified identical industrial equipment
+    score = 98; // Verified identical industrial equipment
   } else if (isExactType && (isExactMat || isExactSize) && score >= 70) {
     match_type = 'near-duplicate';
   } else if (score >= 50) {

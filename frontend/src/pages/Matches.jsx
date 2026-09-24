@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react';
 import MatchCard from '../components/MatchCard';
-import { getMatches, approveMatch, rejectMatch, endorseMatch } from '../services/api';
+import { getMatches, approveMatch, rejectMatch, endorseMatch, runMatching } from '../services/api';
 import { useAuth } from '../context/AuthContext';
-import { FiCheckCircle, FiShield, FiAward, FiLayers } from 'react-icons/fi';
+import { FiCheckCircle, FiShield, FiAward, FiLayers, FiRefreshCw } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 
 function Matches() {
   const { currentUser, currentRole } = useAuth();
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [statusFilter, setStatusFilter] = useState('pending');
+  const [isScanning, setIsScanning] = useState(false);
+  const [statusFilter, setStatusFilter] = useState('all');
   const [typeFilter, setTypeFilter] = useState('all');
 
   useEffect(() => {
@@ -187,6 +188,25 @@ function Matches() {
     }
   };
 
+  // On-demand full AI cross-match re-scan
+  const handleTriggerScan = async () => {
+    try {
+      setIsScanning(true);
+      const res = await runMatching();
+      toast.success(res.data?.message || 'AI cross-matching completed across all CPSEs!');
+      await fetchMatches();
+    } catch (err) {
+      console.error(err);
+      toast.error('Failed to trigger AI matching engine.');
+    } finally {
+      setIsScanning(false);
+    }
+  };
+
+  const identicalCount = matches.filter(m => m.type === 'identical').length;
+  const nearDupCount = matches.filter(m => m.type === 'near-duplicate').length;
+  const equivCount = matches.filter(m => m.type === 'equivalent').length;
+
   return (
     <div className="max-w-5xl mx-auto space-y-6">
       {/* Page Title & Filter Header */}
@@ -198,17 +218,26 @@ function Matches() {
           </p>
         </div>
         
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap items-center gap-2">
+          <button
+            onClick={handleTriggerScan}
+            disabled={isScanning}
+            className="flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-lg text-xs sm:text-sm font-semibold shadow-xs transition-all disabled:opacity-50 cursor-pointer"
+          >
+            <FiRefreshCw className={isScanning ? 'animate-spin' : ''} />
+            <span>{isScanning ? 'Analyzing All Catalogs...' : '⚡ Re-scan All Catalogs'}</span>
+          </button>
+
           <select 
             value={statusFilter}
             onChange={e => setStatusFilter(e.target.value)}
             className="bg-white border border-slate-300 rounded-lg py-2 px-3 text-xs sm:text-sm text-slate-700 font-semibold focus:outline-none focus:border-[#3b82f6] shadow-xs cursor-pointer"
           >
+            <option value="all">Status: All Lifecycle States</option>
             <option value="pending">Status: Pending Technical Review</option>
             <option value="endorsed">Status: Endorsed (Ready for MoPNG)</option>
             <option value="approved">Status: Ratified by MoPNG</option>
             <option value="rejected">Status: Rejected</option>
-            <option value="all">Status: All</option>
           </select>
           <select 
             value={typeFilter}
@@ -216,10 +245,30 @@ function Matches() {
             className="bg-white border border-slate-300 rounded-lg py-2 px-3 text-xs sm:text-sm text-slate-700 font-semibold focus:outline-none focus:border-[#3b82f6] shadow-xs cursor-pointer"
           >
             <option value="all">Match Type: All</option>
-            <option value="identical">Identical</option>
-            <option value="near-duplicate">Near-Duplicate</option>
-            <option value="equivalent">Equivalent</option>
+            <option value="identical">Identical (90%-98%)</option>
+            <option value="near-duplicate">Near-Duplicate (70%-89%)</option>
+            <option value="equivalent">Equivalent (50%-69%)</option>
           </select>
+        </div>
+      </div>
+
+      {/* Real-time Cross-CPSE Parity Stats Bar */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div className="bg-white border border-slate-200 rounded-xl p-3 shadow-2xs">
+          <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Total Match Pairs</div>
+          <div className="text-xl font-bold text-slate-800 mt-0.5">{matches.length}</div>
+        </div>
+        <div className="bg-white border border-emerald-200 rounded-xl p-3 shadow-2xs bg-emerald-50/20">
+          <div className="text-[11px] font-semibold text-emerald-700 uppercase tracking-wider">Identical (98%)</div>
+          <div className="text-xl font-bold text-emerald-700 mt-0.5">{identicalCount}</div>
+        </div>
+        <div className="bg-white border border-blue-200 rounded-xl p-3 shadow-2xs bg-blue-50/20">
+          <div className="text-[11px] font-semibold text-blue-700 uppercase tracking-wider">Near-Duplicate</div>
+          <div className="text-xl font-bold text-blue-700 mt-0.5">{nearDupCount}</div>
+        </div>
+        <div className="bg-white border border-amber-200 rounded-xl p-3 shadow-2xs bg-amber-50/20">
+          <div className="text-[11px] font-semibold text-amber-700 uppercase tracking-wider">Equivalent</div>
+          <div className="text-xl font-bold text-amber-700 mt-0.5">{equivCount}</div>
         </div>
       </div>
 
