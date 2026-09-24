@@ -65,25 +65,25 @@ function Upload() {
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       <div>
-        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900">Upload CPSE Material Catalogs</h1>
-        <p className="text-slate-500 text-xs sm:text-sm mt-1">
+        <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Upload CPSE Material Catalogs</h1>
+        <p className="text-slate-500 text-xs sm:text-sm mt-0.5">
           Ingest enterprise legacy ERP catalogs (Excel .xlsx, .xls, or CSV) for automated NLP attribute extraction and duplicate detection.
         </p>
       </div>
 
       {/* Active Session Info Banner (Only if user is logged in) */}
       {currentUser && (
-        <div className="bg-white border border-slate-200 rounded-xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-sm">
+        <div className="bg-white border border-slate-200 rounded-xl p-3.5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-2xs">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-[#3b82f6] text-white rounded-lg text-lg shadow-xs">
+            <div className="p-2 bg-slate-100 text-slate-700 rounded-lg text-base border border-slate-200">
               <FiUserCheck />
             </div>
             <div>
-              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-800">
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-800">
                 Authenticated Officer: {currentUser.name}
               </h4>
               <p className="text-xs text-slate-500">
-                Designation: <strong>{currentUser.designation || 'Procurement Executive'}</strong> · Organization: <strong className="text-blue-600">{currentUser.cpse_organization || 'CPSE'}</strong>
+                Designation: <strong className="text-slate-700">{currentUser.designation || 'Procurement Executive'}</strong> · Organization: <strong className="text-slate-900">{currentUser.cpse_organization || 'CPSE'}</strong>
               </p>
             </div>
           </div>
@@ -91,11 +91,11 @@ function Upload() {
       )}
 
       {/* External Catalog Download Resources */}
-      <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 sm:p-5 space-y-3">
+      <div className="bg-white border border-slate-200 rounded-xl p-4 sm:p-5 space-y-3 shadow-2xs">
         <div className="flex items-center justify-between flex-wrap gap-2">
           <div className="flex items-center space-x-2">
-            <FiDownload className="text-blue-600 text-lg" />
-            <h3 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-800">
+            <FiDownload className="text-slate-600 text-base" />
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-800">
               External Real CPSE Material Catalogs
             </h3>
           </div>
@@ -106,47 +106,47 @@ function Upload() {
           <a
             href="/catalogs/ONGC_Offshore_Field_Catalog_2026.xlsx"
             download="ONGC_Offshore_Field_Catalog_2026.xlsx"
-            className="flex items-center justify-between p-3 bg-white hover:bg-blue-50/60 border border-slate-200 hover:border-blue-300 rounded-xl transition-all shadow-2xs group cursor-pointer"
+            className="flex items-center justify-between p-3 bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-300 rounded-xl transition-all shadow-2xs group cursor-pointer"
           >
             <div>
-              <div className="text-xs font-bold text-slate-800 group-hover:text-blue-600">ONGC Offshore Catalog</div>
+              <div className="text-xs font-semibold text-slate-800 group-hover:text-slate-900">ONGC Offshore Catalog</div>
               <div className="text-[10px] text-slate-500">20 Fresh Exploration & Field Items</div>
             </div>
-            <span className="text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">.XLSX</span>
+            <span className="text-[10px] font-mono font-medium text-slate-700 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">.XLSX</span>
           </a>
 
           <a
             href="/catalogs/BPCL_Terminal_Operations_Catalog_2026.xlsx"
             download="BPCL_Terminal_Operations_Catalog_2026.xlsx"
-            className="flex items-center justify-between p-3 bg-white hover:bg-blue-50/60 border border-slate-200 hover:border-blue-300 rounded-xl transition-all shadow-2xs group cursor-pointer"
+            className="flex items-center justify-between p-3 bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-300 rounded-xl transition-all shadow-2xs group cursor-pointer"
           >
             <div>
-              <div className="text-xs font-bold text-slate-800 group-hover:text-blue-600">BPCL Operations Master</div>
+              <div className="text-xs font-semibold text-slate-800 group-hover:text-slate-900">BPCL Operations Master</div>
               <div className="text-[10px] text-slate-500">20 Fresh Terminal & POL Items</div>
             </div>
-            <span className="text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">.XLSX</span>
+            <span className="text-[10px] font-mono font-medium text-slate-700 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">.XLSX</span>
           </a>
 
           <a
             href="/catalogs/IOCL_Petrochem_Refinery_Catalog_2026.xlsx"
             download="IOCL_Petrochem_Refinery_Catalog_2026.xlsx"
-            className="flex items-center justify-between p-3 bg-white hover:bg-blue-50/60 border border-slate-200 hover:border-blue-300 rounded-xl transition-all shadow-2xs group cursor-pointer"
+            className="flex items-center justify-between p-3 bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-300 rounded-xl transition-all shadow-2xs group cursor-pointer"
           >
             <div>
-              <div className="text-xs font-bold text-slate-800 group-hover:text-blue-600">IOCL Petrochem Inventory</div>
+              <div className="text-xs font-semibold text-slate-800 group-hover:text-slate-900">IOCL Petrochem Inventory</div>
               <div className="text-[10px] text-slate-500">20 Fresh Refinery & Process Items</div>
             </div>
-            <span className="text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">.XLSX</span>
+            <span className="text-[10px] font-mono font-medium text-slate-700 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">.XLSX</span>
           </a>
         </div>
       </div>
 
       {/* Main Upload Box */}
-      <div className="bg-white p-6 sm:p-7 rounded-xl border border-slate-200 shadow-sm space-y-6">
+      <div className="bg-white p-5 sm:p-6 rounded-xl border border-slate-200 shadow-2xs space-y-5">
         <div>
           <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-2">Target CPSE Enterprise</label>
           <select 
-            className="w-full bg-slate-50 border border-slate-300 rounded-lg py-2.5 px-3.5 text-xs sm:text-sm text-slate-800 font-semibold focus:outline-none focus:border-[#3b82f6] cursor-pointer"
+            className="w-full bg-white border border-slate-200 rounded-lg py-2 px-3 text-xs sm:text-sm text-slate-800 font-medium focus:outline-none focus:border-slate-900 cursor-pointer"
             value={cpse}
             onChange={(e) => setCpse(e.target.value)}
           >
@@ -156,15 +156,15 @@ function Upload() {
 
         <div>
           <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-2">Catalog File (.xlsx, .xls, .csv)</label>
-          <div className="border-2 border-dashed border-slate-300 hover:border-[#3b82f6] rounded-xl p-8 sm:p-12 flex flex-col items-center justify-center bg-slate-50 hover:bg-blue-50/40 transition-colors cursor-pointer relative">
+          <div className="border-2 border-dashed border-slate-200 hover:border-slate-400 rounded-xl p-8 sm:p-10 flex flex-col items-center justify-center bg-slate-50/50 hover:bg-slate-50 transition-colors cursor-pointer relative">
             <input 
               type="file" 
               className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
               accept=".csv, .xlsx, .xls"
               onChange={handleFileChange}
             />
-            <MdCloudUpload className="text-4xl sm:text-5xl text-[#3b82f6] mb-3" />
-            <p className="text-xs sm:text-sm font-bold text-slate-800 text-center">{file ? file.name : "Click or drag catalog file here to upload"}</p>
+            <MdCloudUpload className="text-4xl text-slate-400 mb-2" />
+            <p className="text-xs sm:text-sm font-semibold text-slate-800 text-center">{file ? file.name : "Click or drag catalog file here to upload"}</p>
             <p className="text-[11px] sm:text-xs text-slate-400 mt-1 text-center">Accepts Excel (.xlsx) and CSV with columns: Code, Description, Category, Unit, Price, Quantity</p>
           </div>
         </div>
@@ -173,7 +173,7 @@ function Upload() {
           <button 
             onClick={handleUpload}
             disabled={uploading || !file || !cpse}
-            className="w-full sm:w-auto px-6 py-2.5 bg-[#3b82f6] hover:bg-blue-700 text-white rounded-lg font-semibold text-xs sm:text-sm shadow-sm transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center cursor-pointer"
+            className="w-full sm:w-auto px-5 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg font-medium text-xs sm:text-sm shadow-2xs transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center cursor-pointer"
           >
             {uploading ? 'Processing File with AI...' : 'Upload & Parse Catalog'}
           </button>
@@ -181,24 +181,24 @@ function Upload() {
       </div>
 
       {uploadResult && (
-        <div className="bg-white border border-blue-200 p-6 rounded-xl space-y-4 shadow-sm">
-          <div className="flex items-center text-slate-900 font-bold">
-            <MdCheckCircle className="text-2xl mr-2 text-emerald-600" />
-            <h3 className="text-sm sm:text-base font-bold">Upload & Ingestion Complete</h3>
+        <div className="bg-white border border-slate-200 p-5 rounded-xl space-y-3 shadow-2xs">
+          <div className="flex items-center text-slate-900 font-semibold">
+            <MdCheckCircle className="text-xl mr-2 text-emerald-600" />
+            <h3 className="text-sm font-semibold">Upload & Ingestion Complete</h3>
           </div>
-          <p className="text-xs text-slate-600">
+          <p className="text-xs text-slate-600 leading-relaxed">
             Successfully ingested <strong>{uploadResult.uploaded || 0}</strong> materials into the central EkCode master database. AI matching pipeline has been scheduled.
           </p>
           
           <button 
             onClick={handleRunMatching}
             disabled={matching}
-            className="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-lg font-semibold text-xs shadow-sm transition-colors disabled:opacity-50 flex items-center cursor-pointer"
+            className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg font-medium text-xs shadow-2xs transition-colors disabled:opacity-50 flex items-center cursor-pointer"
           >
             {matching ? (
               'Running AI Matching Pipeline...'
             ) : (
-              <><MdPlayArrow className="mr-1.5 text-base text-[#3b82f6]" /> Trigger AI Matching Pipeline</>
+              <><MdPlayArrow className="mr-1.5 text-base text-slate-300" /> Trigger AI Matching Pipeline</>
             )}
           </button>
         </div>

@@ -140,18 +140,18 @@ function Governance() {
       {/* Header */}
       <div className="flex justify-between items-end flex-wrap gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 flex items-center gap-2">
-            <FiShield className="text-[#3b82f6]" /> Audit Trail & ERP Governance
+          <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
+            <FiShield className="text-slate-700" /> Audit Trail & ERP Governance
           </h1>
-          <p className="text-slate-500 text-xs sm:text-sm mt-1">
+          <p className="text-slate-500 text-xs sm:text-sm mt-0.5">
             Enterprise compliance, immutable approval ledger, and SAP S/4HANA & Oracle ERP integration support.
           </p>
         </div>
         <button 
           onClick={fetchData}
-          className="px-3.5 py-2 bg-white border border-slate-300 rounded-lg text-xs sm:text-sm text-slate-700 hover:bg-slate-50 font-semibold shadow-xs transition-colors cursor-pointer"
+          className="px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-xs text-slate-700 hover:text-slate-900 hover:bg-slate-50 font-medium shadow-2xs transition-colors cursor-pointer"
         >
-          <FiRefreshCw className="inline mr-1.5" /> Refresh Live Data
+          <FiRefreshCw className="inline mr-1.5 text-xs" /> Refresh Live Data
         </button>
       </div>
 
@@ -159,23 +159,23 @@ function Governance() {
       <div className="flex border-b border-slate-200 gap-4">
         <button
           onClick={() => setActiveTab('erp')}
-          className={`pb-3 text-xs sm:text-sm font-semibold border-b-2 transition-all cursor-pointer ${
+          className={`pb-2.5 text-xs sm:text-sm font-semibold border-b-2 transition-all cursor-pointer ${
             activeTab === 'erp'
-              ? 'border-[#3b82f6] text-blue-600'
+              ? 'border-slate-900 text-slate-900'
               : 'border-transparent text-slate-500 hover:text-slate-800'
           }`}
         >
-          ⚙️ SAP / ERP Integration & MATMAS
+          SAP / ERP Integration & MATMAS
         </button>
         <button
           onClick={() => setActiveTab('audit')}
-          className={`pb-3 text-xs sm:text-sm font-semibold border-b-2 transition-all cursor-pointer ${
+          className={`pb-2.5 text-xs sm:text-sm font-semibold border-b-2 transition-all cursor-pointer ${
             activeTab === 'audit'
-              ? 'border-[#3b82f6] text-blue-600'
+              ? 'border-slate-900 text-slate-900'
               : 'border-transparent text-slate-500 hover:text-slate-800'
           }`}
         >
-          📋 Audit Trail & Review Log
+          Audit Trail & Review Log
         </button>
       </div>
 
@@ -183,7 +183,7 @@ function Governance() {
       {activeTab === 'erp' && (
         <div className="space-y-6">
           {/* ERP Connectors */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
             {(erpStatus?.active_integrations || []).map((conn) => {
               const isSyncing = syncingCpse === conn.cpse;
               const wasJustSynced = recentlySynced[conn.cpse];
@@ -191,31 +191,31 @@ function Governance() {
               return (
                 <div 
                   key={conn.cpse} 
-                  className={`bg-white p-5 rounded-xl border transition-all duration-300 shadow-sm flex flex-col justify-between ${
+                  className={`bg-white p-4 sm:p-5 rounded-xl border transition-all duration-300 shadow-2xs flex flex-col justify-between ${
                     wasJustSynced 
-                      ? 'border-emerald-400 ring-2 ring-emerald-100 shadow-md' 
+                      ? 'border-emerald-500 ring-1 ring-emerald-200 shadow-xs' 
                       : 'border-slate-200 hover:border-slate-300'
                   }`}
                 >
                   <div className="space-y-3">
                     <div className="flex justify-between items-center">
-                      <span className="text-sm font-bold text-slate-900 flex items-center gap-1.5">
-                        <FiServer className="text-blue-600 text-sm" />
+                      <span className="text-xs font-semibold text-slate-900 flex items-center gap-1.5">
+                        <FiServer className="text-slate-600 text-xs" />
                         {conn.cpse} ERP Interface
                       </span>
-                      <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase border transition-colors ${
+                      <span className={`px-2 py-0.5 rounded text-[10px] font-medium uppercase border transition-colors ${
                         wasJustSynced || conn.status === 'Synchronized Just Now'
-                          ? 'bg-emerald-100 text-emerald-800 border-emerald-300 animate-pulse'
-                          : 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                          ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
+                          : 'bg-slate-100 text-slate-700 border-slate-200'
                       }`}>
-                        {wasJustSynced ? '🟢 SYNCED JUST NOW' : 'CONNECTED'}
+                        {wasJustSynced ? 'SYNCED JUST NOW' : 'CONNECTED'}
                       </span>
                     </div>
 
                     <div className="text-xs text-slate-600 space-y-1.5 pt-1">
                       <div className="flex justify-between">
                         <span className="text-slate-400">System:</span>
-                        <span className="font-semibold text-slate-800">{conn.erp_system}</span>
+                        <span className="font-medium text-slate-800">{conn.erp_system}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-slate-400">Protocol:</span>
@@ -223,17 +223,17 @@ function Governance() {
                       </div>
                       <div className="flex justify-between">
                         <span className="text-slate-400">Synced Items:</span>
-                        <span className="font-bold text-blue-600">{conn.synced_items} materials</span>
+                        <span className="font-semibold text-slate-900">{conn.synced_items} materials</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-slate-400">National Codes:</span>
-                        <span className="font-semibold text-emerald-600">{conn.national_codes_mapped || 4} Mapped</span>
+                        <span className="font-semibold text-slate-900">{conn.national_codes_mapped || 4} Mapped</span>
                       </div>
                       <div className="flex justify-between items-center pt-1 border-t border-slate-100">
                         <span className="text-slate-400 flex items-center gap-1">
                           <FiClock className="text-slate-400 text-xs" /> Last Synced:
                         </span>
-                        <span className="font-semibold text-slate-900 bg-slate-100 px-2 py-0.5 rounded text-[11px]">
+                        <span className="font-medium text-slate-800 bg-slate-100 px-2 py-0.5 rounded text-[10px]">
                           {formatLastSync(conn.last_sync)}
                         </span>
                       </div>
@@ -247,25 +247,25 @@ function Governance() {
                   <button
                     onClick={() => handleSync(conn.cpse)}
                     disabled={isSyncing}
-                    className={`w-full mt-4 py-2.5 rounded-lg text-xs font-semibold transition-all duration-200 cursor-pointer flex items-center justify-center gap-2 shadow-xs ${
+                    className={`w-full mt-4 py-2 rounded-lg text-xs font-medium transition-colors cursor-pointer flex items-center justify-center gap-1.5 shadow-2xs ${
                       wasJustSynced
-                        ? 'bg-emerald-600 text-white hover:bg-emerald-700'
+                        ? 'bg-emerald-700 text-white hover:bg-emerald-800'
                         : 'bg-slate-900 hover:bg-slate-800 text-white'
                     } disabled:opacity-50 disabled:cursor-not-allowed`}
                   >
                     {isSyncing ? (
                       <>
-                        <FiRefreshCw className="animate-spin text-sm" />
+                        <FiRefreshCw className="animate-spin text-xs" />
                         <span>Synchronizing {conn.cpse} ERP...</span>
                       </>
                     ) : wasJustSynced ? (
                       <>
-                        <FiCheck className="text-sm font-bold" />
-                        <span>{conn.cpse} Synchronized! (Click to Re-sync)</span>
+                        <FiCheck className="text-xs font-bold" />
+                        <span>{conn.cpse} Synchronized (Click to Re-sync)</span>
                       </>
                     ) : (
                       <>
-                        <FiRefreshCw className="text-sm" />
+                        <FiRefreshCw className="text-xs" />
                         <span>Sync {conn.cpse} ERP</span>
                       </>
                     )}
@@ -276,26 +276,26 @@ function Governance() {
           </div>
 
           {/* SAP MM MATMAS05 Payload & Export */}
-          <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
+          <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-2xs space-y-4">
             <div className="flex justify-between items-center flex-wrap gap-3">
               <div>
-                <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
-                  <FiDatabase className="text-[#3b82f6]" /> SAP Material Master (MATMAS05) Payload Generator
+                <h3 className="text-sm font-semibold text-slate-900 flex items-center gap-2">
+                  <FiDatabase className="text-slate-700" /> SAP Material Master (MATMAS05) Payload Generator
                 </h3>
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-slate-500 mt-0.5">
                   Ready-to-import payload for SAP S/4HANA (BAPI_MATERIAL_SAVEDATA) including <code>BISMT</code> (Old Material Number) for backward traceability.
                 </p>
               </div>
               <div className="flex gap-2">
                 <button
                   onClick={downloadSapJSON}
-                  className="px-3.5 py-2 bg-white border border-slate-300 hover:bg-slate-50 text-slate-800 rounded-lg text-xs font-semibold shadow-xs flex items-center gap-1.5 cursor-pointer"
+                  className="px-3 py-1.5 bg-white border border-slate-200 hover:bg-slate-50 text-slate-800 rounded-lg text-xs font-medium shadow-2xs flex items-center gap-1.5 cursor-pointer"
                 >
                   <FiDownload /> Download SAP JSON
                 </button>
                 <button
                   onClick={downloadSapCSV}
-                  className="px-3.5 py-2 bg-[#3b82f6] hover:bg-blue-700 text-white rounded-lg text-xs font-semibold shadow-xs flex items-center gap-1.5 cursor-pointer"
+                  className="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-medium shadow-2xs flex items-center gap-1.5 cursor-pointer"
                 >
                   <FiDownload /> Export SAP CSV
                 </button>
@@ -306,25 +306,25 @@ function Governance() {
             {sapPayload && sapPayload.records && (
               <div className="overflow-x-auto border border-slate-200 rounded-lg">
                 <table className="w-full text-xs text-left">
-                  <thead className="text-[11px] text-slate-600 uppercase bg-slate-50 border-b border-slate-200 font-semibold">
+                  <thead className="text-[11px] text-slate-500 uppercase bg-slate-50/80 border-b border-slate-200 font-semibold">
                     <tr>
-                      <th className="px-4 py-2.5">MATNR (National Code)</th>
-                      <th className="px-4 py-2.5">MAKTX (Material Description)</th>
-                      <th className="px-4 py-2.5">MEINS (UOM)</th>
-                      <th className="px-4 py-2.5">MATKL (Group)</th>
-                      <th className="px-4 py-2.5">BISMT (Backward Traceability)</th>
-                      <th className="px-4 py-2.5 text-right">Aggregated Demand</th>
+                      <th className="px-4 py-2">MATNR (National Code)</th>
+                      <th className="px-4 py-2">MAKTX (Material Description)</th>
+                      <th className="px-4 py-2">MEINS (UOM)</th>
+                      <th className="px-4 py-2">MATKL (Group)</th>
+                      <th className="px-4 py-2">BISMT (Backward Traceability)</th>
+                      <th className="px-4 py-2 text-right">Aggregated Demand</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100">
                     {sapPayload.records.slice(0, 5).map((row, idx) => (
-                      <tr key={idx} className="hover:bg-slate-50">
-                        <td className="px-4 py-2 font-mono font-bold text-[#3b82f6]">{row.MATNR}</td>
-                        <td className="px-4 py-2 text-slate-800 font-medium">{row.MAKTX}</td>
-                        <td className="px-4 py-2 text-slate-600">{row.MEINS}</td>
-                        <td className="px-4 py-2 text-slate-600">{row.MATKL}</td>
-                        <td className="px-4 py-2 font-mono text-[11px] text-slate-600">{row.BISMT}</td>
-                        <td className="px-4 py-2 text-right font-semibold text-slate-800">{row.TOTAL_ANNUAL_DEMAND}</td>
+                      <tr key={idx} className="hover:bg-slate-50/60">
+                        <td className="px-4 py-2.5 font-mono font-semibold text-slate-900">{row.MATNR}</td>
+                        <td className="px-4 py-2.5 text-slate-800 font-medium">{row.MAKTX}</td>
+                        <td className="px-4 py-2.5 text-slate-600">{row.MEINS}</td>
+                        <td className="px-4 py-2.5 text-slate-600">{row.MATKL}</td>
+                        <td className="px-4 py-2.5 font-mono text-[11px] text-slate-600">{row.BISMT}</td>
+                        <td className="px-4 py-2.5 text-right font-medium text-slate-800">{row.TOTAL_ANNUAL_DEMAND}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -337,37 +337,37 @@ function Governance() {
 
       {/* TAB 2: AUDIT TRAIL */}
       {activeTab === 'audit' && (
-        <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden space-y-4">
-          <div className="p-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/60 flex-wrap gap-2">
+        <div className="bg-white rounded-xl border border-slate-200 shadow-2xs overflow-hidden space-y-4">
+          <div className="p-3.5 border-b border-slate-100 flex justify-between items-center bg-slate-50/60 flex-wrap gap-2">
             <div>
-              <h3 className="text-sm font-bold text-slate-800">Immutable Governance Audit Log</h3>
-              <p className="text-xs text-slate-500">Every match approval, catalog ingestion, and code generation is permanently recorded.</p>
+              <h3 className="text-xs font-semibold text-slate-900">Immutable Governance Audit Log</h3>
+              <p className="text-[11px] text-slate-500">Every match approval, catalog ingestion, and code generation is permanently recorded.</p>
             </div>
-            <span className="text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-1 rounded-full font-semibold">
+            <span className="text-[10px] bg-slate-100 text-slate-700 border border-slate-200 px-2.5 py-0.5 rounded font-medium">
               CVC & MoPNG Guidelines Compliant
             </span>
           </div>
 
           {loading ? (
-            <div className="text-center py-20 text-slate-400">Loading audit trail...</div>
+            <div className="text-center py-20 text-slate-400 text-xs">Loading audit trail...</div>
           ) : auditLogs.length === 0 ? (
-            <div className="text-center py-16 text-slate-500">No audit records found yet.</div>
+            <div className="text-center py-16 text-slate-500 text-xs">No audit records found yet.</div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-xs text-left min-w-[650px]">
-                <thead className="text-[11px] text-slate-600 uppercase bg-slate-50 border-b border-slate-200 font-semibold">
+                <thead className="text-[11px] text-slate-500 uppercase bg-slate-50/80 border-b border-slate-200 font-semibold">
                   <tr>
-                    <th className="px-5 py-3">Timestamp</th>
-                    <th className="px-5 py-3">Action Type</th>
-                    <th className="px-5 py-3">Details / Target Item</th>
-                    <th className="px-5 py-3">Authorized Officer</th>
-                    <th className="px-5 py-3 text-right">Integrity Status</th>
+                    <th className="px-4 py-2.5">Timestamp</th>
+                    <th className="px-4 py-2.5">Action Type</th>
+                    <th className="px-4 py-2.5">Details / Target Item</th>
+                    <th className="px-4 py-2.5">Authorized Officer</th>
+                    <th className="px-4 py-2.5 text-right">Integrity Status</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
                   {auditLogs.map((log) => (
-                    <tr key={log._id} className="hover:bg-slate-50 transition-colors">
-                      <td className="px-5 py-3.5 text-slate-500 whitespace-nowrap">
+                    <tr key={log._id} className="hover:bg-slate-50/60 transition-colors">
+                      <td className="px-4 py-2.5 text-slate-500 whitespace-nowrap text-[11px]">
                         <FiClock className="inline mr-1 text-slate-400" />
                         {new Date(log.timestamp).toLocaleString()}
                       </td>

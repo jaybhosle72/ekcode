@@ -156,28 +156,27 @@ function FloatingChat() {
         <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex items-center space-x-3">
           <button
             onClick={() => setIsOpen(true)}
-            className="flex items-center space-x-2 px-4 py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-full shadow-xl border border-slate-700/60 transition-all duration-200 cursor-pointer"
+            className="flex items-center space-x-2 px-3.5 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg shadow-md border border-slate-800 transition-colors cursor-pointer text-xs font-medium"
             aria-label="Open EkCode AI Assistant"
           >
-            <BsRobot className="text-lg text-blue-400" />
-            <span className="text-xs sm:text-sm font-bold">Ask EkCode AI</span>
-            <BsStars className="text-amber-300 text-xs" />
+            <BsRobot className="text-sm text-slate-300" />
+            <span>EkCode AI Copilot</span>
           </button>
         </div>
       )}
 
       {/* Floating Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-3 right-3 sm:bottom-6 sm:right-6 z-50 w-[94vw] sm:w-[400px] h-[550px] max-h-[82vh] bg-white border border-slate-200/90 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in fade-in duration-150">
+        <div className="fixed bottom-3 right-3 sm:bottom-6 sm:right-6 z-50 w-[94vw] sm:w-[380px] h-[520px] max-h-[82vh] bg-white border border-slate-200 rounded-xl shadow-xl flex flex-col overflow-hidden animate-in fade-in duration-150">
           {/* Header */}
-          <div className="p-3.5 bg-white text-slate-900 border-b border-slate-200/80 flex items-center justify-between">
-            <div className="flex items-center space-x-2.5">
-              <div className="w-8 h-8 rounded-lg bg-blue-50 border border-blue-200/60 flex items-center justify-center text-blue-600 text-base">
+          <div className="p-3 bg-white text-slate-900 border-b border-slate-200 flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <div className="w-7 h-7 rounded-md bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-700 text-sm">
                 <BsRobot />
               </div>
               <div>
-                <h3 className="text-xs sm:text-sm font-bold text-slate-900 leading-tight">EkCode AI Copilot</h3>
-                <p className="text-[10px] text-slate-500 leading-tight">National Material Standardization DPI</p>
+                <h3 className="text-xs font-semibold text-slate-900 leading-tight">EkCode AI Copilot</h3>
+                <p className="text-[10px] text-slate-400 leading-tight">Material Standardization Assistant</p>
               </div>
             </div>
 
@@ -185,21 +184,21 @@ function FloatingChat() {
               <button
                 onClick={clearChat}
                 title="Clear conversation"
-                className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors text-xs cursor-pointer"
+                className="p-1 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded transition-colors text-xs cursor-pointer"
               >
                 <FiTrash2 />
               </button>
               <button
                 onClick={() => setIsOpen(false)}
                 title="Minimize chat"
-                className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors text-xs cursor-pointer"
+                className="p-1 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded transition-colors text-xs cursor-pointer"
               >
                 <FiMinimize2 />
               </button>
               <button
                 onClick={() => setIsOpen(false)}
                 title="Close chat"
-                className="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors text-xs cursor-pointer"
+                className="p-1 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded transition-colors text-xs cursor-pointer"
               >
                 <FiX />
               </button>
@@ -207,22 +206,22 @@ function FloatingChat() {
           </div>
 
           {/* Message List */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-3 text-xs bg-slate-50">
+          <div className="flex-1 overflow-y-auto p-3.5 space-y-3 text-xs bg-slate-50/50">
             {messages.map((msg, index) => (
               <div
                 key={index}
                 className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 {msg.sender === 'ai' && (
-                  <div className="w-6 h-6 rounded bg-blue-100 text-[#3b82f6] flex items-center justify-center flex-shrink-0 mr-2 mt-0.5 font-bold text-[10px]">
+                  <div className="w-5 h-5 rounded bg-slate-200 text-slate-700 flex items-center justify-center flex-shrink-0 mr-2 mt-0.5 font-semibold text-[9px]">
                     AI
                   </div>
                 )}
                 <div
-                  className={`max-w-[85%] rounded-lg px-3.5 py-2.5 text-xs ${
+                  className={`max-w-[85%] rounded-lg px-3 py-2 text-xs leading-relaxed ${
                     msg.sender === 'user'
-                      ? 'bg-[#3b82f6] text-white font-medium'
-                      : 'bg-white text-slate-800 border border-slate-200'
+                      ? 'bg-slate-900 text-white font-normal'
+                      : 'bg-white text-slate-800 border border-slate-200 shadow-2xs'
                   }`}
                 >
                   {renderFormattedText(msg.text)}
@@ -232,13 +231,13 @@ function FloatingChat() {
 
             {loading && (
               <div className="flex justify-start items-center space-x-2 text-slate-400">
-                <div className="w-6 h-6 rounded bg-blue-100 text-[#3b82f6] flex items-center justify-center flex-shrink-0 text-[10px] font-bold">
+                <div className="w-5 h-5 rounded bg-slate-200 text-slate-700 flex items-center justify-center flex-shrink-0 text-[9px] font-semibold">
                   AI
                 </div>
-                <div className="bg-white border border-slate-200 px-3 py-2 rounded-lg flex items-center space-x-1.5">
-                  <span className="w-1.5 h-1.5 bg-[#3b82f6] rounded-full animate-bounce"></span>
-                  <span className="w-1.5 h-1.5 bg-[#3b82f6] rounded-full animate-bounce [animation-delay:0.2s]"></span>
-                  <span className="w-1.5 h-1.5 bg-[#3b82f6] rounded-full animate-bounce [animation-delay:0.4s]"></span>
+                <div className="bg-white border border-slate-200 px-3 py-1.5 rounded-lg flex items-center space-x-1.5 shadow-2xs">
+                  <span className="w-1.5 h-1.5 bg-slate-500 rounded-full animate-bounce"></span>
+                  <span className="w-1.5 h-1.5 bg-slate-500 rounded-full animate-bounce [animation-delay:0.2s]"></span>
+                  <span className="w-1.5 h-1.5 bg-slate-500 rounded-full animate-bounce [animation-delay:0.4s]"></span>
                 </div>
               </div>
             )}
@@ -246,16 +245,16 @@ function FloatingChat() {
           </div>
 
           {/* Quick Prompts Carousel */}
-          <div className="px-3 py-2 bg-white border-t border-slate-200 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
-            <span className="text-[10px] uppercase font-bold text-slate-400 flex items-center gap-1 flex-shrink-0">
-              <BsStars className="text-[#3b82f6]" /> Prompts:
+          <div className="px-3 py-1.5 bg-white border-t border-slate-200 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+            <span className="text-[10px] uppercase font-semibold text-slate-400 flex items-center gap-1 flex-shrink-0">
+              <BsStars className="text-slate-400" /> Prompts:
             </span>
             {PROMPT_SUGGESTIONS.map((prompt, idx) => (
               <button
                 key={idx}
                 onClick={() => handleSend(prompt)}
                 disabled={loading}
-                className="whitespace-nowrap text-[11px] px-2.5 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 transition-colors flex-shrink-0 cursor-pointer"
+                className="whitespace-nowrap text-[11px] px-2 py-0.5 rounded bg-white hover:bg-slate-50 text-slate-600 border border-slate-200 transition-colors flex-shrink-0 cursor-pointer"
               >
                 {prompt}
               </button>
@@ -263,7 +262,7 @@ function FloatingChat() {
           </div>
 
           {/* Input Box */}
-          <div className="p-3 bg-white border-t border-slate-200">
+          <div className="p-2.5 bg-white border-t border-slate-200">
             <div className="flex items-center space-x-2">
               <input
                 ref={inputRef}
@@ -273,15 +272,15 @@ function FloatingChat() {
                 onKeyDown={handleKeyDown}
                 placeholder="Ask about materials, duplicates, savings..."
                 disabled={loading}
-                className="flex-1 bg-slate-50 text-slate-900 border border-slate-300 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-[#3b82f6] placeholder-slate-400"
+                className="flex-1 bg-white text-slate-900 border border-slate-200 rounded-lg px-3 py-1.5 text-xs focus:outline-none focus:border-slate-900 placeholder-slate-400"
               />
               <button
                 onClick={() => handleSend()}
                 disabled={!input.trim() || loading}
-                className="p-2 bg-[#3b82f6] hover:bg-blue-700 text-white rounded-lg transition-colors disabled:opacity-40 cursor-pointer shadow-xs"
+                className="p-1.5 bg-slate-900 hover:bg-slate-800 text-white rounded-lg transition-colors disabled:opacity-40 cursor-pointer shadow-2xs"
                 title="Send message"
               >
-                <FiSend className="text-sm" />
+                <FiSend className="text-xs" />
               </button>
             </div>
           </div>

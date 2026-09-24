@@ -70,31 +70,31 @@ function MaterialMaster() {
     <div className="space-y-6">
       <div className="flex justify-between items-end flex-wrap gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 flex items-center gap-2">
-            <FiCheckCircle className="text-[#3b82f6]" /> One Nation, One Material Code Master
+          <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
+            <FiCheckCircle className="text-slate-700" /> One Nation, One Material Code Master
           </h1>
-          <p className="text-slate-500 text-xs sm:text-sm mt-1">
+          <p className="text-slate-500 text-xs sm:text-sm mt-0.5">
             Centralized National Catalog of standardized, deduplicated materials with cross-CPSE backward traceability.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
           <button 
             onClick={fetchUnified}
-            className="px-3.5 py-2 bg-white border border-slate-300 rounded-lg text-xs sm:text-sm text-slate-700 hover:bg-slate-50 font-semibold shadow-xs transition-colors cursor-pointer"
+            className="px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-xs text-slate-700 hover:text-slate-900 hover:bg-slate-50 font-medium shadow-2xs transition-colors cursor-pointer"
           >
             Refresh
           </button>
           <button 
             onClick={exportCSV}
-            className="flex items-center gap-2 px-4 py-2 bg-[#3b82f6] hover:bg-blue-700 text-white rounded-lg text-xs sm:text-sm font-semibold shadow-xs transition-colors cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-medium shadow-2xs transition-colors cursor-pointer"
           >
             <FiDownload /> Export Master CSV
           </button>
         </div>
       </div>
 
-      <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-        <div className="p-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/60 flex-wrap gap-3">
+      <div className="bg-white rounded-xl border border-slate-200 shadow-2xs overflow-hidden">
+        <div className="p-3.5 border-b border-slate-100 flex justify-between items-center bg-slate-50/60 flex-wrap gap-3">
           <div className="relative w-full md:w-80">
             <FiSearch className="absolute left-3 top-2.5 text-slate-400" />
             <input 
@@ -102,7 +102,7 @@ function MaterialMaster() {
               value={search}
               onChange={e => setSearch(e.target.value)}
               placeholder="Search code, description, or CPSE..." 
-              className="w-full bg-white border border-slate-300 rounded-lg py-1.5 pl-9 pr-3 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-[#3b82f6]"
+              className="w-full bg-white border border-slate-200 rounded-lg py-1.5 pl-9 pr-3 text-xs text-slate-900 focus:outline-none focus:border-slate-900"
             />
           </div>
           <span className="text-xs text-slate-500 font-medium">
@@ -112,60 +112,56 @@ function MaterialMaster() {
 
         {loading ? (
           <div className="text-center py-24 text-slate-400">
-            <div className="w-8 h-8 border-4 border-[#3b82f6] border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
-            Loading National Material Master...
+            <div className="w-8 h-8 border-2 border-slate-800 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
+            <p className="text-xs font-medium uppercase tracking-wider text-slate-500">Loading National Material Master...</p>
           </div>
         ) : filtered.length === 0 ? (
-          <div className="text-center py-20 text-slate-500">
+          <div className="text-center py-20 text-slate-500 text-xs">
             No standardized materials found. Approve duplicate matches in the <strong className="text-slate-800">Matches</strong> tab to generate National Codes.
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full text-xs sm:text-sm text-left min-w-[700px]">
-              <thead className="text-[11px] sm:text-xs text-slate-600 uppercase bg-slate-50 border-b border-slate-200 font-semibold">
+            <table className="w-full text-xs text-left min-w-[700px]">
+              <thead className="text-[11px] text-slate-500 uppercase bg-slate-50/80 border-b border-slate-200 font-semibold">
                 <tr>
-                  <th className="px-5 py-3">National Material Code</th>
-                  <th className="px-5 py-3">Standardized Description</th>
-                  <th className="px-5 py-3">Category</th>
-                  <th className="px-5 py-3">Mapped CPSE Legacy Codes</th>
-                  <th className="px-5 py-3 text-right">Aggregated Qty</th>
-                  <th className="px-5 py-3 text-right">Est. Savings (₹)</th>
+                  <th className="px-4 py-2.5">National Code</th>
+                  <th className="px-4 py-2.5">Standardized Description</th>
+                  <th className="px-4 py-2.5">Category</th>
+                  <th className="px-4 py-2.5">Mapped CPSE Legacy Codes</th>
+                  <th className="px-4 py-2.5 text-right">Aggregated Qty</th>
+                  <th className="px-4 py-2.5 text-right">Est. Savings (₹)</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {filtered.map(m => (
-                  <tr key={m._id} className="hover:bg-slate-50 transition-colors">
-                    <td className="px-5 py-3.5 font-mono font-bold text-[#3b82f6] whitespace-nowrap">
+                  <tr key={m._id} className="hover:bg-slate-50/60 transition-colors">
+                    <td className="px-4 py-3 font-mono font-semibold text-slate-900 whitespace-nowrap">
                       {m.national_code}
                     </td>
-                    <td className="px-5 py-3.5 text-slate-800 font-medium max-w-md">
+                    <td className="px-4 py-3 text-slate-800 font-medium max-w-md">
                       {m.standard_description}
                     </td>
-                    <td className="px-5 py-3.5">
-                      <span className="px-2 py-0.5 rounded bg-slate-100 text-[11px] font-semibold text-slate-600 border border-slate-200">
+                    <td className="px-4 py-3">
+                      <span className="px-2 py-0.5 rounded bg-slate-100 text-[10px] font-medium text-slate-600 border border-slate-200">
                         {m.category || 'General'}
                       </span>
                     </td>
-                    <td className="px-5 py-3.5">
+                    <td className="px-4 py-3">
                       <div className="flex flex-wrap gap-1 max-w-xs">
                         {(m.mapped_codes || []).map((c, idx) => (
                           <span 
                             key={idx} 
-                            className={`px-2 py-0.5 text-[10px] font-mono rounded border font-semibold ${
-                              c.cpse === 'ONGC' ? 'bg-rose-50 text-rose-700 border-rose-200' :
-                              c.cpse === 'BPCL' ? 'bg-blue-50 text-blue-700 border-blue-200' :
-                              'bg-amber-50 text-amber-700 border-amber-200'
-                            }`}
+                            className="px-2 py-0.5 text-[10px] font-mono rounded border font-medium bg-slate-50 text-slate-700 border-slate-200"
                           >
                             <strong>{c.cpse}:</strong> {c.code}
                           </span>
                         ))}
                       </div>
                     </td>
-                    <td className="px-5 py-3.5 text-right text-slate-700 font-semibold">
+                    <td className="px-4 py-3 text-right text-slate-700 font-medium">
                       {(m.total_annual_quantity || 0).toLocaleString()}
                     </td>
-                    <td className="px-5 py-3.5 text-right text-emerald-700 font-bold whitespace-nowrap bg-emerald-50/40">
+                    <td className="px-4 py-3 text-right text-slate-900 font-semibold whitespace-nowrap">
                       ₹{((m.estimated_savings || 0)).toLocaleString()}
                     </td>
                   </tr>

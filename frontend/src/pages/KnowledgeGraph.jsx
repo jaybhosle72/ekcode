@@ -43,24 +43,24 @@ function KnowledgeGraph() {
     <div className="space-y-6">
       <div className="flex justify-between items-end flex-wrap gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 flex items-center gap-2">
-            <FiLayers className="text-[#3b82f6]" /> CPSE Code Harmonization & Migration Hub
+          <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
+            <FiLayers className="text-slate-700" /> CPSE Code Harmonization & Migration Hub
           </h1>
-          <p className="text-slate-500 text-xs sm:text-sm mt-1">
+          <p className="text-slate-500 text-xs sm:text-sm mt-0.5">
             Standardized mapping showing how legacy material codes across ONGC, BPCL, and IOC merge into One Central National Code.
           </p>
         </div>
         <div className="flex items-center gap-2">
           <Link
             to="/matches"
-            className="px-3.5 py-2 bg-[#3b82f6] hover:bg-blue-700 text-white rounded-lg text-xs sm:text-sm font-semibold shadow-sm transition-colors flex items-center gap-1.5"
+            className="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-medium shadow-2xs transition-colors flex items-center gap-1.5"
           >
             <span>Review Unapproved Items</span>
             <FiExternalLink />
           </Link>
           <button 
             onClick={loadHarmonizationData}
-            className="px-3.5 py-2 bg-white border border-slate-300 rounded-lg text-xs sm:text-sm text-slate-700 hover:bg-slate-50 font-semibold shadow-xs transition-colors cursor-pointer"
+            className="px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-xs text-slate-700 hover:text-slate-900 hover:bg-slate-50 font-medium shadow-2xs transition-colors cursor-pointer"
           >
             Refresh
           </button>
@@ -68,15 +68,15 @@ function KnowledgeGraph() {
       </div>
 
       {/* Filter & Search Bar */}
-      <div className="bg-white border border-slate-200 shadow-sm rounded-xl p-4 flex flex-wrap justify-between items-center gap-4">
+      <div className="bg-white border border-slate-200 shadow-2xs rounded-xl p-3 sm:p-4 flex flex-wrap justify-between items-center gap-3">
         <div className="flex flex-wrap gap-1.5">
           {categories.map(cat => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`text-xs px-3 py-1.5 rounded-lg transition-colors cursor-pointer font-semibold ${
+              className={`text-xs px-2.5 py-1 rounded-md transition-colors cursor-pointer font-medium ${
                 selectedCategory === cat
-                  ? 'bg-[#3b82f6] text-white'
+                  ? 'bg-slate-900 text-white'
                   : 'bg-slate-100 text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -92,52 +92,52 @@ function KnowledgeGraph() {
             value={search}
             onChange={e => setSearch(e.target.value)}
             placeholder="Search national code, legacy code, or specs..."
-            className="w-full bg-slate-50 border border-slate-300 rounded-lg py-1.5 pl-9 pr-3 text-xs text-slate-900 focus:outline-none focus:border-[#3b82f6]"
+            className="w-full bg-white border border-slate-200 rounded-lg py-1.5 pl-9 pr-3 text-xs text-slate-900 focus:outline-none focus:border-slate-900"
           />
         </div>
       </div>
 
       {loading ? (
         <div className="text-center py-24 text-slate-400">
-          <div className="w-8 h-8 border-4 border-[#3b82f6] border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
-          Loading harmonization mappings...
+          <div className="w-8 h-8 border-2 border-slate-800 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
+          <p className="text-xs font-medium uppercase tracking-wider text-slate-500">Loading harmonization mappings...</p>
         </div>
       ) : (
         <div className="space-y-4">
           <div className="flex justify-between items-center">
-            <h2 className="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-2">
-              <FiCheckCircle className="text-emerald-600 text-sm" /> Standardized National Code Clusters ({filteredUnified.length})
+            <h2 className="text-xs font-semibold uppercase tracking-wider text-slate-500 flex items-center gap-2">
+              <FiCheckCircle className="text-slate-600 text-sm" /> Standardized National Code Clusters ({filteredUnified.length})
             </h2>
             <span className="text-xs text-slate-400">Harmonized across ONGC, BPCL & IOC</span>
           </div>
 
           {filteredUnified.length === 0 ? (
-            <div className="p-8 text-center bg-white border border-slate-200 rounded-xl text-slate-500 text-xs sm:text-sm shadow-sm">
-              No unified codes found. Go to the <Link to="/matches" className="text-[#3b82f6] font-semibold hover:underline">Matches</Link> tab to approve duplicate items and generate new National Codes.
+            <div className="p-8 text-center bg-white border border-slate-200 rounded-xl text-slate-500 text-xs shadow-2xs">
+              No unified codes found. Go to the <Link to="/matches" className="text-slate-900 font-semibold hover:underline">Matches</Link> tab to approve duplicate items and generate new National Codes.
             </div>
           ) : (
-            <div className="grid grid-cols-1 gap-4">
+            <div className="grid grid-cols-1 gap-3.5">
               {filteredUnified.map(u => (
-                <div key={u._id} className="bg-white border border-slate-200 shadow-sm rounded-xl p-5 hover:border-blue-300 transition-all">
+                <div key={u._id} className="bg-white border border-slate-200 shadow-2xs rounded-xl p-4 sm:p-5 hover:border-slate-300 transition-all">
                   {/* Header: National Code Hub */}
                   <div className="flex justify-between items-start flex-wrap gap-2 pb-3 border-b border-slate-100">
                     <div>
-                      <div className="flex items-center gap-2.5">
-                        <span className="px-3 py-1 bg-blue-50 border border-blue-200 text-blue-700 font-mono font-bold text-xs sm:text-sm rounded-lg">
-                          🏷️ {u.national_code}
+                      <div className="flex items-center gap-2">
+                        <span className="px-2.5 py-0.5 bg-slate-100 border border-slate-200 text-slate-900 font-mono font-semibold text-xs rounded-md">
+                          {u.national_code}
                         </span>
-                        <span className="text-[11px] px-2 py-0.5 rounded bg-slate-100 text-slate-600 font-semibold border border-slate-200">
+                        <span className="text-[10px] px-2 py-0.5 rounded bg-slate-100 text-slate-600 font-medium border border-slate-200">
                           {u.category}
                         </span>
                       </div>
-                      <p className="text-slate-900 font-semibold text-xs sm:text-sm mt-2">
+                      <p className="text-slate-900 font-medium text-xs sm:text-sm mt-1.5">
                         {u.standard_description}
                       </p>
                     </div>
 
                     <div className="text-right">
-                      <span className="text-xs text-slate-400 font-medium">Projected Demand Savings:</span>
-                      <div className="text-emerald-700 font-bold text-sm flex items-center justify-end gap-1">
+                      <span className="text-[11px] text-slate-400 font-medium">Projected Savings:</span>
+                      <div className="text-slate-900 font-semibold text-xs sm:text-sm flex items-center justify-end gap-1">
                         <FiTrendingUp className="text-emerald-600" /> ₹{(u.estimated_savings || 0).toLocaleString()}
                       </div>
                     </div>
@@ -145,28 +145,20 @@ function KnowledgeGraph() {
 
                   {/* Body: Connected CPSE Legacy Codes */}
                   <div className="mt-3">
-                    <div className="text-[11px] text-slate-500 uppercase font-semibold tracking-wider mb-2">Harmonized CPSE Legacy Equivalents:</div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                    <div className="text-[10px] text-slate-400 uppercase font-semibold tracking-wider mb-2">Harmonized CPSE Legacy Equivalents:</div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
                       {(u.mapped_codes || []).map((mc, idx) => (
                         <div 
                           key={idx} 
-                          className={`p-2.5 rounded-lg border flex flex-col justify-between ${
-                            mc.cpse === 'ONGC' ? 'bg-rose-50 border-rose-200' :
-                            mc.cpse === 'BPCL' ? 'bg-blue-50 border-blue-200' :
-                            'bg-amber-50 border-amber-200'
-                          }`}
+                          className="p-2.5 rounded-lg border border-slate-200 bg-slate-50/60 flex flex-col justify-between"
                         >
                           <div className="flex justify-between items-center mb-1">
-                            <span className={`text-[10px] font-bold ${
-                              mc.cpse === 'ONGC' ? 'text-rose-700' :
-                              mc.cpse === 'BPCL' ? 'text-blue-700' :
-                              'text-amber-700'
-                            }`}>
+                            <span className="text-[10px] font-semibold text-slate-600">
                               {mc.cpse} Legacy Code
                             </span>
                             <FiArrowRight className="text-slate-400 text-xs" />
                           </div>
-                          <div className="font-mono text-xs font-semibold text-slate-800">
+                          <div className="font-mono text-xs font-medium text-slate-800">
                             {mc.code}
                           </div>
                         </div>

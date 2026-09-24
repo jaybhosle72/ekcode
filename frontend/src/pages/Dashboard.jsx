@@ -24,14 +24,14 @@ function Dashboard() {
     }
   };
 
-  const COLORS = ['#3b82f6', '#22c55e', '#eab308', '#ef4444', '#8b5cf6', '#06b6d4'];
+  const COLORS = ['#0f172a', '#2563eb', '#059669', '#d97706', '#64748b', '#7c3aed'];
 
   if (loading || !stats) {
     return (
       <div className="flex items-center justify-center py-28 text-slate-400">
         <div className="text-center space-y-3">
-          <div className="w-10 h-10 border-4 border-[#3b82f6] border-t-transparent rounded-full animate-spin mx-auto"></div>
-          <p className="text-xs font-semibold uppercase tracking-wider">Loading real-time material master analytics...</p>
+          <div className="w-8 h-8 border-2 border-slate-800 border-t-transparent rounded-full animate-spin mx-auto"></div>
+          <p className="text-xs font-medium uppercase tracking-wider text-slate-500">Loading master analytics...</p>
         </div>
       </div>
     );
@@ -64,21 +64,21 @@ function Dashboard() {
       {/* Header Banner */}
       <div className="flex justify-between items-end flex-wrap gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900">EkCode Dashboard</h1>
-          <p className="text-slate-500 text-xs sm:text-sm mt-1">
-            Overview of material standardization across CPSEs (ONGC, BPCL, IOC)
+          <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">EkCode Dashboard</h1>
+          <p className="text-slate-500 text-xs sm:text-sm mt-0.5">
+            Material standardization analytics across CPSEs (ONGC, BPCL, IOC)
           </p>
         </div>
         <button 
           onClick={fetchStats}
-          className="text-xs bg-white/90 border border-slate-200/90 text-slate-800 hover:bg-white px-4 py-2 rounded-xl transition-all font-bold shadow-2xs cursor-pointer"
+          className="text-xs bg-white border border-slate-200 text-slate-700 hover:text-slate-900 hover:bg-slate-50 px-3 py-1.5 rounded-lg transition-colors font-medium shadow-2xs cursor-pointer"
         >
           Refresh Live Data
         </button>
       </div>
 
-      {/* Metrics Row: Responsive 1 col -> 2 col -> 3 col -> 6 col */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4">
+      {/* Metrics Row */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3.5">
         <StatsCard icon={<MdStorage />} title="Total Materials" value={stats.totalMaterials || 0} subtitle="Across CPSEs" />
         <StatsCard icon={<MdLink />} title="Duplicates Found" value={stats.totalMatches || 0} subtitle={`${stats.duplicatesFound || 0} High Confidence`} />
         <StatsCard icon={<MdPending />} title="Pending Review" value={stats.pendingMatches || 0} subtitle="Awaiting Action" />
@@ -89,37 +89,37 @@ function Dashboard() {
 
       {/* Clean Slate Onboarding Prompt */}
       {(!stats.totalMaterials || stats.totalMaterials === 0) && (
-        <div className="bg-white/95 backdrop-blur-xs border border-blue-200/80 rounded-2xl p-6 text-center space-y-2 shadow-xs">
-          <h3 className="text-sm sm:text-base font-bold text-slate-900">
-            🚀 Ready for External CPSE Catalog Ingestion
+        <div className="bg-white border border-slate-200 rounded-xl p-6 text-center space-y-2 shadow-2xs">
+          <h3 className="text-sm font-semibold text-slate-900">
+            Ready for External CPSE Catalog Ingestion
           </h3>
-          <p className="text-xs sm:text-sm text-slate-500 max-w-xl mx-auto">
+          <p className="text-xs text-slate-500 max-w-xl mx-auto leading-relaxed">
             The database is currently clean. Sign in as an authorized CPSE Procurement Officer to upload catalog spreadsheets (.xlsx / .csv). The EkCode AI engine will automatically extract technical specifications and detect cross-enterprise duplicates.
           </p>
         </div>
       )}
 
       {/* Analytics Charts Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
         {/* CPSE Distribution */}
-        <div className="bg-white/95 backdrop-blur-xs border border-slate-200/80 shadow-xs rounded-2xl p-5">
-          <h2 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-4">Materials Ingested per CPSE</h2>
-          <div className="h-64">
+        <div className="bg-white border border-slate-200 shadow-2xs rounded-xl p-4 sm:p-5">
+          <h2 className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-4">Materials Ingested per CPSE</h2>
+          <div className="h-60">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={cpseChartData}>
                 <XAxis dataKey="name" stroke="#94a3b8" fontSize={11} />
                 <YAxis stroke="#94a3b8" fontSize={11} />
-                <Tooltip contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', borderRadius: '12px', color: '#0f172a', fontSize: '12px', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
-                <Bar dataKey="count" fill="#3b82f6" radius={[6, 6, 0, 0]} />
+                <Tooltip contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', borderRadius: '8px', color: '#0f172a', fontSize: '11px', boxShadow: '0 2px 4px 0 rgb(0 0 0 / 0.05)' }} />
+                <Bar dataKey="count" fill="#0f172a" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </div>
 
         {/* Match Classification */}
-        <div className="bg-white/95 backdrop-blur-xs border border-slate-200/80 shadow-xs rounded-2xl p-5">
-          <h2 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-4">Duplicate Match Types</h2>
-          <div className="h-64">
+        <div className="bg-white border border-slate-200 shadow-2xs rounded-xl p-4 sm:p-5">
+          <h2 className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-4">Duplicate Match Types</h2>
+          <div className="h-60">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
@@ -127,8 +127,8 @@ function Dashboard() {
                   cx="50%"
                   cy="50%"
                   innerRadius={50}
-                  outerRadius={80}
-                  paddingAngle={4}
+                  outerRadius={75}
+                  paddingAngle={3}
                   dataKey="value"
                   label={({ name, percent }) => `${name} (${(percent * 100).toFixed(0)}%)`}
                 >
@@ -136,22 +136,22 @@ function Dashboard() {
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
-                <Tooltip contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', borderRadius: '12px', color: '#0f172a', fontSize: '12px', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
+                <Tooltip contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', borderRadius: '8px', color: '#0f172a', fontSize: '11px', boxShadow: '0 2px 4px 0 rgb(0 0 0 / 0.05)' }} />
               </PieChart>
             </ResponsiveContainer>
           </div>
         </div>
 
         {/* Category Breakdown */}
-        <div className="bg-white/95 backdrop-blur-xs border border-slate-200/80 shadow-xs rounded-2xl p-5">
-          <h2 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-4">Category Breakdown</h2>
-          <div className="h-64">
+        <div className="bg-white border border-slate-200 shadow-2xs rounded-xl p-4 sm:p-5">
+          <h2 className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-4">Category Breakdown</h2>
+          <div className="h-60">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={categoryChartData} layout="vertical">
                 <XAxis type="number" stroke="#94a3b8" fontSize={11} />
                 <YAxis dataKey="name" type="category" stroke="#94a3b8" fontSize={10} width={85} />
-                <Tooltip contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', borderRadius: '8px', color: '#0f172a', fontSize: '12px' }} />
-                <Bar dataKey="count" fill="#6366f1" radius={[0, 4, 4, 0]} />
+                <Tooltip contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', borderRadius: '8px', color: '#0f172a', fontSize: '11px', boxShadow: '0 2px 4px 0 rgb(0 0 0 / 0.05)' }} />
+                <Bar dataKey="count" fill="#334155" radius={[0, 4, 4, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>

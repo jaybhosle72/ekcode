@@ -212,8 +212,8 @@ function Matches() {
       {/* Page Title & Filter Header */}
       <div className="flex justify-between items-end flex-wrap gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900">AI Duplicate & Equivalence Matcher</h1>
-          <p className="text-slate-500 text-xs sm:text-sm mt-1">
+          <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">AI Duplicate & Equivalence Matcher</h1>
+          <p className="text-slate-500 text-xs sm:text-sm mt-0.5">
             Two-Tier Harmonization: CPSE technical parity endorsement + MoPNG sovereign national code ratification.
           </p>
         </div>
@@ -222,27 +222,27 @@ function Matches() {
           <button
             onClick={handleTriggerScan}
             disabled={isScanning}
-            className="flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-lg text-xs sm:text-sm font-semibold shadow-xs transition-all disabled:opacity-50 cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-medium shadow-2xs transition-colors disabled:opacity-50 cursor-pointer"
           >
             <FiRefreshCw className={isScanning ? 'animate-spin' : ''} />
-            <span>{isScanning ? 'Analyzing All Catalogs...' : '⚡ Re-scan All Catalogs'}</span>
+            <span>{isScanning ? 'Analyzing All Catalogs...' : 'Re-scan All Catalogs'}</span>
           </button>
 
           <select 
             value={statusFilter}
             onChange={e => setStatusFilter(e.target.value)}
-            className="bg-white border border-slate-300 rounded-lg py-2 px-3 text-xs sm:text-sm text-slate-700 font-semibold focus:outline-none focus:border-[#3b82f6] shadow-xs cursor-pointer"
+            className="bg-white border border-slate-200 rounded-lg py-1.5 px-3 text-xs text-slate-800 font-medium focus:outline-none focus:border-slate-900 shadow-2xs cursor-pointer"
           >
-            <option value="all">Status: All Lifecycle States</option>
-            <option value="pending">Status: Pending Technical Review</option>
-            <option value="endorsed">Status: Endorsed (Ready for MoPNG)</option>
-            <option value="approved">Status: Ratified by MoPNG</option>
+            <option value="all">Status: All States</option>
+            <option value="pending">Status: Pending Review</option>
+            <option value="endorsed">Status: Endorsed</option>
+            <option value="approved">Status: Ratified</option>
             <option value="rejected">Status: Rejected</option>
           </select>
           <select 
             value={typeFilter}
             onChange={e => setTypeFilter(e.target.value)}
-            className="bg-white border border-slate-300 rounded-lg py-2 px-3 text-xs sm:text-sm text-slate-700 font-semibold focus:outline-none focus:border-[#3b82f6] shadow-xs cursor-pointer"
+            className="bg-white border border-slate-200 rounded-lg py-1.5 px-3 text-xs text-slate-800 font-medium focus:outline-none focus:border-slate-900 shadow-2xs cursor-pointer"
           >
             <option value="all">Match Type: All</option>
             <option value="identical">Identical (90%-98%)</option>
@@ -255,57 +255,51 @@ function Matches() {
       {/* Real-time Cross-CPSE Parity Stats Bar */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <div className="bg-white border border-slate-200 rounded-xl p-3 shadow-2xs">
-          <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Total Match Pairs</div>
-          <div className="text-xl font-bold text-slate-800 mt-0.5">{matches.length}</div>
+          <div className="text-[11px] font-medium text-slate-500 uppercase tracking-wider">Total Match Pairs</div>
+          <div className="text-xl font-bold text-slate-900 mt-0.5">{matches.length}</div>
         </div>
-        <div className="bg-white border border-emerald-200 rounded-xl p-3 shadow-2xs bg-emerald-50/20">
-          <div className="text-[11px] font-semibold text-emerald-700 uppercase tracking-wider">Identical (98%)</div>
-          <div className="text-xl font-bold text-emerald-700 mt-0.5">{identicalCount}</div>
+        <div className="bg-white border border-slate-200 rounded-xl p-3 shadow-2xs">
+          <div className="text-[11px] font-medium text-slate-500 uppercase tracking-wider">Identical (98%)</div>
+          <div className="text-xl font-bold text-slate-900 mt-0.5">{identicalCount}</div>
         </div>
-        <div className="bg-white border border-blue-200 rounded-xl p-3 shadow-2xs bg-blue-50/20">
-          <div className="text-[11px] font-semibold text-blue-700 uppercase tracking-wider">Near-Duplicate</div>
-          <div className="text-xl font-bold text-blue-700 mt-0.5">{nearDupCount}</div>
+        <div className="bg-white border border-slate-200 rounded-xl p-3 shadow-2xs">
+          <div className="text-[11px] font-medium text-slate-500 uppercase tracking-wider">Near-Duplicate</div>
+          <div className="text-xl font-bold text-slate-900 mt-0.5">{nearDupCount}</div>
         </div>
-        <div className="bg-white border border-amber-200 rounded-xl p-3 shadow-2xs bg-amber-50/20">
-          <div className="text-[11px] font-semibold text-amber-700 uppercase tracking-wider">Equivalent</div>
-          <div className="text-xl font-bold text-amber-700 mt-0.5">{equivCount}</div>
+        <div className="bg-white border border-slate-200 rounded-xl p-3 shadow-2xs">
+          <div className="text-[11px] font-medium text-slate-500 uppercase tracking-wider">Equivalent</div>
+          <div className="text-xl font-bold text-slate-900 mt-0.5">{equivCount}</div>
         </div>
       </div>
 
       {/* Role-Specific Two-Tier Framework Session Banner */}
       {currentUser && (
-        <div className={`border rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs ${
-          currentRole === 'admin'
-            ? 'bg-amber-50/70 border-amber-200 text-amber-900'
-            : 'bg-blue-50/70 border-blue-200 text-blue-900'
-        }`}>
+        <div className="bg-white border border-slate-200 rounded-xl p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-2xs">
           <div className="flex items-center space-x-3 text-xs">
-            <div className={`p-2 rounded-lg text-white text-base ${
-              currentRole === 'admin' ? 'bg-amber-600' : 'bg-blue-600'
-            }`}>
+            <div className="p-2 rounded-lg bg-slate-100 text-slate-700 text-base border border-slate-200">
               {currentRole === 'admin' ? <FiAward /> : <FiShield />}
             </div>
             <div>
-              <div className="font-bold text-slate-900 text-xs sm:text-sm">
+              <div className="font-semibold text-slate-900 text-xs sm:text-sm">
                 {currentRole === 'admin' 
-                  ? '👑 MoPNG Central Standardization Committee Session' 
-                  : `🏢 ${currentUser.cpse_organization || 'CPSE'} Domain Technical Session`}
+                  ? 'MoPNG Central Standardization Committee Session' 
+                  : `${currentUser.cpse_organization || 'CPSE'} Domain Technical Session`}
               </div>
-              <div className="text-slate-600 text-[11px] mt-0.5">
-                Active User: <strong>{currentUser.name}</strong> · Designation: <strong>{currentUser.designation || 'Specialist'}</strong>
+              <div className="text-slate-500 text-[11px] mt-0.5">
+                Active User: <strong className="text-slate-700">{currentUser.name}</strong> · Designation: <strong className="text-slate-700">{currentUser.designation || 'Specialist'}</strong>
               </div>
             </div>
           </div>
 
-          <div className="text-[11px] font-medium bg-white/80 border border-slate-200/80 px-3 py-1.5 rounded-lg text-slate-600 self-start sm:self-auto">
+          <div className="text-[11px] font-medium bg-slate-50 border border-slate-200 px-2.5 py-1 rounded-md text-slate-600 self-start sm:self-auto">
             {currentRole === 'admin' ? (
-              <span className="flex items-center gap-1.5 text-amber-800">
-                <FiAward className="text-amber-600" />
-                <span>Tier 2 Authority: Sovereign Ratification & National Code Minting</span>
+              <span className="flex items-center gap-1.5 text-slate-700">
+                <FiAward className="text-slate-600" />
+                <span>Tier 2 Authority: Sovereign Ratification & Minting</span>
               </span>
             ) : (
-              <span className="flex items-center gap-1.5 text-blue-800">
-                <FiCheckCircle className="text-emerald-600" />
+              <span className="flex items-center gap-1.5 text-slate-700">
+                <FiCheckCircle className="text-slate-600" />
                 <span>Tier 1 Authority: Specification Equivalence Endorsement</span>
               </span>
             )}
@@ -316,11 +310,11 @@ function Matches() {
       {/* Matches List */}
       {loading ? (
         <div className="text-center py-24 text-slate-400">
-          <div className="w-10 h-10 border-4 border-[#3b82f6] border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
-          <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Loading cross-CPSE matches...</p>
+          <div className="w-8 h-8 border-2 border-slate-800 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
+          <p className="text-xs font-medium uppercase tracking-wider text-slate-500">Loading cross-CPSE matches...</p>
         </div>
       ) : matches.length === 0 ? (
-        <div className="text-center py-16 bg-white border border-slate-200 rounded-xl text-slate-500 shadow-sm p-6">
+        <div className="text-center py-16 bg-white border border-slate-200 rounded-xl text-slate-500 shadow-2xs p-6 text-xs">
           No matches found for the selected status. Try switching the filter above to <strong>All</strong> or <strong>Pending</strong>.
         </div>
       ) : (

@@ -42,57 +42,55 @@ function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-40 bg-white/85 backdrop-blur-md border-b border-slate-200/80 shadow-xs">
+    <nav className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Brand Logo & Tagline */}
+        <div className="flex items-center justify-between h-14">
+          {/* Brand Logo & Minimal Tagline */}
           <div className="flex items-center space-x-3">
-            <Link to="/" className="flex items-center flex-shrink-0 group">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-blue-500 flex items-center justify-center text-white shadow-xs font-black text-xs tracking-wider mr-2.5">
+            <Link to="/" className="flex items-center space-x-2.5">
+              <div className="w-7 h-7 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-xs tracking-wider shadow-2xs">
                 EK
               </div>
-              <div className="flex flex-col">
-                <span className="text-xl font-black text-slate-900 tracking-tight leading-none">
-                  EkCode
-                </span>
-                <span className="text-[10px] font-semibold text-slate-500 tracking-tight mt-0.5 hidden sm:inline-block">
-                  One Nation, One Material Code
+              <div className="flex items-center space-x-2">
+                <span className="text-base font-bold text-slate-900 tracking-tight">EkCode</span>
+                <span className="hidden md:inline-block text-[11px] text-slate-400 font-normal border-l border-slate-200 pl-2">
+                  National Materials Standardization DPI
                 </span>
               </div>
             </Link>
           </div>
 
-          {/* Desktop Navigation Links (Scoped to currentRole) */}
-          <div className="hidden lg:flex items-center space-x-1.5">
+          {/* Desktop Navigation Links */}
+          <div className="hidden lg:flex items-center space-x-1">
             {visibleLinks.map((link) => {
               const isActive = location.pathname === link.path;
               return (
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`flex items-center px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                  className={`flex items-center px-3 py-1.5 rounded-lg text-xs transition-colors cursor-pointer ${
                     isActive
-                      ? 'bg-slate-900 text-white font-bold shadow-xs'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/80'
+                      ? 'bg-slate-100 text-slate-900 font-semibold'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50 font-medium'
                   }`}
                 >
-                  <span className="mr-1.5 text-base">{link.icon}</span>
+                  <span className="mr-1.5 text-sm text-slate-500">{link.icon}</span>
                   {link.name}
                 </Link>
               );
             })}
           </div>
 
-          {/* User Profile / Genuine Authentication Controls */}
-          <div className="flex items-center space-x-3">
+          {/* User Profile Controls */}
+          <div className="flex items-center space-x-2">
             {currentUser ? (
-              <div className="flex items-center space-x-2.5 bg-white border border-slate-200 shadow-2xs px-3 py-1.5 rounded-xl">
-                <div className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold shadow-2xs ${
+              <div className="flex items-center space-x-2 bg-slate-50 border border-slate-200/80 px-2.5 py-1 rounded-lg">
+                <div className={`w-6 h-6 rounded-md flex items-center justify-center text-[10px] font-bold ${
                   currentUser.role === 'admin'
-                    ? 'bg-amber-100 text-amber-900 border border-amber-300/80'
+                    ? 'bg-amber-100 text-amber-800'
                     : currentUser.role === 'viewer'
-                    ? 'bg-emerald-100 text-emerald-900 border border-emerald-300/80'
-                    : 'bg-blue-100 text-blue-900 border border-blue-300/80'
+                    ? 'bg-emerald-100 text-emerald-800'
+                    : 'bg-blue-100 text-blue-800'
                 }`}>
                   {currentUser.role === 'admin'
                     ? '👑'
@@ -103,48 +101,42 @@ function Navbar() {
                     : 'CP'}
                 </div>
                 <div className="hidden sm:flex flex-col text-left">
-                  <span className="text-xs font-bold text-slate-900 leading-tight truncate max-w-[140px]">
+                  <span className="text-xs font-semibold text-slate-900 leading-none truncate max-w-[130px]">
                     {currentUser.name}
                   </span>
-                  <span className={`text-[10px] font-bold leading-tight ${
-                    currentUser.role === 'admin'
-                      ? 'text-amber-700'
-                      : currentUser.role === 'viewer'
-                      ? 'text-emerald-700'
-                      : 'text-blue-700'
-                  }`}>
+                  <span className="text-[10px] text-slate-500 font-medium leading-none mt-1">
                     {currentUser.role === 'admin'
-                      ? (currentUser.designation || 'MoPNG National Admin')
+                      ? (currentUser.designation || 'MoPNG Admin')
                       : currentUser.role === 'viewer'
-                      ? (currentUser.designation || 'Public Citizen / Auditor')
+                      ? (currentUser.designation || 'Public Citizen')
                       : `${currentUser.cpse_organization || 'CPSE'} · ${currentUser.designation || 'Officer'}`}
                   </span>
                 </div>
                 <button
                   onClick={handleLogout}
                   title="Sign Out"
-                  className="p-1.5 text-slate-400 hover:text-rose-600 rounded-lg hover:bg-rose-50 transition-colors ml-1 cursor-pointer"
+                  className="p-1 text-slate-400 hover:text-rose-600 hover:bg-slate-200/50 rounded transition-colors ml-1 cursor-pointer"
                 >
-                  <FiLogOut className="text-sm" />
+                  <FiLogOut className="text-xs" />
                 </button>
               </div>
             ) : (
               <button
                 onClick={() => setIsLoginModalOpen(true)}
-                className="flex items-center space-x-1.5 px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
+                className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-medium transition-colors cursor-pointer"
               >
-                <FiLogIn className="text-sm" />
-                <span>Sign In / Register</span>
+                <FiLogIn className="text-xs" />
+                <span>Sign In</span>
               </button>
             )}
 
             {/* Mobile Menu Hamburger Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors cursor-pointer"
+              className="lg:hidden p-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors cursor-pointer"
               aria-label="Toggle navigation menu"
             >
-              {mobileMenuOpen ? <MdClose className="text-xl" /> : <MdMenu className="text-xl" />}
+              {mobileMenuOpen ? <MdClose className="text-lg" /> : <MdMenu className="text-lg" />}
             </button>
           </div>
         </div>
@@ -152,7 +144,7 @@ function Navbar() {
 
       {/* Mobile Drawer Navigation Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white/95 backdrop-blur-md border-t border-slate-200/80 px-4 pt-2 pb-4 space-y-1 shadow-lg">
+        <div className="lg:hidden bg-white border-t border-slate-200 px-4 pt-2 pb-3 space-y-1 shadow-sm">
           {visibleLinks.map((link) => {
             const isActive = location.pathname === link.path;
             return (
@@ -160,34 +152,28 @@ function Navbar() {
                 key={link.name}
                 to={link.path}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`flex items-center px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all ${
+                className={`flex items-center px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
                   isActive
-                    ? 'bg-slate-900 text-white shadow-xs font-bold'
-                    : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+                    ? 'bg-slate-100 text-slate-900 font-semibold'
+                    : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
                 }`}
               >
-                <span className="mr-3 text-base">{link.icon}</span>
+                <span className="mr-3 text-base text-slate-500">{link.icon}</span>
                 {link.name}
               </Link>
             );
           })}
 
-          <div className="pt-3 border-t border-slate-200 flex items-center justify-between text-xs text-slate-600 px-2">
+          <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600 px-2">
             {currentUser ? (
               <div className="flex items-center justify-between w-full">
                 <div className="flex flex-col">
-                  <span className="text-slate-900 font-bold leading-tight">{currentUser.name}</span>
-                  <span className={`text-[11px] font-semibold mt-0.5 ${
-                    currentUser.role === 'admin'
-                      ? 'text-amber-700'
-                      : currentUser.role === 'viewer'
-                      ? 'text-emerald-700'
-                      : 'text-blue-700'
-                  }`}>
+                  <span className="text-slate-900 font-semibold leading-tight">{currentUser.name}</span>
+                  <span className="text-[10px] text-slate-500 font-medium mt-0.5">
                     {currentUser.role === 'admin'
-                      ? (currentUser.designation || 'MoPNG National Admin')
+                      ? (currentUser.designation || 'MoPNG Admin')
                       : currentUser.role === 'viewer'
-                      ? (currentUser.designation || 'Public Citizen / Auditor')
+                      ? (currentUser.designation || 'Public Citizen')
                       : `${currentUser.cpse_organization || 'CPSE'} · ${currentUser.designation || 'Officer'}`}
                   </span>
                 </div>
@@ -196,7 +182,7 @@ function Navbar() {
                     handleLogout();
                     setMobileMenuOpen(false);
                   }}
-                  className="text-rose-600 font-bold hover:underline ml-4"
+                  className="text-rose-600 font-medium hover:underline ml-4 text-xs"
                 >
                   Sign Out
                 </button>
@@ -207,9 +193,9 @@ function Navbar() {
                   setMobileMenuOpen(false);
                   setIsLoginModalOpen(true);
                 }}
-                className="text-slate-900 font-bold hover:underline"
+                className="text-slate-900 font-medium hover:underline text-xs"
               >
-                Sign In / Register
+                Sign In
               </button>
             )}
           </div>

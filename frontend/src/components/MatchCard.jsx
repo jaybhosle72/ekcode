@@ -230,15 +230,15 @@ function MatchCard({ matchData, onEndorse, onApprove, onReject }) {
 
       {/* Ratification Details Banner (If Approved) */}
       {status === 'approved' && (
-        <div className="p-3.5 bg-gradient-to-r from-blue-50 to-amber-50/60 border-t border-blue-200 text-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+        <div className="p-3.5 bg-slate-50 border-t border-slate-200 text-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
           <div className="flex items-center space-x-2 text-slate-800">
-            <FiAward className="text-amber-600 text-base flex-shrink-0" />
+            <FiAward className="text-slate-700 text-base flex-shrink-0" />
             <span>
               <strong>Tier 2 Sovereign Ratified:</strong> Approved by{' '}
-              <strong className="text-amber-900">{matchData.reviewed_by || 'Dr. Rajesh Verma (MoPNG Committee)'}</strong>
+              <strong className="text-slate-900">{matchData.reviewed_by || 'Dr. Rajesh Verma (MoPNG Committee)'}</strong>
             </span>
           </div>
-          <span className="text-[11px] font-mono font-bold text-blue-800 bg-white border border-blue-300 px-3 py-1 rounded-md shadow-xs">
+          <span className="text-[11px] font-mono font-semibold text-slate-900 bg-white border border-slate-200 px-2.5 py-1 rounded-md shadow-2xs">
             National Code: {nationalCode || matchData.nationalCode || 'IND-MAT-CODE'}
           </span>
         </div>
@@ -297,10 +297,10 @@ function MatchCard({ matchData, onEndorse, onApprove, onReject }) {
               <button
                 onClick={handleApproveAction}
                 disabled={loading}
-                className="flex items-center px-4 py-1.5 text-xs font-bold text-white bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 rounded-lg shadow-xs transition-colors cursor-pointer disabled:opacity-50"
+                className="flex items-center px-4 py-1.5 text-xs font-semibold text-white bg-slate-900 hover:bg-slate-800 rounded-lg shadow-2xs transition-colors cursor-pointer disabled:opacity-50"
               >
-                <FiAward className="mr-1.5 text-sm text-amber-300" />
-                <span>👑 Sovereign Ratify & Mint National Code</span>
+                <FiAward className="mr-1.5 text-sm text-slate-300" />
+                <span>Sovereign Ratify & Mint National Code</span>
               </button>
             )}
           </div>

@@ -102,43 +102,30 @@ function LoginModal() {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in duration-200">
-      <div className="w-full max-w-md bg-white border border-slate-200 rounded-2xl shadow-2xl overflow-hidden">
-        {/* Modal Header */}
-        <div className="p-4 sm:p-5 bg-white border-b border-slate-200/80 flex justify-between items-center">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200/60 flex items-center justify-center text-blue-600 text-lg font-bold shadow-2xs">
-              <FiShield />
-            </div>
-            <div>
-              <h3 className="text-sm sm:text-base font-bold text-slate-900 leading-tight">EkCode Authentication</h3>
-              <p className="text-[11px] text-slate-500 font-medium">National Petroleum & Energy Materials DPI</p>
-            </div>
+      <div className="w-full max-w-md bg-white border border-slate-200 rounded-xl shadow-xl overflow-hidden">
+        {/* Minimal Modal Header */}
+        <div className="p-4 sm:p-5 bg-white border-b border-slate-100 flex justify-between items-center">
+          <div>
+            <h3 className="text-sm sm:text-base font-bold text-slate-900 tracking-tight">EkCode Authentication</h3>
+            <p className="text-[11px] text-slate-500 font-normal">Central Materials Standardization DPI</p>
           </div>
           <button
             onClick={() => setIsLoginModalOpen(false)}
             className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
           >
-            <FiX className="text-lg" />
+            <FiX className="text-base" />
           </button>
         </div>
 
         <div className="p-5 sm:p-6 space-y-4 max-h-[82vh] overflow-y-auto">
-          {/* Production Real-Database Badge (inspired by KaryaSetu) */}
-          <div className="flex items-center justify-between pb-0.5">
-            <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase bg-emerald-50 text-emerald-700 border border-emerald-200/80">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span>
-              REAL-TIME ENTERPRISE AUTHENTICATION
-            </span>
-          </div>
-
-          {/* Sign In vs Sign Up Tabs (Pill Container) */}
-          <div className="flex bg-slate-100/80 p-1 rounded-xl border border-slate-200/60">
+          {/* Segmented Tab Control */}
+          <div className="flex bg-slate-100 p-1 rounded-lg">
             <button
               type="button"
               onClick={() => setActiveTab('signin')}
-              className={`flex-1 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer ${
+              className={`flex-1 py-1.5 text-xs font-semibold rounded-md transition-all cursor-pointer ${
                 activeTab === 'signin'
-                  ? 'bg-white text-slate-900 shadow-xs'
+                  ? 'bg-white text-slate-900 shadow-2xs'
                   : 'text-slate-500 hover:text-slate-800'
               }`}
             >
@@ -147,21 +134,21 @@ function LoginModal() {
             <button
               type="button"
               onClick={() => setActiveTab('signup')}
-              className={`flex-1 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer ${
+              className={`flex-1 py-1.5 text-xs font-semibold rounded-md transition-all cursor-pointer ${
                 activeTab === 'signup'
-                  ? 'bg-white text-slate-900 shadow-xs'
+                  ? 'bg-white text-slate-900 shadow-2xs'
                   : 'text-slate-500 hover:text-slate-800'
               }`}
             >
-              Create Account (Sign Up)
+              Create Account
             </button>
           </div>
 
           {/* TAB 1: Sign In Form */}
           {activeTab === 'signin' && (
-            <form onSubmit={handleLoginSubmit} className="space-y-4">
+            <form onSubmit={handleLoginSubmit} className="space-y-3.5">
               <div>
-                <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1">
+                <label className="block text-[11px] font-semibold uppercase tracking-wider text-slate-600 mb-1">
                   Email Address
                 </label>
                 <div className="relative">
@@ -172,13 +159,13 @@ function LoginModal() {
                     onChange={(e) => setLoginEmail(e.target.value)}
                     placeholder="officer@ongc.in"
                     required
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2.5 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-blue-600 font-medium"
+                    className="w-full bg-white border border-slate-300 rounded-lg pl-9 pr-3 py-2 text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900 focus:border-slate-900 placeholder:text-slate-400"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1">
+                <label className="block text-[11px] font-semibold uppercase tracking-wider text-slate-600 mb-1">
                   Password
                 </label>
                 <div className="relative">
@@ -189,7 +176,7 @@ function LoginModal() {
                     onChange={(e) => setLoginPassword(e.target.value)}
                     placeholder="••••••••"
                     required
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2.5 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-blue-600"
+                    className="w-full bg-white border border-slate-300 rounded-lg pl-9 pr-3 py-2 text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900 focus:border-slate-900 placeholder:text-slate-400"
                   />
                 </div>
               </div>
@@ -197,10 +184,10 @@ function LoginModal() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-bold text-xs sm:text-sm shadow-xs transition-colors flex items-center justify-center space-x-1.5 cursor-pointer disabled:opacity-50"
+                className="w-full py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg font-medium text-xs shadow-2xs transition-colors flex items-center justify-center space-x-1.5 cursor-pointer disabled:opacity-50 mt-1"
               >
                 <FiLogIn />
-                <span>{loading ? 'Verifying Credentials...' : 'Sign In to Portal →'}</span>
+                <span>{loading ? 'Verifying...' : 'Sign In'}</span>
               </button>
             </form>
           )}
@@ -209,7 +196,7 @@ function LoginModal() {
           {activeTab === 'signup' && (
             <form onSubmit={handleRegisterSubmit} className="space-y-3.5">
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-700 mb-1">
+                <label className="block text-[10px] font-semibold uppercase tracking-wider text-slate-600 mb-1">
                   Full Name
                 </label>
                 <div className="relative">
@@ -220,13 +207,13 @@ function LoginModal() {
                     onChange={(e) => setRegisterName(e.target.value)}
                     placeholder="e.g. Vikram Sharma"
                     required
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-600 font-medium"
+                    className="w-full bg-white border border-slate-200 rounded-lg pl-9 pr-3.5 py-1.5 text-xs text-slate-900 focus:outline-none focus:border-slate-900 font-medium"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-700 mb-1">
+                <label className="block text-[10px] font-semibold uppercase tracking-wider text-slate-600 mb-1">
                   Email Address
                 </label>
                 <div className="relative">
@@ -237,77 +224,77 @@ function LoginModal() {
                     onChange={(e) => setRegisterEmail(e.target.value)}
                     placeholder="name@domain.com"
                     required
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-600 font-medium"
+                    className="w-full bg-white border border-slate-200 rounded-lg pl-9 pr-3.5 py-1.5 text-xs text-slate-900 focus:outline-none focus:border-slate-900 font-medium"
                   />
                 </div>
               </div>
 
               {/* Role Scope Selector (Interactive Persona Cards) */}
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+                <label className="block text-[10px] font-semibold uppercase tracking-wider text-slate-600 mb-1.5">
                   Select Account Persona & Scope
                 </label>
                 <div className="grid grid-cols-3 gap-2">
                   <button
                     type="button"
                     onClick={() => handleRoleChange('officer')}
-                    className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer ${
+                    className={`p-2.5 rounded-lg border text-left transition-all cursor-pointer ${
                       registerRole === 'officer'
-                        ? 'border-2 border-blue-600 bg-blue-50/60 shadow-2xs'
-                        : 'border-slate-200 bg-white hover:border-slate-300'
+                        ? 'border-slate-900 bg-slate-50 text-slate-900 shadow-2xs'
+                        : 'border-slate-200 bg-white hover:border-slate-300 text-slate-600'
                     }`}
                   >
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-base">🏢</span>
                       <span className={`w-3.5 h-3.5 rounded-full border flex items-center justify-center ${
-                        registerRole === 'officer' ? 'border-blue-600 bg-blue-600' : 'border-slate-300'
+                        registerRole === 'officer' ? 'border-slate-900 bg-slate-900' : 'border-slate-300'
                       }`}>
                         {registerRole === 'officer' && <span className="w-1.5 h-1.5 rounded-full bg-white"></span>}
                       </span>
                     </div>
-                    <div className="text-xs font-bold text-slate-900 leading-tight">CPSE Officer</div>
+                    <div className="text-xs font-semibold text-slate-900 leading-tight">CPSE Officer</div>
                     <div className="text-[10px] text-slate-500 mt-0.5">Procurement</div>
                   </button>
 
                   <button
                     type="button"
                     onClick={() => handleRoleChange('admin')}
-                    className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer ${
+                    className={`p-2.5 rounded-lg border text-left transition-all cursor-pointer ${
                       registerRole === 'admin'
-                        ? 'border-2 border-amber-600 bg-amber-50/60 shadow-2xs'
-                        : 'border-slate-200 bg-white hover:border-slate-300'
+                        ? 'border-slate-900 bg-slate-50 text-slate-900 shadow-2xs'
+                        : 'border-slate-200 bg-white hover:border-slate-300 text-slate-600'
                     }`}
                   >
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-base">👑</span>
                       <span className={`w-3.5 h-3.5 rounded-full border flex items-center justify-center ${
-                        registerRole === 'admin' ? 'border-amber-600 bg-amber-600' : 'border-slate-300'
+                        registerRole === 'admin' ? 'border-slate-900 bg-slate-900' : 'border-slate-300'
                       }`}>
                         {registerRole === 'admin' && <span className="w-1.5 h-1.5 rounded-full bg-white"></span>}
                       </span>
                     </div>
-                    <div className="text-xs font-bold text-slate-900 leading-tight">MoPNG Admin</div>
+                    <div className="text-xs font-semibold text-slate-900 leading-tight">MoPNG Admin</div>
                     <div className="text-[10px] text-slate-500 mt-0.5">Governance</div>
                   </button>
 
                   <button
                     type="button"
                     onClick={() => handleRoleChange('viewer')}
-                    className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer ${
+                    className={`p-2.5 rounded-lg border text-left transition-all cursor-pointer ${
                       registerRole === 'viewer'
-                        ? 'border-2 border-emerald-600 bg-emerald-50/60 shadow-2xs'
-                        : 'border-slate-200 bg-white hover:border-slate-300'
+                        ? 'border-slate-900 bg-slate-50 text-slate-900 shadow-2xs'
+                        : 'border-slate-200 bg-white hover:border-slate-300 text-slate-600'
                     }`}
                   >
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-base">🌐</span>
                       <span className={`w-3.5 h-3.5 rounded-full border flex items-center justify-center ${
-                        registerRole === 'viewer' ? 'border-emerald-600 bg-emerald-600' : 'border-slate-300'
+                        registerRole === 'viewer' ? 'border-slate-900 bg-slate-900' : 'border-slate-300'
                       }`}>
                         {registerRole === 'viewer' && <span className="w-1.5 h-1.5 rounded-full bg-white"></span>}
                       </span>
                     </div>
-                    <div className="text-xs font-bold text-slate-900 leading-tight">Public Citizen</div>
+                    <div className="text-xs font-semibold text-slate-900 leading-tight">Public Citizen</div>
                     <div className="text-[10px] text-slate-500 mt-0.5">Open Data</div>
                   </button>
                 </div>
@@ -316,13 +303,13 @@ function LoginModal() {
               {registerRole === 'officer' && (
                 <div className="grid grid-cols-2 gap-2.5">
                   <div>
-                    <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-700 mb-1">
+                    <label className="block text-[10px] font-semibold uppercase tracking-wider text-slate-600 mb-1">
                       CPSE Enterprise
                     </label>
                     <select
                       value={registerCpse}
                       onChange={(e) => setRegisterCpse(e.target.value)}
-                      className="w-full bg-slate-50 border border-slate-300 rounded-xl px-2.5 py-2 text-xs text-slate-900 font-semibold focus:outline-none focus:border-blue-600 cursor-pointer"
+                      className="w-full bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs text-slate-900 font-medium focus:outline-none focus:border-slate-900 cursor-pointer"
                     >
                       <option value="ONGC">ONGC</option>
                       <option value="BPCL">BPCL</option>
@@ -335,7 +322,7 @@ function LoginModal() {
                   </div>
 
                   <div>
-                    <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-700 mb-1">
+                    <label className="block text-[10px] font-semibold uppercase tracking-wider text-slate-600 mb-1">
                       Designation
                     </label>
                     <input
@@ -343,21 +330,21 @@ function LoginModal() {
                       value={registerDesignation}
                       onChange={(e) => setRegisterDesignation(e.target.value)}
                       placeholder="Materials & Procurement Officer"
-                      className="w-full bg-slate-50 border border-slate-300 rounded-xl px-2.5 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-600"
+                      className="w-full bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs text-slate-900 focus:outline-none focus:border-slate-900"
                     />
                   </div>
                 </div>
               )}
 
               {registerRole === 'admin' && (
-                <div className="p-3 bg-amber-50/90 border border-amber-200 rounded-xl flex items-start space-x-2.5 text-left">
+                <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg flex items-start space-x-2.5 text-left">
                   <span className="text-base mt-0.5">👑</span>
                   <div className="text-[11px] leading-relaxed">
-                    <div className="font-bold text-amber-950">MoPNG Master Administrator Persona</div>
-                    <div className="text-amber-800">
-                      Organization: <span className="font-semibold text-amber-950">MoPNG</span> · Designation: <span className="font-semibold text-amber-950">MoPNG Master Administrator</span>
+                    <div className="font-semibold text-slate-900">MoPNG Master Administrator Persona</div>
+                    <div className="text-slate-600">
+                      Organization: <span className="font-medium text-slate-900">MoPNG</span> · Designation: <span className="font-medium text-slate-900">MoPNG Master Administrator</span>
                     </div>
-                    <div className="text-amber-700 text-[10px] mt-0.5">
+                    <div className="text-slate-500 text-[10px] mt-0.5">
                       Full authority: Catalog governance, Cross-CPSE approval, ERP Sync & Audit logs.
                     </div>
                   </div>
@@ -365,14 +352,14 @@ function LoginModal() {
               )}
 
               {registerRole === 'viewer' && (
-                <div className="p-3 bg-emerald-50/90 border border-emerald-200 rounded-xl flex items-start space-x-2.5 text-left">
+                <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg flex items-start space-x-2.5 text-left">
                   <span className="text-base mt-0.5">🌐</span>
                   <div className="text-[11px] leading-relaxed">
-                    <div className="font-bold text-emerald-950">Public Citizen / Auditor Persona</div>
-                    <div className="text-emerald-800">
-                      Organization: <span className="font-semibold text-emerald-950">Public Citizen</span> · Designation: <span className="font-semibold text-emerald-950">Public Citizen / Auditor</span>
+                    <div className="font-semibold text-slate-900">Public Citizen / Auditor Persona</div>
+                    <div className="text-slate-600">
+                      Organization: <span className="font-medium text-slate-900">Public Citizen</span> · Designation: <span className="font-medium text-slate-900">Public Citizen / Auditor</span>
                     </div>
-                    <div className="text-emerald-700 text-[10px] mt-0.5">
+                    <div className="text-slate-500 text-[10px] mt-0.5">
                       Open Data Access: Read-only access to Central Master Catalogue & Semantic Graph.
                     </div>
                   </div>
@@ -381,7 +368,7 @@ function LoginModal() {
 
               <div className="grid grid-cols-2 gap-2.5">
                 <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-700 mb-1">
+                  <label className="block text-[10px] font-semibold uppercase tracking-wider text-slate-600 mb-1">
                     Password
                   </label>
                   <input
@@ -390,12 +377,12 @@ function LoginModal() {
                     onChange={(e) => setRegisterPassword(e.target.value)}
                     placeholder="Min 6 chars"
                     required
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-2.5 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-600"
+                    className="w-full bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs text-slate-900 focus:outline-none focus:border-slate-900"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-700 mb-1">
+                  <label className="block text-[10px] font-semibold uppercase tracking-wider text-slate-600 mb-1">
                     Confirm Password
                   </label>
                   <input
@@ -404,7 +391,7 @@ function LoginModal() {
                     onChange={(e) => setRegisterConfirmPassword(e.target.value)}
                     placeholder="Repeat password"
                     required
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-2.5 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-600"
+                    className="w-full bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs text-slate-900 focus:outline-none focus:border-slate-900"
                   />
                 </div>
               </div>
@@ -412,7 +399,7 @@ function LoginModal() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-bold text-xs sm:text-sm shadow-xs transition-colors flex items-center justify-center space-x-1.5 cursor-pointer disabled:opacity-50 mt-1"
+                className="w-full py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg font-medium text-xs shadow-2xs transition-colors flex items-center justify-center space-x-1.5 cursor-pointer disabled:opacity-50 mt-1"
               >
                 <FiUserPlus />
                 <span>{loading ? 'Creating Account...' : 'Complete Registration & Access DPI →'}</span>
