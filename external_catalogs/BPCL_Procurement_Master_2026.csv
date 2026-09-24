@@ -1,0 +1,21 @@
+Material Code,Material Description,Category,Unit of Measure,Unit Price (INR),Annual Quantity
+BPCL-MAT-PIPE-640,Seamless CS Pipe 6 inch NB Schedule 40 ASTM A106 Grade B Beveled,Pipes,Mtr,4920,10500
+BPCL-MAT-PIPE-440,"Carbon Steel Seamless Pipe 4"" NB Sch 40 to ASTM A106 Gr B",Pipes,Mtr,3250,7200
+BPCL-PIP-SS316-02,"Stainless Steel Pipe 2"" NB Seamless Sch 40S ASTM A312 Grade TP316L",Pipes,Mtr,8950,3800
+BPCL-VAL-BALL-304,Valve Ball Flanged 4 inch 300# Full Port CS A216 WCB RF Lever Operated,Valves,Nos,24900,390
+BPCL-VAL-GATE-156,"Gate Valve 6"" 150# Flanged WCB Body Bolted Bonnet Trim 8 to API 600",Valves,Nos,38500,290
+BPCL-VAL-CHCK-303,Check Valve Swing Type 3 inch Class 300 RF Flanged WCB API 6D,Valves,Nos,16800,240
+BPCL-VAL-GLOB-302,Globe Valve 2 inch Class 300 Flanged WCB Body OS&Y Stem to BS 1873,Valves,Nos,14400,310
+BPCL-BLT-ST-2012,Stud Bolt 20mm Dia x 120mm Long Alloy Steel A193-B7 with 2H Hex Nuts,Fasteners,Set,350,22000
+BPCL-BLT-ST-2416,Stud Bolt M24 x 160mm Long ASTM A193 Grade B7 with 2 Heavy Hex Nuts 2H,Fasteners,Set,530,16000
+BPCL-BLT-SS-1690,Stainless Steel Stud Bolt M16 x 90mm Long ASTM A193 B8M with 2 Nuts 8M,Fasteners,Set,790,8200
+BPCL-FLG-WN-306,Flange WNRF 6 inch 300# Sch 40 Bore CS ASTM A105 ASME B16.5,Fittings,Nos,6250,1100
+BPCL-FLG-WN-154,Flange Weld Neck 4 inch Class 150 Raised Face ASTM A105 ASME B16.5,Fittings,Nos,3450,1450
+BPCL-FIT-ELB-906,Elbow 90 Deg LR 6 inch NB Sch 40 Seamless WPB to ASTM A234 ASME B16.9,Fittings,Nos,2850,1950
+BPCL-GSK-SW-306,Gasket Spiral Wound 6 inch 300# SS316/Graphite with Inner/Outer Ring B16.20,Fittings,Nos,460,12500
+BPCL-PMP-SEAL-50,Cartridge Mechanical Seal 50mm for Centrifugal Process Pump API 682,Mechanical,Nos,43500,95
+BPCL-LTG-FL-60W,Flameproof Explosion Proof LED Luminaire 60W Zone 1 Gas Group IIA/IIB/IIC,Electrical,Nos,18800,750
+BPCL-PPE-HLM-01,Industrial Safety Helmet White Colour with 4-Point Suspension IS:2925,Safety,Nos,490,5500
+BPCL-PPE-GLV-NIT,"Nitrile Chemical Gloves Heavy Duty Gauntlet Cuff 13"" Green EN388",Safety,Pair,330,11000
+BPCL-REF-STM-TRP,"Thermodynamic Steam Trap 1/2"" NPT Class 600 Forged Carbon Steel Body",Mechanical,Nos,5400,650
+BPCL-LPG-LOAD-ARM,"LPG Bottom Loading Coupler 4"" API RP 1004 Cam-and-Groove with Viton Seals",Refinery,Nos,88000,35

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { MdCloudUpload, MdPlayArrow, MdCheckCircle } from 'react-icons/md';
-import { FiUserCheck } from 'react-icons/fi';
+import { FiUserCheck, FiDownload } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 import { uploadFile, runMatching } from '../services/api';
 
@@ -89,6 +89,57 @@ function Upload() {
           </div>
         </div>
       )}
+
+      {/* External Catalog Download Resources */}
+      <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 sm:p-5 space-y-3">
+        <div className="flex items-center justify-between flex-wrap gap-2">
+          <div className="flex items-center space-x-2">
+            <FiDownload className="text-blue-600 text-lg" />
+            <h3 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-800">
+              External Real CPSE Material Catalogs
+            </h3>
+          </div>
+          <span className="text-[11px] text-slate-500">Download and upload these realistic files to test cross-CPSE deduplication</span>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <a
+            href="/catalogs/ONGC_Material_Catalog_2026.xlsx"
+            download="ONGC_Material_Catalog_2026.xlsx"
+            className="flex items-center justify-between p-3 bg-white hover:bg-blue-50/60 border border-slate-200 hover:border-blue-300 rounded-xl transition-all shadow-2xs group cursor-pointer"
+          >
+            <div>
+              <div className="text-xs font-bold text-slate-800 group-hover:text-blue-600">ONGC Material Catalog</div>
+              <div className="text-[10px] text-slate-500">20 Exploration & Drilling Items</div>
+            </div>
+            <span className="text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">.XLSX</span>
+          </a>
+
+          <a
+            href="/catalogs/BPCL_Procurement_Master_2026.xlsx"
+            download="BPCL_Procurement_Master_2026.xlsx"
+            className="flex items-center justify-between p-3 bg-white hover:bg-blue-50/60 border border-slate-200 hover:border-blue-300 rounded-xl transition-all shadow-2xs group cursor-pointer"
+          >
+            <div>
+              <div className="text-xs font-bold text-slate-800 group-hover:text-blue-600">BPCL Procurement Master</div>
+              <div className="text-[10px] text-slate-500">20 Refinery & Marketing Items</div>
+            </div>
+            <span className="text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">.XLSX</span>
+          </a>
+
+          <a
+            href="/catalogs/IOCL_Refinery_Inventory_2026.xlsx"
+            download="IOCL_Refinery_Inventory_2026.xlsx"
+            className="flex items-center justify-between p-3 bg-white hover:bg-blue-50/60 border border-slate-200 hover:border-blue-300 rounded-xl transition-all shadow-2xs group cursor-pointer"
+          >
+            <div>
+              <div className="text-xs font-bold text-slate-800 group-hover:text-blue-600">IOCL Refinery Inventory</div>
+              <div className="text-[10px] text-slate-500">12 Pipeline & Process Items</div>
+            </div>
+            <span className="text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">.XLSX</span>
+          </a>
+        </div>
+      </div>
 
       {/* Main Upload Box */}
       <div className="bg-white p-6 sm:p-7 rounded-xl border border-slate-200 shadow-sm space-y-6">

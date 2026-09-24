@@ -79,13 +79,25 @@ function Dashboard() {
 
       {/* Metrics Row: Responsive 1 col -> 2 col -> 3 col -> 6 col */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4">
-        <StatsCard icon={<MdStorage />} title="Total Materials" value={stats.totalMaterials || 0} subtitle="Across 3 CPSEs" />
+        <StatsCard icon={<MdStorage />} title="Total Materials" value={stats.totalMaterials || 0} subtitle="Across CPSEs" />
         <StatsCard icon={<MdLink />} title="Duplicates Found" value={stats.totalMatches || 0} subtitle={`${stats.duplicatesFound || 0} High Confidence`} />
         <StatsCard icon={<MdPending />} title="Pending Review" value={stats.pendingMatches || 0} subtitle="Awaiting Action" />
         <StatsCard icon={<MdCheckCircle />} title="Approved Pairs" value={stats.approvedMatches || 0} subtitle="Unified Nationally" />
         <StatsCard icon={<MdCode />} title="National Codes" value={stats.totalUnified || 0} subtitle="Central Catalog" />
         <StatsCard icon={<MdTrendingUp />} title="Est. Savings" value={formatCurrency(stats.savingsEstimate)} subtitle="Bulk Demand Pooling" />
       </div>
+
+      {/* Clean Slate Onboarding Prompt */}
+      {(!stats.totalMaterials || stats.totalMaterials === 0) && (
+        <div className="bg-white border border-blue-200 rounded-xl p-6 text-center space-y-2 shadow-xs">
+          <h3 className="text-sm sm:text-base font-bold text-slate-800">
+            🚀 Ready for External CPSE Catalog Ingestion
+          </h3>
+          <p className="text-xs sm:text-sm text-slate-500 max-w-xl mx-auto">
+            The database is currently clean. Sign in as an authorized CPSE Procurement Officer to upload catalog spreadsheets (.xlsx / .csv). The EkCode AI engine will automatically extract technical specifications and detect cross-enterprise duplicates.
+          </p>
+        </div>
+      )}
 
       {/* Analytics Charts Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

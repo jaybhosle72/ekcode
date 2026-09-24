@@ -1,0 +1,21 @@
+Material Code,Material Description,Category,Unit of Measure,Unit Price (INR),Annual Quantity
+ONGC-PIP-CS-1001,"Pipe Seamless Carbon Steel ASTM A106 Gr B 6"" Sch 40 Beveled End",Pipes,Mtr,4850,12000
+ONGC-PIP-CS-1002,"Pipe Seamless Carbon Steel ASTM A106 Gr B 4"" Sch 40 Beveled End",Pipes,Mtr,3200,8500
+ONGC-PIP-SS-2001,"Pipe Stainless Steel Seamless ASTM A312 TP316L 2"" Sch 40S",Pipes,Mtr,8900,4500
+ONGC-PIP-API-3001,"Line Pipe Seamless API 5L Gr X52 PSL2 8"" Sch 40 3LPE Coated",Pipes,Mtr,11500,15000
+ONGC-VLV-BL-3004,"Ball Valve 4"" Class 300 Flanged Full Bore ASTM A216 WCB Lever Operated API 6D",Valves,Nos,24500,450
+ONGC-VLV-GT-1506,"Gate Valve 6"" Class 150 Flanged Bolted Bonnet ASTM A216 WCB Trim 8 API 600",Valves,Nos,38000,320
+ONGC-VLV-CK-3003,"Swing Check Valve 3"" Class 300 Flanged ASTM A216 WCB API 6D Trim 5",Valves,Nos,16500,280
+ONGC-VLV-GL-3002,"Globe Valve 2"" Class 300 Flanged OS&Y Rising Stem ASTM A216 WCB BS 1873",Valves,Nos,14200,350
+ONGC-FAS-ST-B712,Stud Bolt M20 x 120mm ASTM A193 Gr B7 with 2 Heavy Hex Nuts ASTM A194 Gr 2H,Fasteners,Set,340,25000
+ONGC-FAS-ST-B716,Stud Bolt M24 x 160mm ASTM A193 Gr B7 with 2 Heavy Hex Nuts ASTM A194 Gr 2H,Fasteners,Set,520,18000
+ONGC-FAS-ST-B8M,Stud Bolt M16 x 90mm Stainless Steel ASTM A193 Gr B8M with 2 Nuts A194 Gr 8M,Fasteners,Set,780,9500
+ONGC-FLG-WN-3006,"Weld Neck Flange 6"" Class 300 Raised Face ASME B16.5 ASTM A105 Sch 40 Bore",Fittings,Nos,6200,1200
+ONGC-FLG-WN-1504,"Weld Neck Flange 4"" Class 150 Raised Face ASME B16.5 ASTM A105 Sch 40 Bore",Fittings,Nos,3400,1600
+ONGC-FIT-ELB-906,"90 Deg Long Radius Elbow 6"" Sch 40 Carbon Steel ASTM A234 Gr WPB ASME B16.9",Fittings,Nos,2800,2200
+ONGC-GSK-SW-3006,"Spiral Wound Gasket 6"" Class 300 SS316 with Flexible Graphite Filler ASME B16.20",Fittings,Nos,450,14000
+ONGC-MECH-SEAL-01,Cartridge Mechanical Seal 50mm Shaft Single Spring for Crude Oil Service API 682,Mechanical,Nos,42000,110
+ONGC-ELEC-LED-60W,Flameproof Wellhead LED Well Light 60W Ex d IIC T6 IP66 230V AC,Electrical,Nos,18500,850
+ONGC-SAF-HLM-WHT,Safety Helmet Industrial Grade HDPE Ratchet Type White Colour IS 2925,Safety,Nos,480,6000
+ONGC-SAF-GLV-NIT,Heavy Duty Nitrile Chemical Resistant Gloves 13 Inch Gauntlet EN 388,Safety,Pair,320,12000
+ONGC-DRL-BIT-850,PDC Drilling Bit 8-1/2 Inch 5-Blade Matrix Body 16mm Cutters API Spec 7-1,Drilling,Nos,385000,45
